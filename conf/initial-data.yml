@@ -1,0 +1,27 @@
+users:
+
+    - !!models.User
+        email:      guillaume@sample.com
+        username:   guillaume
+        password:   secret
+
+    - !!models.User
+        email:      maxime@sample.com
+        username:   maxime
+        password:   secret
+        country:    UKR
+
+    - !!models.User
+        email:      sadek@sample.com
+        username:   sadek
+        password:   secret
+        firstname:  Sadek
+        country:    GER
+
+    - !!models.User
+        email:      erwan@sample.com
+        username:   erwan
+        password:   secret
+        firstname:  Erwan
+        lastname:   Loisant
+        country:    USA
