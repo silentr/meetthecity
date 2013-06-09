@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET     /signin                     controllers.Application.signin()
 POST    /user                       controllers.Application.createUser()
 GET     /user/all                   controllers.Application.getAllUsers()
 GET     /user/:id                   controllers.Application.getUser(id : String)

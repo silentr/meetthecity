@@ -17,6 +17,10 @@ public class Application extends Controller {
         return ok(index.render("Your new application is ready."));
     }
 
+    public static Result signin() {
+        return ok(signin.render());
+    }
+    
     public static Result createUser() {
         User user = Form.form(User.class).bindFromRequest().get();
         user.save();
