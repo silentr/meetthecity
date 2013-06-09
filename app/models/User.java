@@ -3,7 +3,6 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -14,13 +13,10 @@ public class User extends Model {
     public static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
 
     @Id
-    @Required
     public String username;
 
-    @Required
     public String password;
 
-    @Required
     public String email;
 
     public String firstname;
@@ -35,4 +31,7 @@ public class User extends Model {
                 + firstname + ", lastname=" + lastname + ", country=" + country + "]";
     }
 
+    public static User authenticate(String username, String password) {
+        return find.where().eq("username", username).eq("password", password).findUnique();
+    }
 }
