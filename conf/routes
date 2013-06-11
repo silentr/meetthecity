@@ -3,6 +3,8 @@
 # ~~~~
 
 # Home page
+
+GET     /homepage                   controllers.Application.homePage()
 GET     /                           controllers.Application.index()
 GET     /signin                     controllers.Application.signin()
 POST    /signin                     controllers.Application.authenticate()

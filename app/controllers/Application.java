@@ -11,6 +11,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
 import views.html.signin;
+import views.html.homepage;
 
 public class Application extends Controller {
 
@@ -50,6 +51,11 @@ public class Application extends Controller {
 
     public static Result signin() {
         return ok(signin.render(Form.form(Login.class)));
+    }
+    
+    public static Result homePage() {
+    	
+    	return ok(homepage.render("Homepage"));
     }
 
     public static Result createUser() {

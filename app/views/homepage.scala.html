@@ -1,0 +1,263 @@
+@(message: String)
+
+@main("Homepage") {
+
+<style>
+.container-fluid > .sidebar {
+    position: relative;
+    top: 0;
+    left:auto;
+    width: 180px;
+}
+
+.left {
+    float:left;
+}
+
+
+.right {
+    float:right;
+}
+
+.container-fluid > .content {
+    margin: 0 200px;
+}
+body {
+    padding-top: 160px;
+}
+</style>
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<!-- <div class='navbar navbar-fixed-top'> -->
+
+<!-- top navigation bar -->
+<div class="navbar">
+  <div class="navbar-inner">
+	<ul class="nav pull-left">
+	
+		<li><img src="@routes.Assets.at("images/logo.png")" class="img-rounded"></li>
+	</ul>
+	<ul class="nav" >
+
+	  <li class="active"><a href="#">Home</a></li>
+	  <li class="divider-vertical"><a href="#">Recent</a></li>
+	  <li class="divider-vertical"><a href="#">Guides</a></li>
+	  <li class="divider-vertical"><a href="#">Tours</a></li>
+	  <li class="divider-vertical"><a href="#">Create a Tour</a></li>
+	  <li class="divider-vertical"><a href="#">Join a Tour</a></li>
+	  <li class="divider-vertical"><a href="#">About</a></li>
+	  </ul>
+	  <ul  class="nav pull-right">
+	  <li>
+	  <button class="btn btn-primary" type="button" style="float: right; 
+	  padding-right: 67px; padding-left: 67px" >Sign In</button>
+	  		</li>
+		</ul>
+
+  </div>
+</div>
+<!-- end of the top navigation bar -->
+
+
+<ul class="breadcrumb" style="margin-left: 220px; margin-right: 220px">
+  <li><a href="#">Home</a> <span class="divider">></span></li>
+  <li><a href="#">Tours</a> <span class="divider">></span></li>
+  <li class="active">Active Tours</li>
+</ul>
+
+<div class="container-fluid">
+     
+<!--      right sidebar -->
+     <div class="sidebar right">
+     
+        <div class="well" style="margin: 0px; padding: 0px">
+        	<p style="margin: 2px">Language:
+        		<div class="bfh-selectbox">
+  					<input type="hidden" name="selectbox1" value="">
+  						<a class="bfh-selectbox-toggle" data-toggle="bfh-selectbox" href="#">
+    						<span class="bfh-selectbox-option input-medium" data-option="1">English</span>
+    							<b class="caret"></b>
+  						</a>
+					  	<div class="bfh-selectbox-options">
+					  		<div role="listbox">
+					    		<ul role="option">
+					      			<li><a tabindex="-1" href="#" data-option="1">English</a></li>
+					      			<li><a tabindex="-1" href="#" data-option="2">Deutsch</a></li>
+					      			<li><a tabindex="-1" href="#" data-option="3">Español</a></li>
+					      			<li><a tabindex="-1" href="#" data-option="3">Français</a></li>
+					    		</ul>
+					    	</div>
+					  </div>
+				</div>
+        	 </p>
+       	</div>
+      
+        <div class="well">
+            <a href="#">Visiting Isar</a>
+            <p>Once Considered ultra Conservative, culture and attitude</p>
+            <a href="#">Tour de TUM</a>
+            <p>Once Considered ultra Conservative, culture and attitude</p>
+            <a href="#">Marienplatz</a>
+            <p>Once Considered ultra Conservative, culture and attitude</p>            
+        </div>
+  		<div class="well" style="margin: 0px; padding: 0px">
+  		
+        	<img src="@routes.Assets.at("images/glyphicons-halflings.png")" class="img-rounded">
+    	</div>
+  	</div>
+<!--     end of the right sidebar  -->
+      
+<!--       left sidebar -->
+      <div class="sidebar left">
+      	<div class="well" style="margin: 0px; padding: 0px">
+        	<form class="navbar-search pull-left">
+                <input type="text" class="search-query" placeholder="Search" style="width: 148px;">
+            </form>
+      	</div>
+      <div class="well">
+          <h5>Continents</h5>
+          <ul id="continents">
+            <li>
+            	<a id="asia" href="#">Asia</a>
+             		<ul id="asian_countries">
+             			<li><a href="#">China</a></li>
+            			<li><a href="#">Japan</a></li>
+            			<li><a href="#">India</a></li>
+            			<li><a href="#">Pakistan</a></li>
+             		</ul>
+             </li>
+            <li><a id=europe href="#">Europe</a></li>
+           		<ul id="europian_countries">
+             		<li><a href="#">Germany</a></li>
+            		<li><a href="#">Ukraine</a></li>
+            		<li><a href="#">Turkey</a></li>
+            		<li><a href="#">Bosnia Herzegovina</a></li>
+             	</ul>
+            </li>
+            <li><a id="north" href="#">North America</a>
+           		<ul id="northA_countries">
+             		<li><a href="#">USA</a></li>
+            		<li><a href="#">Canada</a></li>
+             	</ul>
+            </li>
+            <li><a id="south"  href="#">South America</a>
+                <ul id="southA_countries">
+             		<li><a href="#">Brazil</a></li>
+            		<li><a href="#">Argentina</a></li>
+            		<li><a href="#">Chile</a></li>
+             	</ul>
+            </li>
+            <li><a id="australia" href="#">Australia</a>
+                <ul id="australia_countries">
+             		<li><a href="#">Australia</a></li>
+            		<li><a href="#">New Zeland</a></li>
+            	</ul>            
+            </li>
+            <li><a id="africa" href="#">Africa</a>
+            	<ul id="africa_countries">
+             		<li><a href="#">Egypt</a></li>
+            		<li><a href="#">Tunusia</a></li>
+            		<li><a href="#">Nigeria</a></li> 
+            	</ul>           
+            </li>  
+          </ul>
+        	<h5>Subscribe</h5>
+        		<ul id="continents">
+        			<li><a href="#">RSS</a></li>
+            		<li><a href="#">E-Mail</a></li>
+        		</ul>
+      	</div>
+      </div>
+<!--       end of the leftsidebar -->
+    
+      <script type="text/javascript">
+	  
+      $asianCont = $("#asian_countries");
+      $euCont = $("#europian_countries");
+      $northACont = $("#northA_countries");
+      $southACont = $("#southA_countries");
+      $australiaCont = $("#australia_countries");
+      $africaCont = $("#africa_countries");
+ 
+ 	  
+      $cont = $("#continents");
+      
+      $cont.find("ul").hide();
+      
+      $cont.find("a").click(function(){ 
+    	  
+    	  
+//     	  $cont.find("ul").hide("show");
+    	  
+    	  var currentId = $(this).attr('id');
+    	  if(currentId == "asia")
+    		  $asianCont.toggle("slow");
+    	  if(currentId == "europe")
+    		  $euCont.toggle("slow");
+    	  if(currentId == "north")
+    		  $northACont.toggle("slow")
+    	  if(currentId == "south")
+    		  $southACont.toggle("slow") 
+		  if(currentId == "australia")
+       		  $australiaCont.toggle("slow")  
+       	  if(currentId == "africa")
+          	  $africaCont.toggle("slow")      
+ 
+      });
+      </script>
+
+<!-- main content -->
+      <div class="content">
+          <div class="hero-unit">
+              <h1>Hello, world!</h1>
+              <p>hello world.hello world.hello world.hello world.</p>
+          </div>
+    </div>
+<!--     end of the main content -->
+</div>
+
+<!-- foot navigation bar -->
+<div class="navbar" style="margin-left: 210px; margin-right: 210px">
+  <div class="navbar-inner">
+
+	<ul class="nav" >
+
+	  <li class="active"><a href="#">Home</a></li>
+	  <li class="divider-vertical"><a href="#">Recent</a></li>
+	  <li class="divider-vertical"><a href="#">Guides</a></li>
+	  <li class="divider-vertical"><a href="#">Tours</a></li>
+	  <li class="divider-vertical"><a href="#">Create a Tour</a></li>
+	  <li class="divider-vertical"><a href="#">Join a Tour</a></li>
+	  <li class="divider-vertical"><a href="#">About</a></li>
+	  </ul>
+  </div>
+</div>
+<!-- end of the foot navigation bar -->
+
+<!-- <ul class="nav nav-tabs" style="float: left; margin-left: 250px"> -->
+<!--   <li class="active"><a href="#">Home</a></li> -->
+<!--   <li><a href="#">Recent</a></li> -->
+<!--   <li><a href="#">Guides</a></li> -->
+<!--   <li><a href="#">Tours</a></li> -->
+<!--   <li><a href="#">Create a Tour</a></li> -->
+<!--   <li><a href="#">Join a Tour</a></li> -->
+<!--   <li><a href="#">About</a></li> -->
+<!-- </ul> -->
+ 
+<!--  footer   -->
+<div id="footer" style="margin-left:270px">
+      <div class="container">
+        <p class="muted credit">
+        	© 2013 Meet the City&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="#">Terms of Service</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="#">About</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="#">Help</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="#">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="#">FAQ</a>
+        	
+        </p>
+      </div>
+</div>
+<!-- end of the footer -->
+}
