@@ -1,0 +1,121 @@
+@(tour: Tour)
+@content(tour: Tour) = {
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+	html { height: 400px; width: 400px; }
+	body { height: 100%; margin: 0; padding: 0 }
+	#map-canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKULXtW1Lnxt0OITHOyeEBtnid9LYUlcM&sensor=true">
+    </script>
+    <script type="text/javascript">
+	function initialize() {
+	    var mapOptions = {
+		center: new google.maps.LatLng(-34.397, 150.644),
+		zoom: 8,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	    };
+	    var map = new google.maps.Map(document.getElementById("map-canvas"),
+		    mapOptions);
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    <script>!function(d, s, id) {
+	    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+	    if (!d.getElementById(id)) {
+		js = d.createElement(s);
+		js.id = id;
+		js.src = p + '://platform.twitter.com/widgets.js';
+		fjs.parentNode.insertBefore(js, fjs);
+	    }
+	}(document, 'script', 'twitter-wjs');</script>
+    <script type="text/javascript">
+	(function() {
+	    var po = document.createElement('script');
+	    po.type = 'text/javascript';
+	    po.async = true;
+	    po.src = 'https://apis.google.com/js/plusone.js';
+	    var s = document.getElementsByTagName('script')[0];
+	    s.parentNode.insertBefore(po, s);
+	})();
+    </script>
+    <link href="/assets/star-rating/jquery.rating.css" rel="stylesheet"></link>
+    <script type="text/javascript" src="/assets/star-rating/jquery.js"></script>
+    <script type="text/javascript" src="/assets/star-rating/jquery.form.js"></script>
+    <script type="text/javascript" src="/assets/star-rating/jquery.MetaData.js"></script>
+    <script type="text/javascript" src="/assets/star-rating/jquery.rating.pack.js"></script>
+    <script type="text/javascript" src="/assets/star-rating/jquery.rating.js"></script>
+    <script>
+	(function(d, s, id) {
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id))
+		return;
+	    js = d.createElement(s);
+	    js.id = id;
+	    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	    fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+    </script>
+</head>
+<table>
+    <tr>
+	<td colspan="2">
+	    <div style="float: left; padding-right: 10px;">
+		Date:</br>
+		Location:</br>
+		Guide:
+	    </div>
+	    <div>
+		tour.getDate()<br/>
+		Istanbul<br/>
+		Altug Bayram
+	    </div>
+	</td>
+    </tr>
+    <tr>
+	<td>
+	    <img style="height: 125px; width: 150px;" src="/assets/images/altug.jpg" alt="">
+	</td>
+	<td style="text-align: left; vertical-align: top;">
+	    <div>
+		Guide: Altug Bayram
+	    </div>
+	    <div>
+		<input name="star2" type="radio" class="star" disabled="disabled"/>
+		<input name="star2" type="radio" class="star" disabled="disabled"/>
+		<input name="star2" type="radio" class="star" checked="checked" disabled="disabled"/>
+		<input name="star2" type="radio" class="star" disabled="disabled"/>
+		<input name="star2" type="radio" class="star" disabled="disabled"/>
+	    </div><br/>
+	    <div style="height: 70px;"></div>
+	    <div>
+		Phone: 89343 984 3984&nbsp;&nbsp;&nbsp;&nbsp;Email: altug.bayram&#64;tum.de
+	    </div>
+	</td>
+    </tr>
+</table>
+<h2>@tour.getName()</h2>
+<img src="/assets/images/istanbul.jpg" align="left"/>
+With a population of 13.9 million, the city forms one of the largest urban agglomerations in Europe[d] and is among the largest cities in the world by population within city limits.[2][3] Istanbul's vast area of 5,343 square kilometers (2,063 sq mi) is coterminous with Istanbul Province, of which the city is the administrative capital.[c] Istanbul is a transcontinental city, straddling the Bosphorus—one of the world's busiest waterways—in northwestern Turkey, between the Sea of Marmara and the Black Sea. Its commercial and historical center lies in Europe, while a third of its population lives in Asia.[4]
+Founded on the Sarayburnu promontory around 660 BC as Byzantium, the city now known as Istanbul developed to become one of the most significant cities in history. For nearly sixteen centuries following its reestablishment as Constantinople in 330 AD, it served as the capital of four empires: the Roman Empire (330–395), the Byzantine Empire (395–1204 and 1261–1453), the Latin Empire (1204–1261), and the Ottoman Empire (1453–1922).[5] It was instrumental in the advancement of Christianity during Roman and Byzantine times, before the Ottomans conquered the city in 1453 and transformed it into an Islamic stronghold and the seat of the last caliphate.[6] Although the Republic of Turkey established its capital in Ankara, palaces and imperial mosques still line Istanbul's hills as visible reminders of the city's previous central role.
+Istanbul's strategic position along the historic Silk Road,[7] rail networks to Europe and the Middle East, and the only sea route between the Black Sea and the Mediterranean have helped foster an eclectic populace, although less so since the establishment of the Republic in 1923. Overlooked for the new capital during the interwar period, the city has since regained much of its prominence. The population of the city has increased tenfold since the 1950s, as migrants from across Anatolia have flocked to the metropolis and city limits have expanded to accommodate them.[8][9] Arts festivals were established at the end of the 20th century, while infrastructure improvements have produced a complex transportation network.
+<br/>
+Price: 350e
+<br/><br/>
+<!-- SHARE: TWITTER -->
+<div style="padding-bottom: 5px;">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://meetthecity.com/join-a-tour">Tweet</a>
+</div>
+<!-- SHARE: GOOGLE PLUS ONE -->
+<div  class="g-plusone" data-annotation="inline" data-width="300"></div>
+<!-- SHARE: FACEBOOK -->
+<div id="fb-root" style="padding-top: 5px;">
+</div>
+<div class="fb-like" data-href="http://meetthecity.com/join-a-tour" data-send="true" data-width="450" data-show-faces="true"></div>
+<!-- GOOGLE MAPS -->
+<div id="map-canvas"/>
+}
+
+@homepage(content(tour))
