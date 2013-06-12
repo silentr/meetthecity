@@ -25,3 +25,13 @@ users:
         firstname:  Erwan
         lastname:   Loisant
         country:    USA
+
+tours:
+
+    - !!models.Tour
+        id:               1
+        name:             Trip to Istanbul
+
+    - !!models.Tour
+        id:               2
+        name:             Munich sightseeing
