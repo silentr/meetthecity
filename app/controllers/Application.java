@@ -2,16 +2,20 @@ package controllers;
 
 import java.util.List;
 
+import models.Tour;
 import models.User;
 import play.Logger;
+import play.api.templates.Html;
 import play.data.Form;
 import play.db.ebean.Model;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import scala.collection.mutable.StringBuilder;
 import views.html.index;
 import views.html.signin;
 import views.html.homepage;
+import views.html.joinatour;
 
 public class Application extends Controller {
 
@@ -55,7 +59,7 @@ public class Application extends Controller {
     
     public static Result homePage() {
     	
-    	return ok(homepage.render("Homepage"));
+    	return ok(homepage.render(new Html(new StringBuilder())));
     }
 
     public static Result createUser() {
@@ -76,4 +80,9 @@ public class Application extends Controller {
 
         return user != null ? ok(Json.toJson(user)) : notFound();
     }
+    
+    public static Result joinATour(String id) {
+		Tour tour = new Model.Finder<String, Tour>(String.class, Tour.class).byId(id);
+		return ok(joinatour.render(tour));
+	}
 }

@@ -1,4 +1,4 @@
-@(message: String)
+@(content: Html)
 
 @main("Homepage") {
 
@@ -210,8 +210,7 @@ body {
 <!-- main content -->
       <div class="content">
           <div class="hero-unit">
-              <h1>Hello, world!</h1>
-              <p>hello world.hello world.hello world.hello world.</p>
+              @content
           </div>
     </div>
 <!--     end of the main content -->
