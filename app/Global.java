@@ -1,6 +1,9 @@
 import java.util.List;
 import java.util.Map;
 
+import org.yaml.snakeyaml.Dumper;
+import org.yaml.snakeyaml.representer.Representer;
+
 import models.Location;
 import models.Tour;
 import models.User;
@@ -34,11 +37,20 @@ public class Global extends GlobalSettings {
         }
         
         if(Tour.find.findRowCount() == 0){
-        	Ebean.save(tours);
+        	Ebean.save(locations);
         }
         
         if(Tour.find.findRowCount() == 0){
-        	Ebean.save(locations);
+        	Ebean.save(tours);
         }
+        
+//        Location l = new Location(15, 15, "Banja Luka");
+//        Tour t = new Tour();
+//        t.setId(5L);
+//        t.setLocation(l);
+//        
+//        org.yaml.snakeyaml.Yaml y = new org.yaml.snakeyaml.Yaml();
+//        String output = y.dump(t);
+//        Logger.info(output);
     }
 }

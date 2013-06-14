@@ -5,11 +5,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-import play.data.format.*;
-
+import play.data.format.Formats;
 import play.db.ebean.Model;
 
 @Entity
@@ -27,7 +30,9 @@ public class Tour extends Model {
 	@Formats.DateTime(pattern="yyyy-MM-dd")
 	private Date date;
 	private Double price;
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Location location;
+	@ManyToOne(fetch=FetchType.EAGER)
 	private User guide;
 	private String descriptionFull;
 	private String descriptionShort;
@@ -148,6 +153,16 @@ public class Tour extends Model {
 
 	public void setListReview(List<Review> listReview) {
 		this.listReview = listReview;
+	}
+
+	@Override
+	public String toString() {
+		return "Tour [id=" + id + ", name=" + name + ", date=" + date
+				+ ", price=" + price + ", location=" + location + ", guide="
+				+ guide + ", descriptionFull=" + descriptionFull
+				+ ", descriptionShort=" + descriptionShort
+				+ ", descriptionMini=" + descriptionMini + ", photoName="
+				+ photoName + ", listReview=" + listReview + "]";
 	}
 
 }

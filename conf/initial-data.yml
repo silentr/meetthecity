@@ -13,30 +13,21 @@ users:
 
     - !!models.User
         email:      sadek@sample.com
+        phone:      0151 51 748 832
         username:   sadek
         password:   secret
         firstname:  Sadek
+        lastname:   Dekas
         country:    GER
 
     - !!models.User
         email:      erwan@sample.com
+        phone:      0151 51 108 532
         username:   erwan
         password:   secret
         firstname:  Erwan
         lastname:   Loisant
         country:    USA
-
-tours:
-
-    - !!models.Tour
-        id:               1
-        name:             Trip to Istanbul
-        date:             2013-06-15
-
-    - !!models.Tour
-        id:               2
-        name:             Munich sightseeing
-        date:             2013-06-16
 
 locations:
     - !!models.Location
@@ -49,3 +40,27 @@ locations:
         length:           30
         width:            30
         name:             Munich
+
+tours:
+
+    - !!models.Tour
+        id:               1
+        name:             Trip to Istanbul
+        date:             2013-06-15
+        price:            0
+        location:         !!models.Location
+                          id: 1
+        guide:            !!models.User
+                          username: sadek
+        photoName:        "/assets/images/locations/istanbul.png"
+        
+    - !!models.Tour
+        id:               2
+        name:             Munich sightseeing
+        date:             2013-06-16
+        price:            100
+        location:         !!models.Location
+                          id: 2
+        guide:            !!models.User
+                          username: erwan
+        photoName:        "/assets/images/locations/munich.png"

@@ -23,6 +23,8 @@ create table tour (
   name                      varchar(255),
   date                      timestamp,
   price                     double,
+  location_id               integer,
+  guide_username            varchar(255),
   description_full          varchar(255),
   description_short         varchar(255),
   description_mini          varchar(255),
@@ -34,6 +36,7 @@ create table user (
   username                  varchar(255) not null,
   password                  varchar(255),
   email                     varchar(255),
+  phone                     varchar(255),
   firstname                 varchar(255),
   lastname                  varchar(255),
   country                   varchar(255),
@@ -48,6 +51,10 @@ create sequence tour_seq;
 
 create sequence user_seq;
 
+alter table tour add constraint fk_tour_location_1 foreign key (location_id) references location (id) on delete restrict on update restrict;
+create index ix_tour_location_1 on tour (location_id);
+alter table tour add constraint fk_tour_guide_2 foreign key (guide_username) references user (username) on delete restrict on update restrict;
+create index ix_tour_guide_2 on tour (guide_username);
 
 
 

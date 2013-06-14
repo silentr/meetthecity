@@ -1,7 +1,12 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
@@ -13,6 +18,8 @@ public class Location extends Model {
 	private int length;
 	private int width;
 	private String name;
+	@OneToMany(mappedBy="location", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Tour> tours;
 	
 	public Location() {
 	}
@@ -54,6 +61,12 @@ public class Location extends Model {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Location [id=" + id + ", length=" + length + ", width=" + width
+				+ ", name=" + name + "]";
 	}
 
 }

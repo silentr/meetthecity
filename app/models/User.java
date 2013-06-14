@@ -18,6 +18,8 @@ public class User extends Model {
     public String password;
 
     public String email;
+    
+    public String phone;
 
     public String firstname;
 
