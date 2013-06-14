@@ -7,7 +7,7 @@ import play.db.ebean.Model.Finder;
 
 @Entity
 public class Review {
-	private static final long serialVersionUID = -559026603187724583L;
+	private static final long serialVersionUID = -55902660318772583L;
 
     public static Finder<String, Review> find = new Finder<String, Review>(String.class, Review.class);
     
