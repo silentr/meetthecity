@@ -25,8 +25,8 @@ create table tour (
   price                     double,
   location_id               integer,
   guide_username            varchar(255),
-  description_full          varchar(255),
-  description_short         varchar(255),
+  description_full          TEXT,
+  description_short         TEXT,
   description_mini          varchar(255),
   photo_name                varchar(255),
   constraint pk_tour primary key (id))
@@ -40,6 +40,7 @@ create table user (
   photo                     varchar(255),
   firstname                 varchar(255),
   lastname                  varchar(255),
+  rating                    integer,
   country                   varchar(255),
   constraint pk_user primary key (username))
 ;

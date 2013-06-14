@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import play.data.format.Formats;
@@ -34,7 +33,9 @@ public class Tour extends Model {
 	private Location location;
 	@ManyToOne(fetch=FetchType.EAGER)
 	private User guide;
+	@Column(columnDefinition="TEXT")
 	private String descriptionFull;
+	@Column(columnDefinition="TEXT")
 	private String descriptionShort;
 	private String descriptionMini;
 	private String photoName;

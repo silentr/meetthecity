@@ -81,11 +81,11 @@
 		Guide: @tour.getGuide().firstname @tour.getGuide().lastname
 	    </div>
 	    <div>
-		<input name="star2" type="radio" class="star" disabled="disabled"/>
-		<input name="star2" type="radio" class="star" disabled="disabled"/>
-		<input name="star2" type="radio" class="star" checked="checked" disabled="disabled"/>
-		<input name="star2" type="radio" class="star" disabled="disabled"/>
-		<input name="star2" type="radio" class="star" disabled="disabled"/>
+		<input name="star2" type="radio" class="star" @if(tour.getGuide().rating == 1) {checked="checked"} disabled="disabled"/>
+		<input name="star2" type="radio" class="star" @if(tour.getGuide().rating == 2) {checked="checked"} disabled="disabled"/>
+		<input name="star2" type="radio" class="star" @if(tour.getGuide().rating == 3) {checked="checked"} disabled="disabled"/>
+		<input name="star2" type="radio" class="star" @if(tour.getGuide().rating == 4) {checked="checked"} disabled="disabled"/>
+		<input name="star2" type="radio" class="star" @if(tour.getGuide().rating == 5) {checked="checked"} disabled="disabled"/>
 	    </div>
 	    <div style="height: 120px;"></div>
 	    <div>
@@ -97,9 +97,7 @@
 <h2>@tour.getName()</h2>
 <p style="font-size: small; text-align: justify;">
 	<img src="@tour.getPhotoName()" align="left" style="padding-right: 15px;"/>
-	With a population of 13.9 million, the city forms one of the largest urban agglomerations in Europe[d] and is among the largest cities in the world by population within city limits.[2][3] Istanbul's vast area of 5,343 square kilometers (2,063 sq mi) is coterminous with Istanbul Province, of which the city is the administrative capital.[c] Istanbul is a transcontinental city, straddling the Bosphorus—one of the world's busiest waterways—in northwestern Turkey, between the Sea of Marmara and the Black Sea. Its commercial and historical center lies in Europe, while a third of its population lives in Asia.[4]
-	Founded on the Sarayburnu promontory around 660 BC as Byzantium, the city now known as Istanbul developed to become one of the most significant cities in history. For nearly sixteen centuries following its reestablishment as Constantinople in 330 AD, it served as the capital of four empires: the Roman Empire (330–395), the Byzantine Empire (395–1204 and 1261–1453), the Latin Empire (1204–1261), and the Ottoman Empire (1453–1922).[5] It was instrumental in the advancement of Christianity during Roman and Byzantine times, before the Ottomans conquered the city in 1453 and transformed it into an Islamic stronghold and the seat of the last caliphate.[6] Although the Republic of Turkey established its capital in Ankara, palaces and imperial mosques still line Istanbul's hills as visible reminders of the city's previous central role.
-	Istanbul's strategic position along the historic Silk Road,[7] rail networks to Europe and the Middle East, and the only sea route between the Black Sea and the Mediterranean have helped foster an eclectic populace, although less so since the establishment of the Republic in 1923. Overlooked for the new capital during the interwar period, the city has since regained much of its prominence. The population of the city has increased tenfold since the 1950s, as migrants from across Anatolia have flocked to the metropolis and city limits have expanded to accommodate them.[8][9] Arts festivals were established at the end of the 20th century, while infrastructure improvements have produced a complex transportation network.
+	@tour.getDescriptionFull()
 </p>
 Price: @tour.getPrice()
 <br/><br/>

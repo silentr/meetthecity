@@ -26,6 +26,8 @@ public class User extends Model {
     public String firstname;
 
     public String lastname;
+    
+    public int rating;
 
     public String country;
 

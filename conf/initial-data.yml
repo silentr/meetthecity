@@ -19,6 +19,7 @@ users:
         password:   secret
         firstname:  Sadek
         lastname:   Dekas
+        rating:     4
         country:    GER
 
     - !!models.User
@@ -29,6 +30,7 @@ users:
         password:   secret
         firstname:  Erwan
         lastname:   Loisant
+        rating:     5
         country:    USA
 
 locations:
@@ -55,7 +57,9 @@ tours:
         guide:            !!models.User
                           username: sadek
         photoName:        "/assets/images/locations/istanbul.png"
-        
+        descriptionFull:  "Founded on the Sarayburnu promontory around 660 BC as Byzantium, the city now known as Istanbul developed to become one of the most significant cities in history. For nearly sixteen centuries following its reestablishment as Constantinople in 330 AD, it served as the capital of four empires: the Roman Empire (330–395), the Byzantine Empire (395–1204 and 1261–1453), the Latin Empire (1204–1261), and the Ottoman Empire (1453–1922).[5] It was instrumental in the advancement of Christianity during Roman and Byzantine times, before the Ottomans conquered the city in 1453 and transformed it into an Islamic stronghold and the seat of the last caliphate.[6] Although the Republic of Turkey established its capital in Ankara, palaces and imperial mosques still line Istanbul's hills as visible reminders of the city's previous central role. Istanbul's strategic position along the historic Silk Road,[7] rail networks to Europe and the Middle East, and the only sea route between the Black Sea and the Mediterranean have helped foster an eclectic populace, although less so since the establishment of the Republic in 1923. Overlooked for the new capital during the interwar period, the city has since regained much of its prominence. The population of the city has increased tenfold since the 1950s, as migrants from across Anatolia have flocked to the metropolis and city limits have expanded to accommodate them.[8][9] Arts festivals were established at the end of the 20th century, while infrastructure improvements have produced a complex transportation network."
+        descriptionShort: "Founded on the Sarayburnu promontory around 660 BC as Byzantium, the city now known as Istanbul developed to become one of the most significant cities in history. For nearly sixteen centuries following its reestablishment as Constantinople in 330 AD, it served as the capital of four empires: the Roman Empire (330–395), the Byzantine Empire (395–1204 and 1261–1453), the Latin Empire (1204–1261), and the Ottoman Empire (1453–1922).[5] It was instrumental in the advancement of Christianity during Roman and Byzantine times, before the Ottomans conquered the city in 1453 and transformed it into an Islamic stronghold and the seat of the last caliphate.[6] Although the Republic of Turkey established its capital in Ankara, palaces and imperial mosques still line Istanbul's hills as visible reminders of the city's previous central role."
+        descriptionMini:  "Founded on the Sarayburnu promontory around 660 BC as Byzantium, the city now known as Istanbul developed to become one of the most significant cities in history."
     - !!models.Tour
         id:               2
         name:             Munich sightseeing
@@ -66,3 +70,6 @@ tours:
         guide:            !!models.User
                           username: erwan
         photoName:        "/assets/images/locations/munich.png"
+        descriptionFull:  "The city's motto is München mag dich (Munich likes you). Before 2006, it was Weltstadt mit Herz (Cosmopolitan city with a heart). Its native name, München, is derived from the Old High German Munichen, meaning by the monks' place. The city's name derives from the monks of the Benedictine order who founded the city; hence the monk depicted on the city's coat of arms. Black and gold—the colours of the Holy Roman Empire—have been the city's official colours since the time of Ludwig the Bavarian. Modern Munich is a financial and publishing hub, and a frequently top-ranked destination for migration and expatriate location in livability rankings. Munich achieved 4th place in frequently quoted Mercer livability rankings in 2011[3] and 2012.[4] For economic and social innovation, the city was ranked 15th globally out of 289 cities in 2010, and 5th in Germany by the 2thinknow Innovation Cities Index based on analysis of 162 indicators.[5] In 2010, Monocle ranked Munich as the world's most livable city (in 2012, Munich was ranked fifth in Monocle's ranking, yet remained the highest ranked city in Germany)."
+        descriptionShort: "The city's motto is München mag dich (Munich likes you). Before 2006, it was Weltstadt mit Herz (Cosmopolitan city with a heart). Its native name, München, is derived from the Old High German Munichen, meaning by the monks' place. The city's name derives from the monks of the Benedictine order who founded the city; hence the monk depicted on the city's coat of arms. Black and gold—the colours of the Holy Roman Empire—have been the city's official colours since the time of Ludwig the Bavarian."
+        descriptionMini:  "Modern Munich is a financial and publishing hub, and a frequently top-ranked destination for migration and expatriate location in livability rankings."
