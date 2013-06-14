@@ -31,7 +31,9 @@ tours:
     - !!models.Tour
         id:               1
         name:             Trip to Istanbul
+        date:             2013-06-15
 
     - !!models.Tour
         id:               2
         name:             Munich sightseeing
+        date:             2013-06-16

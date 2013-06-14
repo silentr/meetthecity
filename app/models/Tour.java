@@ -1,10 +1,14 @@
 package models;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import play.data.format.*;
 
 import play.db.ebean.Model;
 
@@ -20,6 +24,7 @@ public class Tour extends Model {
 	@Id
 	private Long id;
 	private String name;
+	@Formats.DateTime(pattern="yyyy-MM-dd")
 	private Date date;
 	private Double price;
 	private Location location;
@@ -70,6 +75,11 @@ public class Tour extends Model {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public String getDateFormatted(){
+		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG, new Locale("de"));
+		return df.format(date);
 	}
 
 	public Double getPrice() {
