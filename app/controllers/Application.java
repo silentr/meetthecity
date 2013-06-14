@@ -70,13 +70,13 @@ public class Application extends Controller {
     }
 
     public static Result getAllUsers() {
-        List<User> user = new Model.Finder<String, User>(String.class, User.class).all();
+        List<User> user = User.find.all();
 
         return ok(Json.toJson(user));
     }
 
     public static Result getUser(String id) {
-        User user = new Model.Finder<String, User>(String.class, User.class).byId(id);
+        User user = User.find.byId(id);
 
         return user != null ? ok(Json.toJson(user)) : notFound();
     }
