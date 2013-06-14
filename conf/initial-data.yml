@@ -14,6 +14,7 @@ users:
     - !!models.User
         email:      sadek@sample.com
         phone:      0151 51 748 832
+        photo:      "/assets/images/guides/guide-1.png"
         username:   sadek
         password:   secret
         firstname:  Sadek
@@ -23,6 +24,7 @@ users:
     - !!models.User
         email:      erwan@sample.com
         phone:      0151 51 108 532
+        photo:      "/assets/images/guides/guide-2.png"
         username:   erwan
         password:   secret
         firstname:  Erwan

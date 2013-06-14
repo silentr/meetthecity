@@ -37,6 +37,7 @@ create table user (
   password                  varchar(255),
   email                     varchar(255),
   phone                     varchar(255),
+  photo                     varchar(255),
   firstname                 varchar(255),
   lastname                  varchar(255),
   country                   varchar(255),

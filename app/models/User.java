@@ -20,6 +20,8 @@ public class User extends Model {
     public String email;
     
     public String phone;
+    
+    public String photo;
 
     public String firstname;
 
