@@ -40,7 +40,7 @@ body {
 	</ul>
 	<ul class="nav" >
 
-	  <li class="active"><a href="#">Home</a></li>
+	  <li class="active"><a href="@routes.Application.index()">Home</a></li>
 	  <li class="divider-vertical"><a href="#">Recent</a></li>
 	  <li class="divider-vertical"><a href="#">Guides</a></li>
 	  <li class="divider-vertical"><a href="#">Tours</a></li>
@@ -50,7 +50,7 @@ body {
 	  </ul>
 	  <ul  class="nav pull-right">
 	  <li>
-	  <button class="btn btn-primary" type="button" style="float: right; 
+	  <button onclick="window.location.href='@routes.Application.signin()'" class="btn btn-primary" type="button" style="float: right; 
 	  padding-right: 67px; padding-left: 67px" >Sign In</button>
 	  		</li>
 		</ul>
@@ -61,7 +61,7 @@ body {
 
 
 <ul class="breadcrumb" style="margin-left: 220px; margin-right: 220px">
-  <li><a href="#">Home</a> <span class="divider">></span></li>
+  <li><a href="@routes.Application.index()">Home</a> <span class="divider">></span></li>
   <li><a href="#">Tours</a> <span class="divider">></span></li>
   <li class="active">Active Tours</li>
 </ul>
@@ -222,7 +222,7 @@ body {
 
 	<ul class="nav" >
 
-	  <li class="active"><a href="#">Home</a></li>
+	  <li class="active"><a href="@routes.Application.index()">Home</a></li>
 	  <li class="divider-vertical"><a href="#">Recent</a></li>
 	  <li class="divider-vertical"><a href="#">Guides</a></li>
 	  <li class="divider-vertical"><a href="#">Tours</a></li>
