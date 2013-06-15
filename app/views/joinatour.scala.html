@@ -75,13 +75,17 @@
 	<img src="@tour.getPhotoName()" align="left"
 		style="padding-right: 15px;" /> @tour.getDescriptionFull()
 </p>
-Price: @tour.getPrice()
-<br />
+<div style="padding-bottom: 10px;">
+Price: @if(tour.getPrice() != 0.0){
+	@tour.getPrice()
+} else{
+	Free
+}
+</div>
 <form action="/join-a-tour" method="POST">
 	<input type="hidden" value="@tour.getId()" name="id"/>
-	<button type="submit">Join a tour</button>
+	<button type="submit" class="btn btn-primary">Join a tour</button>
 </form>
-<br />
 <!-- SHARE: TWITTER -->
 <div style="padding-bottom: 5px;">
 	<a href="https://twitter.com/share" class="twitter-share-button"
@@ -151,5 +155,6 @@ Price: @tour.getPrice()
 	} disabled="disabled" />
 </div><br/>
 <div style="font-size: small;">@review.getComment()</div> 
+}
 }
 @index(content(tour))
