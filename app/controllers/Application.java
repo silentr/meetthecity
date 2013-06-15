@@ -13,9 +13,9 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import scala.collection.mutable.StringBuilder;
 import views.html.index;
-import views.html.signin;
-import views.html.homepage;
 import views.html.joinatour;
+import views.html.signin;
+import views.html.user;
 
 public class Application extends Controller {
 
@@ -50,23 +50,22 @@ public class Application extends Controller {
     }
 
     public static Result index() {
-        return ok(index.render("Your new application is ready."));
+        return ok(index.render(new Html(new StringBuilder())));
     }
 
     public static Result signin() {
         return ok(signin.render(Form.form(Login.class)));
     }
     
-    public static Result homePage() {
-    	
-    	return ok(homepage.render(new Html(new StringBuilder())));
-    }
-
     public static Result createUser() {
         User user = Form.form(User.class).bindFromRequest().get();
         user.save();
 
         return redirect(routes.Application.index());
+    }
+    
+    public static Result addUser() {
+        return ok(user.render());
     }
 
     public static Result getAllUsers() {
