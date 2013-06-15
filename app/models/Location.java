@@ -13,14 +13,17 @@ import play.db.ebean.Model;
 @Entity
 public class Location extends Model {
 	private static final long serialVersionUID = -5592660318772583L;
+
+	public static Finder<String, Location> find = new Finder<String, Location>(
+			String.class, Location.class);
 	@Id
 	private int id;
 	private int length;
 	private int width;
 	private String name;
-	@OneToMany(mappedBy="location", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "location", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Tour> tours;
-	
+
 	public Location() {
 	}
 

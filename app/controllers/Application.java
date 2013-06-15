@@ -3,10 +3,14 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.avaje.ebean.Ebean;
+
+import models.Review;
 import models.Tour;
 import models.User;
 import play.Logger;
 import play.api.templates.Html;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.db.ebean.Model;
 import play.libs.Json;
@@ -95,5 +99,27 @@ public class Application extends Controller {
 		return ok(joinatour.render(tour));
 	}
     
-
+    public static Result joinATourSubmit() {
+        String tourId = Form.form().bindFromRequest().get("id");
+        Ebean.beginTransaction();
+        Tour tour = Tour.find.byId(Long.valueOf(tourId));
+        String username = session("connected");
+        if(username != null){
+            User user = User.find.byId(username);
+            tour.getTourists().add(user);
+            user.tours.add(tour);
+            tour.update();
+            user.update();
+            Ebean.commitTransaction();
+            return ok();
+        }else{
+            Ebean.endTransaction();
+            return unauthorized("Oops, you are not connected");
+        }
+    }
+    
+    public static Result getAllReviews(){
+    	List<Review> reviews = Review.find.all();
+    	return ok(Json.toJson(reviews));
+    }
 }

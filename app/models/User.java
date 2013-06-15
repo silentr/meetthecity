@@ -1,7 +1,15 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
@@ -30,14 +38,27 @@ public class User extends Model {
     public int rating;
 
     public String country;
+    
+    @OneToMany(mappedBy="tourist", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    public List<Review> reviewsGiven;
+    
+    @OneToMany(mappedBy="guide", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    public List<Review> reviewsReceived;
 
-    @Override
-    public String toString() {
-        return "User [username=" + username + ", password=" + password + ", email=" + email + ", firstname="
-                + firstname + ", lastname=" + lastname + ", country=" + country + "]";
-    }
-
+    @ManyToMany(fetch=FetchType.EAGER, mappedBy="tourists")
+    public List<Tour> tours;
+    
     public static User authenticate(String username, String password) {
         return find.where().eq("username", username).eq("password", password).findUnique();
     }
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password
+				+ ", email=" + email + ", phone=" + phone + ", photo=" + photo
+				+ ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", rating=" + rating + ", country=" + country
+				+ ", reviewsGiven=" + reviewsGiven + ", reviewsReceived="
+				+ reviewsReceived + "]";
+	}
 }

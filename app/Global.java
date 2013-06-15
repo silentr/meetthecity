@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.Map;
 
 import models.Location;
+import models.Review;
 import models.Tour;
 import models.User;
 import play.Application;
@@ -27,18 +28,25 @@ public class Global extends GlobalSettings {
 
         List<Location> locations = (List<Location>) yamlMap.get("locations");
         Logger.info(locations.toString());
+        
+        List<Review> reviews = (List<Review>) yamlMap.get("reviews");
+        Logger.info(reviews.toString());
 
         // Check if the database is empty
         if (User.find.findRowCount() == 0) {
             Ebean.save(users);
         }
-
-        if (Tour.find.findRowCount() == 0) {
+        
+        if (Location.find.findRowCount() == 0) {
             Ebean.save(locations);
         }
 
         if (Tour.find.findRowCount() == 0) {
             Ebean.save(tours);
+        }
+        
+        if (Review.find.findRowCount() == 0) {
+            Ebean.save(reviews);
         }
     }
 }

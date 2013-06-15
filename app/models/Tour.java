@@ -5,11 +5,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import play.data.format.Formats;
 import play.db.ebean.Model;
@@ -39,14 +44,23 @@ public class Tour extends Model {
 	private String descriptionShort;
 	private String descriptionMini;
 	private String photoName;
-	private List<Review> listReview;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="tour")
+	private List<Review> reviews;
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="tour_to_tourist",
+	        joinColumns=
+	        @JoinColumn(name="id", referencedColumnName="id"),
+	        inverseJoinColumns=
+	        @JoinColumn(name="username", referencedColumnName="username")
+	        )
+	private List<User> tourists;
 	
 	public Tour(){}
 
 	public Tour(String name, Date date, Double price,
 			Location location, User guide, String descriptionFull,
 			String descriptionShort, String descriptionMini, String photoName,
-			List<Review> listReview) {
+			List<Review> reviews) {
 		this.name = name;
 		this.date = date;
 		this.price = price;
@@ -56,7 +70,7 @@ public class Tour extends Model {
 		this.descriptionShort = descriptionShort;
 		this.descriptionMini = descriptionMini;
 		this.photoName = photoName;
-		this.listReview = listReview;
+		this.reviews = reviews;
 	}
 
 	public Long getId() {
@@ -148,22 +162,30 @@ public class Tour extends Model {
 		this.photoName = photoName;
 	}
 
-	public List<Review> getListReview() {
-		return listReview;
+	public List<Review> getReviews() {
+		return reviews;
 	}
 
-	public void setListReview(List<Review> listReview) {
-		this.listReview = listReview;
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
-	@Override
+	public List<User> getTourists() {
+        return tourists;
+    }
+
+    public void setTourists(List<User> tourists) {
+        this.tourists = tourists;
+    }
+
+    @Override
 	public String toString() {
 		return "Tour [id=" + id + ", name=" + name + ", date=" + date
 				+ ", price=" + price + ", location=" + location + ", guide="
 				+ guide + ", descriptionFull=" + descriptionFull
 				+ ", descriptionShort=" + descriptionShort
 				+ ", descriptionMini=" + descriptionMini + ", photoName="
-				+ photoName + ", listReview=" + listReview + "]";
+				+ photoName + ", reviews=" + reviews + "]";
 	}
 
 }

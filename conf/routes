@@ -13,6 +13,8 @@ POST    /user                       controllers.Application.createUser()
 GET     /user/all                   controllers.Application.getAllUsers()
 GET     /user/:id                   controllers.Application.getUser(id : String)
 GET     /join-a-tour/:id            controllers.Application.joinATour(id: String)
+GET     /reviews                    controllers.Application.getAllReviews()
+POST    /join-a-tour/:id            controllers.Application.joinATourSubmit()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

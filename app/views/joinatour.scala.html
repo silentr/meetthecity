@@ -1,118 +1,153 @@
-@(tour: Tour)
-@content(tour: Tour) = {
+@(tour: Tour) @content(tour: Tour) = {
 <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <style type="text/css">
-	html { height: 400px; width: 400px; }
-	body { height: 100%; margin: 0; padding: 0 }
-	#map-canvas { height: 100% }
-    </style>
-    <script type="text/javascript"
-	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKULXtW1Lnxt0OITHOyeEBtnid9LYUlcM&sensor=true">
-    </script>
-    <script type="text/javascript">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<style>
+#map-canvas {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+</style>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKULXtW1Lnxt0OITHOyeEBtnid9LYUlcM&sensor=true"></script>
+<script>
+	var map;
 	function initialize() {
-	    var mapOptions = {
-		center: new google.maps.LatLng(-34.397, 150.644),
-		zoom: 8,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	    };
-	    var map = new google.maps.Map(document.getElementById("map-canvas"),
-		    mapOptions);
+		var mapOptions = {
+			zoom : 8,
+			center : new google.maps.LatLng(-34.397, 150.644),
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(document.getElementById('map-canvas'),
+				mapOptions);
 	}
+
 	google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-    <script>!function(d, s, id) {
-	    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-	    if (!d.getElementById(id)) {
+</script>
+<script>
+	!function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
+				.test(d.location) ? 'http' : 'https';
+		if (!d.getElementById(id)) {
+			js = d.createElement(s);
+			js.id = id;
+			js.src = p + '://platform.twitter.com/widgets.js';
+			fjs.parentNode.insertBefore(js, fjs);
+		}
+	}(document, 'script', 'twitter-wjs');
+</script>
+<script type="text/javascript">
+	(function() {
+		var po = document.createElement('script');
+		po.type = 'text/javascript';
+		po.async = true;
+		po.src = 'https://apis.google.com/js/plusone.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(po, s);
+	})();
+</script>
+<link href="/assets/star-rating/jquery.rating.css" rel="stylesheet"></link>
+<script type="text/javascript" src="/assets/star-rating/jquery.js"></script>
+<script type="text/javascript" src="/assets/star-rating/jquery.form.js"></script>
+<script type="text/javascript"
+	src="/assets/star-rating/jquery.MetaData.js"></script>
+<script type="text/javascript"
+	src="/assets/star-rating/jquery.rating.pack.js"></script>
+<script type="text/javascript"
+	src="/assets/star-rating/jquery.rating.js"></script>
+<script>
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id))
+			return;
 		js = d.createElement(s);
 		js.id = id;
-		js.src = p + '://platform.twitter.com/widgets.js';
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
 		fjs.parentNode.insertBefore(js, fjs);
-	    }
-	}(document, 'script', 'twitter-wjs');</script>
-    <script type="text/javascript">
-	(function() {
-	    var po = document.createElement('script');
-	    po.type = 'text/javascript';
-	    po.async = true;
-	    po.src = 'https://apis.google.com/js/plusone.js';
-	    var s = document.getElementsByTagName('script')[0];
-	    s.parentNode.insertBefore(po, s);
-	})();
-    </script>
-    <link href="/assets/star-rating/jquery.rating.css" rel="stylesheet"></link>
-    <script type="text/javascript" src="/assets/star-rating/jquery.js"></script>
-    <script type="text/javascript" src="/assets/star-rating/jquery.form.js"></script>
-    <script type="text/javascript" src="/assets/star-rating/jquery.MetaData.js"></script>
-    <script type="text/javascript" src="/assets/star-rating/jquery.rating.pack.js"></script>
-    <script type="text/javascript" src="/assets/star-rating/jquery.rating.js"></script>
-    <script>
-	(function(d, s, id) {
-	    var js, fjs = d.getElementsByTagName(s)[0];
-	    if (d.getElementById(id))
-		return;
-	    js = d.createElement(s);
-	    js.id = id;
-	    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-	    fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
-    </script>
+</script>
 </head>
-<table>
-    <tr>
-	<td colspan="2">
-	    <div style="float: left; padding-right: 10px;">
-		Date:</br>
-		Location:
-	    </div>
-	    <div>
-		@tour.getDateFormatted()<br/>
-		@tour.getLocation().getName()
-	    </div>
-	</td>
-    </tr>
-    <tr>
-	<td>
-	    <img style="padding-right: 15px;" src="@tour.getGuide().photo" alt="">
-	</td>
-	<td style="text-align: left; vertical-align: top;">
-	    <div>
-		Guide: @tour.getGuide().firstname @tour.getGuide().lastname
-	    </div>
-	    <div>
-		<input name="star2" type="radio" class="star" @if(tour.getGuide().rating == 1) {checked="checked"} disabled="disabled"/>
-		<input name="star2" type="radio" class="star" @if(tour.getGuide().rating == 2) {checked="checked"} disabled="disabled"/>
-		<input name="star2" type="radio" class="star" @if(tour.getGuide().rating == 3) {checked="checked"} disabled="disabled"/>
-		<input name="star2" type="radio" class="star" @if(tour.getGuide().rating == 4) {checked="checked"} disabled="disabled"/>
-		<input name="star2" type="radio" class="star" @if(tour.getGuide().rating == 5) {checked="checked"} disabled="disabled"/>
-	    </div>
-	    <div style="height: 120px;"></div>
-	    <div>
-		Phone: @tour.getGuide().phone<br/>Email: @tour.getGuide().email
-	    </div>
-	</td>
-    </tr>
-</table>
 <h2>@tour.getName()</h2>
 <p style="font-size: small; text-align: justify;">
-	<img src="@tour.getPhotoName()" align="left" style="padding-right: 15px;"/>
-	@tour.getDescriptionFull()
+	<img src="@tour.getPhotoName()" align="left"
+		style="padding-right: 15px;" /> @tour.getDescriptionFull()
 </p>
 Price: @tour.getPrice()
-<br/><br/>
+<br />
+<form action="/join-a-tour-submit" method="POST">
+	<input type="hidden" value="@tour.getId()" name="id"/>
+	<button type="submit">Join a tour</button>
+</form>
+<br />
 <!-- SHARE: TWITTER -->
 <div style="padding-bottom: 5px;">
-    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://meetthecity.com/join-a-tour">Tweet</a>
+	<a href="https://twitter.com/share" class="twitter-share-button"
+		data-url="http://meetthecity.com/join-a-tour">Tweet</a>
 </div>
 <!-- SHARE: GOOGLE PLUS ONE -->
-<div  class="g-plusone" data-annotation="inline" data-width="300"></div>
+<div class="g-plusone" data-annotation="inline" data-width="300"></div>
 <!-- SHARE: FACEBOOK -->
-<div id="fb-root" style="padding-top: 5px;">
-</div>
-<div class="fb-like" data-href="http://meetthecity.com/join-a-tour" data-send="true" data-width="450" data-show-faces="true"></div>
-<!-- GOOGLE MAPS -->
-<div id="map-canvas"/>
+<div id="fb-root" style="padding-top: 5px;"></div>
+<div class="fb-like" data-href="http://meetthecity.com/join-a-tour"
+	data-send="true" data-width="450" data-show-faces="true"></div>
+<table>
+	<tr>
+		<td colspan="2">
+			<div style="float: left; padding-right: 10px;">
+				Date:</br> Location:
+			</div>
+			<div>
+				@tour.getDateFormatted()<br /> @tour.getLocation().getName()
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td><img style="padding-right: 15px;"
+			src="@tour.getGuide().photo" alt=""></td>
+		<td style="text-align: left; vertical-align: top;">
+			<div>Guide: @tour.getGuide().firstname
+				@tour.getGuide().lastname</div>
+			<div>
+				<input name="star2" type="radio" class="star"
+					@if(tour.getGuide().rating== 1) {checked="checked"
+					} disabled="disabled" /> <input name="star2" type="radio"
+					class="star" @if(tour.getGuide().rating== 2) {checked="checked"
+					} disabled="disabled" /> <input name="star2" type="radio"
+					class="star" @if(tour.getGuide().rating== 3) {checked="checked"
+					} disabled="disabled" /> <input name="star2" type="radio"
+					class="star" @if(tour.getGuide().rating== 4) {checked="checked"
+					} disabled="disabled" /> <input name="star2" type="radio"
+					class="star" @if(tour.getGuide().rating== 5) {checked="checked"
+					} disabled="disabled" />
+			</div>
+			<div style="height: 120px;"></div>
+			<div>
+				Phone: @tour.getGuide().phone<br />Email: @tour.getGuide().email
+			</div>
+		</td>
+	</tr>
+</table>
+<h3>Reviews</h3>
+@for(review <- tour.getGuide().reviewsReceived){
+<div style="display: inline; float: left; padding-right: 10px;">@review.getTourist().firstname @review.getTourist().lastname</div>
+<div style="padding-top: 6px;">
+<input name="star3" type="radio" class="star"
+	@if(review.getRating() == 1) {checked="checked"
+	} disabled="disabled" />
+<input name="star3" type="radio" class="star"
+	@if(review.getRating() == 2) {checked="checked"
+	} disabled="disabled" />
+<input name="star3" type="radio" class="star"
+	@if(review.getRating() == 3) {checked="checked"
+	} disabled="disabled" />
+<input name="star3" type="radio" class="star"
+	@if(review.getRating() == 4) {checked="checked"
+	} disabled="disabled" />
+<input name="star3" type="radio" class="star"
+	@if(review.getRating() == 5) {checked="checked"
+	} disabled="disabled" />
+</div><br/>
+<div style="font-size: small;">@review.getComment()</div> 
 }
-
 @index(content(tour))

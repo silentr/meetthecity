@@ -73,3 +73,23 @@ tours:
         descriptionFull:  "The city's motto is München mag dich (Munich likes you). Before 2006, it was Weltstadt mit Herz (Cosmopolitan city with a heart). Its native name, München, is derived from the Old High German Munichen, meaning by the monks' place. The city's name derives from the monks of the Benedictine order who founded the city; hence the monk depicted on the city's coat of arms. Black and gold—the colours of the Holy Roman Empire—have been the city's official colours since the time of Ludwig the Bavarian. Modern Munich is a financial and publishing hub, and a frequently top-ranked destination for migration and expatriate location in livability rankings. Munich achieved 4th place in frequently quoted Mercer livability rankings in 2011[3] and 2012.[4] For economic and social innovation, the city was ranked 15th globally out of 289 cities in 2010, and 5th in Germany by the 2thinknow Innovation Cities Index based on analysis of 162 indicators.[5] In 2010, Monocle ranked Munich as the world's most livable city (in 2012, Munich was ranked fifth in Monocle's ranking, yet remained the highest ranked city in Germany)."
         descriptionShort: "The city's motto is München mag dich (Munich likes you). Before 2006, it was Weltstadt mit Herz (Cosmopolitan city with a heart). Its native name, München, is derived from the Old High German Munichen, meaning by the monks' place. The city's name derives from the monks of the Benedictine order who founded the city; hence the monk depicted on the city's coat of arms. Black and gold—the colours of the Holy Roman Empire—have been the city's official colours since the time of Ludwig the Bavarian."
         descriptionMini:  "Modern Munich is a financial and publishing hub, and a frequently top-ranked destination for migration and expatriate location in livability rankings."
+        
+reviews:
+
+    - !!models.Review
+        id:      1
+        comment: Good guide
+        rating:  4
+        guide:   !!models.User
+                   username: sadek
+        tourist: !!models.User
+                   username: erwan
+
+    - !!models.Review
+        id:      2
+        comment: Excellent guide
+        rating:  5
+        tourist:   !!models.User
+                     username: sadek
+        tour:    !!models.Tour
+                   id: 1
