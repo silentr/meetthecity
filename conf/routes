@@ -5,6 +5,7 @@
 # Home page
 
 GET     /                           controllers.Application.index()
+GET     /tours                      controllers.Application.tours()
 GET     /signin                     controllers.Application.signin()
 POST    /signin                     controllers.Application.authenticate()
 GET     /user                       controllers.Application.addUser()

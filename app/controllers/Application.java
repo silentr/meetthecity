@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Tour;
@@ -16,6 +17,7 @@ import views.html.index;
 import views.html.joinatour;
 import views.html.signin;
 import views.html.user;
+import views.html.tours;
 
 public class Application extends Controller {
 
@@ -57,6 +59,12 @@ public class Application extends Controller {
         return ok(signin.render(Form.form(Login.class)));
     }
     
+    public static Result tours() {
+
+        List<Tour> tourList = Tour.find.all();
+        return ok(tours.render(tourList));
+    }
+    
     public static Result createUser() {
         User user = Form.form(User.class).bindFromRequest().get();
         user.save();
@@ -81,7 +89,11 @@ public class Application extends Controller {
     }
     
     public static Result joinATour(String id) {
-		Tour tour = new Model.Finder<String, Tour>(String.class, Tour.class).byId(id);
+
+        Logger.info(id);
+		Tour tour = new Model.Finder<String, Tour>(String.class, Tour.class).byId("1");
 		return ok(joinatour.render(tour));
 	}
+    
+
 }
