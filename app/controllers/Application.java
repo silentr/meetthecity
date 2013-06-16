@@ -1,16 +1,12 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.avaje.ebean.Ebean;
 
 import models.Review;
 import models.Tour;
 import models.User;
 import play.Logger;
 import play.api.templates.Html;
-import play.data.DynamicForm;
 import play.data.Form;
 import play.db.ebean.Model;
 import play.libs.Json;
@@ -20,8 +16,10 @@ import scala.collection.mutable.StringBuilder;
 import views.html.index;
 import views.html.joinatour;
 import views.html.signin;
-import views.html.user;
 import views.html.tours;
+import views.html.user;
+
+import com.avaje.ebean.Ebean;
 
 public class Application extends Controller {
 
@@ -47,7 +45,7 @@ public class Application extends Controller {
             return badRequest(signin.render(loginForm));
         } else {
             session().clear();
-            session("email", loginForm.get().username);
+            session("username", loginForm.get().username);
             
             Logger.debug("User " + loginForm.get().username + " logged in");
             

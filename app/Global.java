@@ -21,16 +21,9 @@ public class Global extends GlobalSettings {
 
         Map yamlMap = (Map) Yaml.load("initial-data.yml");
         List<User> users = (List<User>) yamlMap.get("users");
-        Logger.info(users.toString());
-
         List<Tour> tours = (List<Tour>) yamlMap.get("tours");
-        Logger.info(tours.toString());
-
         List<Location> locations = (List<Location>) yamlMap.get("locations");
-        Logger.info(locations.toString());
-        
         List<Review> reviews = (List<Review>) yamlMap.get("reviews");
-        Logger.info(reviews.toString());
 
         // Check if the database is empty
         if (User.find.findRowCount() == 0) {
