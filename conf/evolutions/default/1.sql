@@ -4,10 +4,11 @@
 # --- !Ups
 
 create table location (
-  id                        integer not null,
-  length                    integer,
-  width                     integer,
-  name                      varchar(255),
+  id                        bigint not null,
+  ltd                       integer,
+  lng                       integer,
+  country                   varchar(255),
+  city                      varchar(255),
   constraint pk_location primary key (id))
 ;
 
@@ -26,7 +27,7 @@ create table tour (
   name                      varchar(255),
   date                      timestamp,
   price                     double,
-  location_id               integer,
+  location_id               bigint,
   guide_username            varchar(255),
   description_full          TEXT,
   description_short         TEXT,

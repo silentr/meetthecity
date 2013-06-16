@@ -9,10 +9,10 @@
 	<tbody>
 		@for(tourItem <- class_list){
 		<tr>
-			<td>@tourItem.getName()<br>
-			<br> <img src="@tourItem.getPhotoName()" /></td>
+			<td>@tourItem.name<br>
+			<br> <img src="@tourItem.photoName" /></td>
 			<td>
-				<p style="font-size: small">@tourItem.getDescriptionShort() <a href=@routes.Application.joinATour("1")>Join This Tour</a></p>
+				<p style="font-size: small">@tourItem.descriptionShort <a href=@routes.Application.joinATour("1")>Join This Tour</a></p>
 			</td>
 		</tr>
 		}

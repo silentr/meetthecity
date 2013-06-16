@@ -70,20 +70,20 @@
 	}(document, 'script', 'facebook-jssdk'));
 </script>
 </head>
-<h2>@tour.getName()</h2>
+<h2>@tour.name</h2>
 <p style="font-size: small; text-align: justify;">
-	<img src="@tour.getPhotoName()" align="left"
-		style="padding-right: 15px;" /> @tour.getDescriptionFull()
+	<img src="@tour.photoName" align="left"
+		style="padding-right: 15px;" /> @tour.descriptionFull
 </p>
 <div style="padding-bottom: 10px;">
-Price: @if(tour.getPrice() != 0.0){
-	@tour.getPrice()
+Price: @if(tour.price != 0.0){
+	@tour.price
 } else{
 	Free
 }
 </div>
 <form action="/join-a-tour" method="POST">
-	<input type="hidden" value="@tour.getId()" name="id"/>
+	<input type="hidden" value="@tour.id" name="id"/>
 	<button type="submit" class="btn btn-primary">Join a tour</button>
 </form>
 <!-- SHARE: TWITTER -->
@@ -104,38 +104,38 @@ Price: @if(tour.getPrice() != 0.0){
 				Date:</br> Location:
 			</div>
 			<div>
-				@tour.getDateFormatted()<br /> @tour.getLocation().getName()
+				@tour.getDateFormatted()<br /> @tour.location.city
 			</div>
 		</td>
 	</tr>
 	<tr>
 		<td><img style="padding-right: 15px;"
-			src="@tour.getGuide().photo" alt=""></td>
+			src="@tour.guide.photo" alt=""></td>
 		<td style="text-align: left; vertical-align: top;">
-			<div>Guide: @tour.getGuide().firstname
-				@tour.getGuide().lastname</div>
+			<div>Guide: @tour.guide.firstname
+				@tour.guide.lastname</div>
 			<div>
 				<input name="star2" type="radio" class="star"
-					@if(tour.getGuide().rating== 1) {checked="checked"
+					@if(tour.guide.rating== 1) {checked="checked"
 					} disabled="disabled" /> <input name="star2" type="radio"
-					class="star" @if(tour.getGuide().rating== 2) {checked="checked"
+					class="star" @if(tour.guide.rating== 2) {checked="checked"
 					} disabled="disabled" /> <input name="star2" type="radio"
-					class="star" @if(tour.getGuide().rating== 3) {checked="checked"
+					class="star" @if(tour.guide.rating== 3) {checked="checked"
 					} disabled="disabled" /> <input name="star2" type="radio"
-					class="star" @if(tour.getGuide().rating== 4) {checked="checked"
+					class="star" @if(tour.guide.rating== 4) {checked="checked"
 					} disabled="disabled" /> <input name="star2" type="radio"
-					class="star" @if(tour.getGuide().rating== 5) {checked="checked"
+					class="star" @if(tour.guide.rating== 5) {checked="checked"
 					} disabled="disabled" />
 			</div>
 			<div style="height: 120px;"></div>
 			<div>
-				Phone: @tour.getGuide().phone<br />Email: @tour.getGuide().email
+				Phone: @tour.guide.phone<br />Email: @tour.guide.email
 			</div>
 		</td>
 	</tr>
 </table>
 <h3>Reviews</h3>
-@for(review <- tour.getGuide().reviewsReceived){
+@for(review <- tour.guide.reviewsReceived){
 <div style="display: inline; float: left; padding-right: 10px;">@review.getTourist().firstname @review.getTourist().lastname</div>
 <div style="padding-top: 6px;">
 <input name="star3" type="radio" class="star"

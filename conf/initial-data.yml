@@ -36,14 +36,22 @@ users:
 locations:
     - !!models.Location
         id:               1
-        length:           20
-        width:            20
-        name:             Istanbul
+        ltd:              20
+        lng:              20
+        country:          Turkey  
+        city:             Istanbul
     - !!models.Location
         id:               2
-        length:           30
-        width:            30
-        name:             Munich
+        ltd:              30
+        lng:              30
+        country:          Germany  
+        city:             Munich
+    - !!models.Location
+        id:               3
+        ltd:              32
+        lng:              33
+        country:          Germany  
+        city:             Berlin
 
 tours:
 

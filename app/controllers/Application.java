@@ -106,7 +106,7 @@ public class Application extends Controller {
         String username = session("connected");
         if(username != null){
             User user = User.find.byId(username);
-            tour.getTourists().add(user);
+            tour.tourists.add(user);
             user.tours.add(tour);
             tour.update();
             user.update();

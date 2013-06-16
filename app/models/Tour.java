@@ -15,177 +15,66 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import play.data.format.Formats;
 import play.db.ebean.Model;
 
 @Entity
 public class Tour extends Model {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	public static Finder<Long,Tour> find = new Finder<Long,Tour>(Long.class, Tour.class);
-	
-	@Id
-	private Long id;
-	private String name;
-	@Formats.DateTime(pattern="yyyy-MM-dd")
-	private Date date;
-	private Double price;
-	@ManyToOne(fetch=FetchType.EAGER)
-	private Location location;
-	@ManyToOne(fetch=FetchType.EAGER)
-	private User guide;
-	@Column(columnDefinition="TEXT")
-	private String descriptionFull;
-	@Column(columnDefinition="TEXT")
-	private String descriptionShort;
-	private String descriptionMini;
-	private String photoName;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="tour")
-	private List<Review> reviews;
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="tour_to_tourist",
-	        joinColumns=
-	        @JoinColumn(name="id", referencedColumnName="id"),
-	        inverseJoinColumns=
-	        @JoinColumn(name="username", referencedColumnName="username")
-	        )
-	private List<User> tourists;
-	
-	public Tour(){}
 
-	public Tour(String name, Date date, Double price,
-			Location location, User guide, String descriptionFull,
-			String descriptionShort, String descriptionMini, String photoName,
-			List<Review> reviews) {
-		this.name = name;
-		this.date = date;
-		this.price = price;
-		this.location = location;
-		this.guide = guide;
-		this.descriptionFull = descriptionFull;
-		this.descriptionShort = descriptionShort;
-		this.descriptionMini = descriptionMini;
-		this.photoName = photoName;
-		this.reviews = reviews;
-	}
+    private static final long serialVersionUID = 1L;
 
-	public Long getId() {
-		return id;
-	}
+    public static Finder<Long, Tour> find = new Finder<Long, Tour>(Long.class, Tour.class);
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Id
+    public long id;
 
-	public String getName() {
-		return name;
-	}
+    public String name;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Formats.DateTime(pattern = "yyyy-MM-dd")
+    public Date date;
 
-	public Date getDate() {
-		return date;
-	}
+    public double price;
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	
-	public String getDateFormatted(){
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG, new Locale("de"));
-		return df.format(date);
-	}
+    @OneToOne(fetch = FetchType.EAGER)
+    public Location location;
 
-	public Double getPrice() {
-		return price;
-	}
+    @ManyToOne(fetch = FetchType.EAGER)
+    public User guide;
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}
+    @Column(columnDefinition = "TEXT")
+    public String descriptionFull;
 
-	public Location getLocation() {
-		return location;
-	}
+    @Column(columnDefinition = "TEXT")
+    public String descriptionShort;
 
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+    public String descriptionMini;
 
-	public User getGuide() {
-		return guide;
-	}
+    public String photoName;
 
-	public void setGuide(User guide) {
-		this.guide = guide;
-	}
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "tour")
+    public List<Review> reviews;
 
-	public String getDescriptionFull() {
-		return descriptionFull;
-	}
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "tour_to_tourist", joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
+    public List<User> tourists;
 
-	public void setDescriptionFull(String descriptionFull) {
-		this.descriptionFull = descriptionFull;
-	}
-
-	public String getDescriptionShort() {
-		return descriptionShort;
-	}
-
-	public void setDescriptionShort(String descriptionShort) {
-		this.descriptionShort = descriptionShort;
-	}
-
-	public String getDescriptionMini() {
-		return descriptionMini;
-	}
-
-	public void setDescriptionMini(String descriptionMini) {
-		this.descriptionMini = descriptionMini;
-	}
-	
-	public void join(User user){
-		
-	}
-
-	public String getPhotoName() {
-		return photoName;
-	}
-
-	public void setPhotoName(String photoName) {
-		this.photoName = photoName;
-	}
-
-	public List<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
-
-	public List<User> getTourists() {
-        return tourists;
+    public String getDateFormatted() {
+        DateFormat df = DateFormat.getDateInstance(DateFormat.LONG, new Locale("de"));
+        return df.format(date);
     }
 
-    public void setTourists(List<User> tourists) {
-        this.tourists = tourists;
+    public void join(User user) {
+
     }
 
     @Override
-	public String toString() {
-		return "Tour [id=" + id + ", name=" + name + ", date=" + date
-				+ ", price=" + price + ", location=" + location + ", guide="
-				+ guide + ", descriptionFull=" + descriptionFull
-				+ ", descriptionShort=" + descriptionShort
-				+ ", descriptionMini=" + descriptionMini + ", photoName="
-				+ photoName + ", reviews=" + reviews + "]";
-	}
+    public String toString() {
+        return "Tour [id=" + id + ", name=" + name + ", date=" + date + ", price=" + price + ", location=" + location
+                + ", guide=" + guide + ", descriptionFull=" + descriptionFull + ", descriptionShort="
+                + descriptionShort + ", descriptionMini=" + descriptionMini + ", photoName=" + photoName + ", reviews="
+                + reviews + ", tourists=" + tourists + "]";
+    }
 
 }
