@@ -1,0 +1,110 @@
+@(form: Form[models.form.SignUp])
+
+@index {
+
+  <head>
+    <meta charset="utf-8">
+    <title>Sign in &middot; Twitter Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <style type="text/css">
+	  
+	  span{color:red}
+	  label{position:relative;line-height:2;margin:10px 0px}
+	  
+    select{ position:absolute;margin-left:20px;width:10em;left:100px}
+      .form-signin {
+        max-width: 430px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #e5e5e5;
+		text-align:right
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading{font-size:30px;}
+      .form-signin .checkbox {
+        margin-bottom: 20px;
+		
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: 6px;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+		width: 280px;
+		}
+		
+	  {
+    position: relative;
+}
+     
+
+    </style>
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+  </head>
+
+    <div class="container">
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading" align="center">Sign Up</h2>
+     <label>Username:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input type= "text" class="input-block-level" style="position:absolute;margin-left:20px;left:100px;"/></label> <br/>
+      <label> First Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input type="text" class="input-block-level" style="position:absolute;margin-left:20px;left:100px;"/></label> <br/>
+		<label>Last Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input type="text" class="input-block-level" style="position:absolute;margin-left:20px;left:100px;"/></label><br/>
+		  <label>Country:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><select name="" placeholder="[Choose Country]"/><br/>
+    <option value="Value for Item 1" title="Title for Item 1">India</option>
+    <option value="Value for Item 2" title="Title for Item 2">Turkey</option>
+    <option value="Value for Item 3" title="Title for Item 3">Ukraine</option>
+</select></label><br/>
+		   <label> Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>*</span>
+		       <input type="text" class="input-block-level" placeholder="example" style="position:absolute;margin-left:20px;left:100px;">
+		   </label> <br/>
+			<label>Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>*</span><input type="password" class="input-block-level" placeholder="min 8 characters" style="position:absolute;margin-left:20px;left:100px;"></label> <br/>
+			<label>Repeat Password:<span>*</span><input type="password" class="input-block-level" placeholder="min 8 characters" style="position:absolute;margin-left:20px;left:100px;"></label> <br/>
+			<p>Type the characters you see in the picture below.</p>
+			<img src="http://www.actingis.com/wp-content/plugins/si-captcha-for-wordpress/captcha/securimage_show.php?si_form_id=com&amp;prefix=ArM9dhdHXBzBa2X5" width="175" height="50" alt="CAPTCHA Image" title="CAPTCHA Image"><br/>
+			<input type= "text" class="input-block-level"><br/>
+          <label class="checkbox">
+          <input type="checkbox" value="remember-me">I agree to Meet the City terms of service and I have<br>
+		  &nbsp;&nbsp;&nbsp;&nbsp; read the <a href=""http://www.w3schools.com/">privacy policy.</a>
+        </label>
+        
+        <button class="btn btn-large btn-primary" type="submit" style="float: right;">Sign Up</button>
+      </form>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
+
+
+}

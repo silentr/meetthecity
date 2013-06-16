@@ -5,6 +5,7 @@ import java.util.List;
 import models.Review;
 import models.Tour;
 import models.User;
+import models.form.Login;
 import play.Logger;
 import play.api.templates.Html;
 import play.data.Form;
@@ -22,19 +23,6 @@ import views.html.user;
 import com.avaje.ebean.Ebean;
 
 public class Application extends Controller {
-
-    public static class Login {
-
-        public String username;
-        
-        public String password;
-
-        public String validate() {
-            Logger.debug("validating = " + username + ", password = " + password);
-            
-            return User.authenticate(username, password) == null ? "Invalid user or password" : null;
-        }
-    }
 
     public static Result authenticate() {
         Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
