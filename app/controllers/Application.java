@@ -24,7 +24,7 @@ public class Application extends Controller {
         Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {
 
-            Logger.debug("User didn't logged in");
+            Logger.debug("User didn't logged in, errors = " + loginForm.errors());
 
             return badRequest(signin.render(loginForm));
         } else {
@@ -45,6 +45,22 @@ public class Application extends Controller {
         return ok(signin.render(Form.form(Login.class)));
     }
 
+    public static Result signupSubmit() {
+        Form<SignUp> signUpForm = Form.form(SignUp.class).bindFromRequest();
+
+        if (signUpForm.hasErrors()) {
+            Logger.debug("User didn't signed up errors = " + signUpForm.errors());
+
+            return badRequest(signup.render(signUpForm));
+        } else {
+            User user = SignUp.createUser(signUpForm.get());
+            user.save();
+            Logger.debug(user + " signed up");
+
+            return redirect(routes.Application.signin());
+        }
+    }
+
     public static Result signup() {
         return ok(signup.render(Form.form(SignUp.class)));
     }
@@ -53,17 +69,6 @@ public class Application extends Controller {
 
         List<Tour> tourList = Tour.find.all();
         return ok(tours.render(tourList));
-    }
-
-    public static Result createUser() {
-        User user = Form.form(User.class).bindFromRequest().get();
-        user.save();
-
-        return redirect(routes.Application.index());
-    }
-
-    public static Result addUser() {
-        return ok(user.render());
     }
 
     public static Result getAllUsers() {

@@ -20,12 +20,14 @@ select {
 	margin: 0 auto 20px;
 	background-color: #fff;
 	border: 1px solid #e5e5e5;
-	text-align: right -webkit-border-radius:    5px;
+	text-align: right -webkit-border-radius:       5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	border: 1px solid #e5e5e5;
+	text-align: right -webkit-border-radius:      5px;
 }
 
 .form-signin .form-signin-heading {
@@ -45,18 +47,23 @@ select {
 }
 </style>
 
-<form class="form-signin">
+<div class="form-signin">
+	@helper.form(routes.Application.signupSubmit) {
 	<h2 class="form-signin-heading" align="center">Sign Up</h2>
+
+	@if(form.hasErrors()) {
+	    <p align="center" class="alert alert-error">@form.errors().values().iterator().next().get(0).message()</p>
+	} 
 	<label>Username:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input
-		type="text" class="input-block-level"
+		name="username" type="text" class="input-block-level"
 		style="position: absolute; margin-left: 20px; left: 100px;" /></label> <br />
 	<label> First
 		Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input
-		type="text" class="input-block-level"
+		name="firstname" type="text" class="input-block-level"
 		style="position: absolute; margin-left: 20px; left: 100px;" />
 	</label> <br /> <label>Last
 		Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input
-		type="text" class="input-block-level"
+		name="lastname" type="text" class="input-block-level"
 		style="position: absolute; margin-left: 20px; left: 100px;" />
 	</label><br /> <label>Country:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><select
 		name="" placeholder="[Choose Country]" /><br />
@@ -65,15 +72,17 @@ select {
 		<option value="Value for Item 3" title="Title for Item 3">Ukraine</option>
 		</select></label><br /> <label>
 		Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
 		<span>*</span> <input type="text" class="input-block-level"
-		placeholder="example"
+		name="email" placeholder="example"
 		style="position: absolute; margin-left: 20px; left: 100px;">
 	</label> <br /> <label>Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<span>*</span><input type="password" class="input-block-level"
-		placeholder="min 8 characters"
+		<span>*</span><input name="password" type="password"
+		class="input-block-level" placeholder="min 8 characters"
 		style="position: absolute; margin-left: 20px; left: 100px;">
 	</label> <br /> <label>Repeat Password:<span>*</span><input
-		type="password" class="input-block-level"
+		name="passwordConfirmation" type="password" class="input-block-level"
 		placeholder="min 8 characters"
 		style="position: absolute; margin-left: 20px; left: 100px;"></label> <br />
 	<p>Type the characters you see in the picture below.</p>
@@ -89,6 +98,7 @@ select {
 
 	<button class="btn btn-large btn-primary" type="submit"
 		style="float: right;">Sign Up</button>
-</form>
+	}
+</div>
 
 }

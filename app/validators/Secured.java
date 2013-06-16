@@ -1,4 +1,4 @@
-package authenticated;
+package validators;
 
 import controllers.routes;
 import play.mvc.Http.Context;
