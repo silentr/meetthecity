@@ -115,95 +115,37 @@ body {
             </form>
       	</div>
       <div class="well">
-          <h5>Continents</h5>
-          <ul id="continents">
-            <li>
-            	<a id="asia" href="#">Asia</a>
-             		<ul id="asian_countries">
-             			<li><a href="#">China</a></li>
-            			<li><a href="#">Japan</a></li>
-            			<li><a href="#">India</a></li>
-            			<li><a href="#">Pakistan</a></li>
-             		</ul>
-             </li>
-            <li><a id=europe href="#">Europe</a></li>
-           		<ul id="europian_countries">
-             		<li><a href="#">Germany</a></li>
-            		<li><a href="#">Ukraine</a></li>
-            		<li><a href="#">Turkey</a></li>
-            		<li><a href="#">Bosnia Herzegovina</a></li>
-             	</ul>
-            </li>
-            <li><a id="north" href="#">North America</a>
-           		<ul id="northA_countries">
-             		<li><a href="#">USA</a></li>
-            		<li><a href="#">Canada</a></li>
-             	</ul>
-            </li>
-            <li><a id="south"  href="#">South America</a>
-                <ul id="southA_countries">
-             		<li><a href="#">Brazil</a></li>
-            		<li><a href="#">Argentina</a></li>
-            		<li><a href="#">Chile</a></li>
-             	</ul>
-            </li>
-            <li><a id="australia" href="#">Australia</a>
-                <ul id="australia_countries">
-             		<li><a href="#">Australia</a></li>
-            		<li><a href="#">New Zeland</a></li>
-            	</ul>            
-            </li>
-            <li><a id="africa" href="#">Africa</a>
-            	<ul id="africa_countries">
-             		<li><a href="#">Egypt</a></li>
-            		<li><a href="#">Tunusia</a></li>
-            		<li><a href="#">Nigeria</a></li> 
-            	</ul>           
-            </li>  
+          <h5>Countries</h5>
+
+          <ul id="countries">
+              @Location.findUniqueCountries().map { country =>
+                  <li>
+                      <a href="#">@country</a>
+	                  <ul id=@country>
+		                  @Location.findUniqueCitiesOfCountry(country).map { city =>
+		                      <li><a href="#">@city</a></li>
+		                  }
+	                  </ul>
+                  </li>
+              }
           </ul>
-        	<h5>Subscribe</h5>
-        		<ul id="continents">
-        			<li><a href="#">RSS</a></li>
-            		<li><a href="#">E-Mail</a></li>
-        		</ul>
+          <h5>Subscribe</h5>
+              <ul id="continents">
+                  <li><a href="#">RSS</a></li>
+                  <li><a href="#">E-Mail</a></li>
+              </ul>
       	</div>
       </div>
 <!--       end of the leftsidebar -->
     
       <script type="text/javascript">
-	  
-      $asianCont = $("#asian_countries");
-      $euCont = $("#europian_countries");
-      $northACont = $("#northA_countries");
-      $southACont = $("#southA_countries");
-      $australiaCont = $("#australia_countries");
-      $africaCont = $("#africa_countries");
- 
- 	  
-      $cont = $("#continents");
+          $countries = $("#countries");
+          $countries.find("ul").hide();
       
-      $cont.find("ul").hide();
-      
-      $cont.find("a").click(function(){ 
-    	  
-    	  
-//     	  $cont.find("ul").hide("show");
-    	  
-    	  var currentId = $(this).attr('id');
-    	  if(currentId == "asia")
-    		  $asianCont.toggle("slow");
-    	  if(currentId == "europe")
-    		  $euCont.toggle("slow");
-    	  if(currentId == "north")
-    		  $northACont.toggle("slow")
-    	  if(currentId == "south")
-    		  $southACont.toggle("slow") 
-		  if(currentId == "australia")
-       		  $australiaCont.toggle("slow")  
-       	  if(currentId == "africa")
-          	  $africaCont.toggle("slow")      
- 
-      });
+          $countries.find("li").click(function(){
+
+              $(this).find("ul").toggle("slow");
+          });
       </script>
 
 <!-- main content -->

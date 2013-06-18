@@ -37,7 +37,7 @@ public class Tour extends Model {
 
     public double price;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Location location;
 
     @ManyToOne(fetch = FetchType.EAGER)

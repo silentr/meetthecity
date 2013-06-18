@@ -35,19 +35,21 @@ users:
 
 locations:
     - !!models.Location
-        id:               1
         ltd:              20
         lng:              20
         country:          Turkey  
         city:             Istanbul
     - !!models.Location
-        id:               2
         ltd:              30
         lng:              30
         country:          Germany  
         city:             Munich
     - !!models.Location
-        id:               3
+        ltd:              30
+        lng:              30
+        country:          Germany  
+        city:             Munich
+    - !!models.Location
         ltd:              32
         lng:              33
         country:          Germany  
@@ -56,12 +58,14 @@ locations:
 tours:
 
     - !!models.Tour
-        id:               1
         name:             Trip to Istanbul
         date:             2013-06-15
         price:            0
         location:         !!models.Location
-                          id: 1
+                              ltd:              30
+                              lng:              32
+                              country:          Ukraine
+                              city:             Kyiv
         guide:            !!models.User
                           username: sadek
         photoName:        "/assets/images/locations/istanbul.png"
@@ -69,12 +73,14 @@ tours:
         descriptionShort: "Founded on the Sarayburnu promontory around 660 BC as Byzantium, the city now known as Istanbul developed to become one of the most significant cities in history. For nearly sixteen centuries following its reestablishment as Constantinople in 330 AD, it served as the capital of four empires: the Roman Empire (330–395), the Byzantine Empire (395–1204 and 1261–1453), the Latin Empire (1204–1261), and the Ottoman Empire (1453–1922).[5] It was instrumental in the advancement of Christianity during Roman and Byzantine times, before the Ottomans conquered the city in 1453 and transformed it into an Islamic stronghold and the seat of the last caliphate.[6] Although the Republic of Turkey established its capital in Ankara, palaces and imperial mosques still line Istanbul's hills as visible reminders of the city's previous central role."
         descriptionMini:  "Founded on the Sarayburnu promontory around 660 BC as Byzantium, the city now known as Istanbul developed to become one of the most significant cities in history."
     - !!models.Tour
-        id:               2
         name:             Munich sightseeing
         date:             2013-06-16
         price:            100
         location:         !!models.Location
-                          id: 2
+                              ltd:              65
+                              lng:              62
+                              country:          USA
+                              city:             New York
         guide:            !!models.User
                           username: erwan
         photoName:        "/assets/images/locations/munich.png"

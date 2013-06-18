@@ -8,8 +8,6 @@ import org.junit.Test;
 import play.mvc.Result;
 import play.test.WithApplication;
 
-import com.google.common.collect.ImmutableMap;
-
 public class ApplicationTest extends WithApplication {
 
     @Before
