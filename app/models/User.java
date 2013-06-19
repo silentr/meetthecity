@@ -51,6 +51,25 @@ public class User extends Model {
     }
 
     @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((country == null) ? 0 : country.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
+        result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
+        result = prime * result + ((password == null) ? 0 : password.hashCode());
+        result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+        result = prime * result + ((photo == null) ? 0 : photo.hashCode());
+        result = prime * result + rating;
+        result = prime * result + ((reviewsGiven == null) ? 0 : reviewsGiven.hashCode());
+        result = prime * result + ((reviewsReceived == null) ? 0 : reviewsReceived.hashCode());
+        result = prime * result + ((tours == null) ? 0 : tours.hashCode());
+        result = prime * result + ((username == null) ? 0 : username.hashCode());
+        return result;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!super.equals(obj)) return false;
@@ -91,11 +110,6 @@ public class User extends Model {
             if (other.username != null) return false;
         } else if (!username.equals(other.username)) return false;
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "";
     }
 
 }
