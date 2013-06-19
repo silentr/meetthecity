@@ -48,15 +48,15 @@ body {
 	  <li class="divider-vertical"><a href="#">About</a></li>
 	  </ul>
 	  <ul  class="nav pull-right">
-			  @if(Application.isUserSignedIn()) {
-				  <li>@Controller.session(Application.SESSION_USERNAME),&nbsp;</li>
+			  @if(UserManagment.isUserSignedIn()) {
+				  <li>@Controller.session(UserManagment.SESSION_USERNAME),&nbsp;</li>
 			      <li>
-			          <button onclick="window.location.href='@routes.Application.signout()'" class="btn btn-primary" type="button" style="float: right; 
+			          <button onclick="window.location.href='@routes.UserManagment.signout()'" class="btn btn-primary" type="button" style="float: right; 
 				          padding-right: 67px; padding-left: 67px" >Sign Out</button>
 				  </li>
 			  } else {
 			      <li>
-                      <button onclick="window.location.href='@routes.Application.signin()'" class="btn btn-primary" type="button" style="float: right; 
+                      <button onclick="window.location.href='@routes.UserManagment.signin()'" class="btn btn-primary" type="button" style="float: right; 
 				          padding-right: 67px; padding-left: 67px" >Sign In</button>
 				 </li>
 			  }

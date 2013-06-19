@@ -33,7 +33,7 @@ public class SignupTest extends WithApplication {
         requestMap.put("firstname", "Test2 firstname");
         requestMap.put("lastname", "Test2 Lastname");
 
-        Result signUpResult = callAction(controllers.routes.ref.Application.signupSubmit(), fakeRequest()
+        Result signUpResult = callAction(controllers.routes.ref.UserManagment.signupSubmit(), fakeRequest()
                 .withFormUrlEncodedBody(Collections.unmodifiableMap(requestMap)));
         assertThat(status(signUpResult)).isEqualTo(SEE_OTHER);
 
@@ -45,7 +45,7 @@ public class SignupTest extends WithApplication {
         assertThat(user.firstname).isEqualTo("Test2 firstname");
         assertThat(user.lastname).isEqualTo("Test2 Lastname");
 
-        Result loginResult = callAction(controllers.routes.ref.Application.authenticate(), fakeRequest()
+        Result loginResult = callAction(controllers.routes.ref.UserManagment.authenticate(), fakeRequest()
                 .withFormUrlEncodedBody(ImmutableMap.of("username", user.username, "password", user.password)));
         assertThat(status(loginResult)).isEqualTo(SEE_OTHER);
         assertThat(user.username).isEqualTo(session(loginResult).get("username"));
@@ -55,7 +55,7 @@ public class SignupTest extends WithApplication {
     @Test
     public void emptyUsername() {
         Result result = callAction(
-                controllers.routes.ref.Application.signupSubmit(),
+                controllers.routes.ref.UserManagment.signupSubmit(),
                 fakeRequest().withFormUrlEncodedBody(
                         ImmutableMap.of("username", "", "password", "12345678", "passwordConfirmation", "12345678",
                                 "email", "test2@mail.com")));
@@ -65,7 +65,7 @@ public class SignupTest extends WithApplication {
     @Test
     public void existingUsername() {
         Result result = callAction(
-                controllers.routes.ref.Application.signupSubmit(),
+                controllers.routes.ref.UserManagment.signupSubmit(),
                 fakeRequest().withFormUrlEncodedBody(
                         ImmutableMap.of("username", "maxime", "password", "12345678", "passwordConfirmation",
                                 "12345678", "email", "test2@mail.com")));
@@ -75,7 +75,7 @@ public class SignupTest extends WithApplication {
     @Test
     public void badEmail() {
         Result result = callAction(
-                controllers.routes.ref.Application.signupSubmit(),
+                controllers.routes.ref.UserManagment.signupSubmit(),
                 fakeRequest().withFormUrlEncodedBody(
                         ImmutableMap.of("username", "maxime", "password", "12345678", "passwordConfirmation",
                                 "12345678", "email", "test2mail.com")));
@@ -85,7 +85,7 @@ public class SignupTest extends WithApplication {
     @Test
     public void tooSmallPassword() {
         Result result = callAction(
-                controllers.routes.ref.Application.signupSubmit(),
+                controllers.routes.ref.UserManagment.signupSubmit(),
                 fakeRequest().withFormUrlEncodedBody(
                         ImmutableMap.of("username", "test2", "password", "1234567", "passwordConfirmation", "1234567",
                                 "email", "test2@mail.com")));
@@ -95,7 +95,7 @@ public class SignupTest extends WithApplication {
     @Test
     public void passwordConfirmationFail() {
         Result result = callAction(
-                controllers.routes.ref.Application.signupSubmit(),
+                controllers.routes.ref.UserManagment.signupSubmit(),
                 fakeRequest().withFormUrlEncodedBody(
                         ImmutableMap.of("username", "test2", "password", "12345678", "passwordConfirmation",
                                 "87654321", "email", "test2@mail.com")));
@@ -105,7 +105,7 @@ public class SignupTest extends WithApplication {
     @Test
     public void emptyPassword() {
         Result result = callAction(
-                controllers.routes.ref.Application.signupSubmit(),
+                controllers.routes.ref.UserManagment.signupSubmit(),
                 fakeRequest().withFormUrlEncodedBody(
                         ImmutableMap.of("username", "test2", "password", "", "passwordConfirmation", "", "email",
                                 "test2@mail.com")));

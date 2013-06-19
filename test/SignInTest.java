@@ -20,7 +20,7 @@ public class SignInTest extends WithApplication {
 
     @Test
     public void authenticationSuccess() {
-        Result result = callAction(controllers.routes.ref.Application.authenticate(), fakeRequest()
+        Result result = callAction(controllers.routes.ref.UserManagment.authenticate(), fakeRequest()
                 .withFormUrlEncodedBody(ImmutableMap.of("username", "maxime", "password", "secret")));
         assertThat(status(result)).isEqualTo(SEE_OTHER);
         assertThat("maxime").isEqualTo(session(result).get("username"));
@@ -28,7 +28,7 @@ public class SignInTest extends WithApplication {
 
     @Test
     public void authenticationFail() {
-        Result result = callAction(controllers.routes.ref.Application.authenticate(), fakeRequest()
+        Result result = callAction(controllers.routes.ref.UserManagment.authenticate(), fakeRequest()
                 .withFormUrlEncodedBody(ImmutableMap.of("username", "omg", "password", "noway")));
         assertThat(status(result)).isEqualTo(BAD_REQUEST);
         assertThat(session(result).get("username")).isNull();

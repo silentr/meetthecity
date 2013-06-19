@@ -32,7 +32,7 @@
     </style>
 
     <div class="form-signin">
-        @helper.form(routes.Application.authenticate) {
+        @helper.form(routes.UserManagment.authenticate) {
             <h2 class="form-signin-heading">Please sign in</h2>
             @if(form.hasGlobalErrors) { 
                 <p class="alert alert-error">
@@ -46,7 +46,7 @@
             <br/>
             <a href="#">Forgot password?</a>
             <br/>
-            <a href=@routes.Application.signup()>Not registered? Sign up!</a>
+            <a href=@routes.UserManagment.signup()>Not registered? Sign up!</a>
         }
     </div>
 }
