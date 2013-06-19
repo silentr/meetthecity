@@ -6,6 +6,7 @@
 
 GET     /                           controllers.Application.index()
 GET     /tours                      controllers.Application.tours()
+GET     /signout                    controllers.Application.signout()
 GET     /signup                     controllers.Application.signup()
 POST    /signup                     controllers.Application.signupSubmit()
 GET     /signin                     controllers.Application.signin()

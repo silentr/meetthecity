@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.List;
 
-import models.Review;
 import models.Tour;
 import models.User;
 import models.form.Login;
@@ -10,18 +9,17 @@ import models.form.SignUp;
 import play.Logger;
 import play.api.templates.Html;
 import play.data.Form;
-import play.db.ebean.Model;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import play.mvc.Security.Authenticated;
 import scala.collection.mutable.StringBuilder;
 import validators.Secured;
 import views.html.*;
-import com.avaje.ebean.Ebean;
 
 public class Application extends Controller {
+
+    public static final String SESSION_USERNAME = "username";
 
     public static Result authenticate() {
         Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
@@ -32,7 +30,7 @@ public class Application extends Controller {
             return badRequest(signin.render(loginForm));
         } else {
             session().clear();
-            session("username", loginForm.get().username);
+            session(SESSION_USERNAME, loginForm.get().username);
 
             Logger.debug("User " + loginForm.get().username + " logged in");
 
@@ -47,7 +45,7 @@ public class Application extends Controller {
     public static Result signin() {
         return ok(signin.render(Form.form(Login.class)));
     }
-    
+
     public static Result signupSubmit() {
         Form<SignUp> signUpForm = Form.form(SignUp.class).bindFromRequest();
 
@@ -66,6 +64,13 @@ public class Application extends Controller {
 
     public static Result signup() {
         return ok(signup.render(Form.form(SignUp.class)));
+    }
+
+    public static Result signout() {
+        Logger.info(session(SESSION_USERNAME) + " has signed out");
+        session().clear();
+
+        return redirect(routes.Application.signin());
     }
 
     public static Result tours() {
@@ -88,7 +93,7 @@ public class Application extends Controller {
     public static Result viewATour(Long id) {
         Tour tour = Tour.find.byId(id);
         String joined = "undefined";
-        String username = session().get("username");
+        String username = session().get(SESSION_USERNAME);
         if (username != null) {
             User user = User.find.byId(username);
             joined = tour.tourists.contains(user) ? "true" : "false";
@@ -100,7 +105,7 @@ public class Application extends Controller {
     public static Result joinATour() {
         String tourId = Form.form().bindFromRequest().get("tourId");
         Tour tour = Tour.find.byId(Long.valueOf(tourId));
-        String username = session().get("username");
+        String username = session().get(SESSION_USERNAME);
         User user = User.find.byId(username);
         return ok(tour.join(user).toString());
     }
@@ -110,18 +115,22 @@ public class Application extends Controller {
         String tourId = Form.form().bindFromRequest().get("tourId");
         Logger.info("tourId: " + tourId);
         Tour tour = Tour.find.byId(Long.valueOf(tourId));
-        String username = session().get("username");
+        String username = session().get(SESSION_USERNAME);
         User user = User.find.byId(username);
         return ok(tour.leave(user).toString());
     }
-    
+
     @Security.Authenticated(Secured.class)
-    public static Result createATour(){
+    public static Result createATour() {
         return ok(createatour.render());
     }
-    
+
     @Security.Authenticated(Secured.class)
-    public static Result createATourSubmit(){
+    public static Result createATourSubmit() {
         return ok();
+    }
+
+    public static boolean isUserSignedIn() {
+        return session(SESSION_USERNAME) != null;
     }
 }
