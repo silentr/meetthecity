@@ -124,11 +124,11 @@ body {
           <h5>Countries</h5>
 
           <ul id="countries">
-              @Location.findUniqueCountries().map { country =>
+              @Tour.findActiveTourCountries().map { country =>
                   <li>
                       <a href="#">@country</a>
 	                  <ul id=@country>
-		                  @Location.findUniqueCitiesOfCountry(country).map { city =>
+		                  @Tour.findActiveTourCitiesByCountry(country).map { city =>
 		                      <li><a href="#">@city</a></li>
 		                  }
 	                  </ul>
