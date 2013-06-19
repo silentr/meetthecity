@@ -1,0 +1,200 @@
+@(tour: Tour, joined: String) @content(tour: Tour) = {
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta charset="utf-8" />
+<style>
+#map-canvas {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+</style>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKULXtW1Lnxt0OITHOyeEBtnid9LYUlcM&sensor=true"></script>
+<script>
+	var map;
+	function initialize() {
+		var mapOptions = {
+			zoom : 8,
+			center : new google.maps.LatLng(-34.397, 150.644),
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(document.getElementById('map-canvas'),
+				mapOptions);
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script>
+	!function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
+				.test(d.location) ? 'http' : 'https';
+		if (!d.getElementById(id)) {
+			js = d.createElement(s);
+			js.id = id;
+			js.src = p + '://platform.twitter.com/widgets.js';
+			fjs.parentNode.insertBefore(js, fjs);
+		}
+	}(document, 'script', 'twitter-wjs');
+</script>
+<script type="text/javascript">
+	(function() {
+		var po = document.createElement('script');
+		po.type = 'text/javascript';
+		po.async = true;
+		po.src = 'https://apis.google.com/js/plusone.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(po, s);
+	})();
+</script>
+<link href="/assets/star-rating/jquery.rating.css" rel="stylesheet"></link>
+<script type="text/javascript" src="/assets/star-rating/jquery.js"></script>
+<script type="text/javascript" src="/assets/star-rating/jquery.form.js"></script>
+<script type="text/javascript"
+	src="/assets/star-rating/jquery.MetaData.js"></script>
+<script type="text/javascript"
+	src="/assets/star-rating/jquery.rating.pack.js"></script>
+<script type="text/javascript"
+	src="/assets/star-rating/jquery.rating.js"></script>
+<script>
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id))
+			return;
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$("#btnJoinATour").click(
+						function() {
+							if(@joined.equals("undefined")){
+								window.location.href = "http://localhost:9000/signin";
+							}else{
+								bootbox.confirm(
+										"Are you sure you want to join a tour?",
+										function(result) {
+											if(result){
+												$.ajax({
+													type: "GET",
+													dataType: "text",
+													data: {tourId: "1"},
+													url: "@routes.Application.joinATour()",
+													success: function(data){
+														bootbox.alert("You joined the tour successfully.");
+														$("#btnJoinATour").css('visibility', 'hidden');
+														$("#btnLeaveATour").css('visibility', 'visible');
+													}
+												});
+											}
+										});
+							}
+						});
+				$("#btnJoinATour").css('visibility', @joined ? 'hidden' : 'visible');
+				$("#btnLeaveATour").click(
+						function() {
+							bootbox.confirm(
+									"Are you sure you want to leave a tour?",
+									function(result) {
+										if(result){
+											$.ajax({
+												type: "GET",
+												dataType: "text",
+												data: {tourId: "1"},
+												url: "@routes.Application.leaveATour()",
+												success: function(data){
+													bootbox.alert("You left the tour successfully.");
+													$("#btnJoinATour").css('visibility', 'visible');
+													$("#btnLeaveATour").css('visibility', 'hidden');
+												}
+											});
+										}
+									});
+						});
+				$("#btnLeaveATour").css('visibility', @joined ? 'visible' : 'hidden');
+			});
+</script>
+</head>
+<h2>@tour.name</h2>
+<p style="font-size: small; text-align: justify;">
+	<img src="@tour.photoName" align="left" style="padding-right: 15px;" />
+	@tour.descriptionFull
+</p>
+<div style="padding-bottom: 10px;">Price: @if(tour.price != 0.0){
+	@tour.price } else{ Free }</div>
+<form action="/join-a-tour" method="POST">
+	<input type="hidden" id="tourId" value="@tour.id" name="tourId" />
+	<button type="button" id="btnJoinATour" class="btn btn-primary">Join
+		a tour</button>
+	<button type="button" id="btnLeaveATour" class="btn btn-inverse">Leave
+		a tour</button>
+</form>
+<!-- SHARE: TWITTER -->
+<div style="padding-bottom: 5px;">
+	<a href="https://twitter.com/share" class="twitter-share-button"
+		data-url="http://meetthecity.com/join-a-tour">Tweet</a>
+</div>
+<!-- SHARE: GOOGLE PLUS ONE -->
+<div class="g-plusone" data-annotation="inline" data-width="300"></div>
+<!-- SHARE: FACEBOOK -->
+<div id="fb-root" style="padding-top: 5px;"></div>
+<div class="fb-like" data-href="http://meetthecity.com/join-a-tour"
+	data-send="true" data-width="450" data-show-faces="true"></div>
+<table>
+	<tr>
+		<td colspan="2">
+			<div style="float: left; padding-right: 10px;">
+				Date:</br> Location:
+			</div>
+			<div>
+				@tour.getDateFormatted()<br /> @tour.location.city
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td><img style="padding-right: 15px;" src="@tour.guide.photo"
+			alt=""></td>
+		<td style="text-align: left; vertical-align: top;">
+			<div>Guide: @tour.guide.firstname @tour.guide.lastname</div>
+			<div>
+				<input name="star2" type="radio" class="star"
+					@if(tour.guide.rating== 1) {checked="checked" } disabled="disabled" />
+				<input name="star2" type="radio" class="star"
+					@if(tour.guide.rating== 2) {checked="checked" } disabled="disabled" />
+				<input name="star2" type="radio" class="star"
+					@if(tour.guide.rating== 3) {checked="checked" } disabled="disabled" />
+				<input name="star2" type="radio" class="star"
+					@if(tour.guide.rating== 4) {checked="checked" } disabled="disabled" />
+				<input name="star2" type="radio" class="star"
+					@if(tour.guide.rating== 5) {checked="checked" } disabled="disabled" />
+			</div>
+			<div style="height: 120px;"></div>
+			<div>
+				Phone: @tour.guide.phone<br />Email: @tour.guide.email
+			</div>
+		</td>
+	</tr>
+</table>
+<h3>Reviews</h3>
+@for(review <- tour.guide.reviewsReceived){
+<div style="display: inline; float: left; padding-right: 10px;">@review.getTourist().firstname
+	@review.getTourist().lastname</div>
+<div style="padding-top: 6px;">
+	<input name="star3" type="radio" class="star" @if(review.getRating() ==
+		1) {checked="checked" } disabled="disabled" /> <input name="star3"
+		type="radio" class="star" @if(review.getRating() ==
+		2) {checked="checked" } disabled="disabled" /> <input name="star3"
+		type="radio" class="star" @if(review.getRating() ==
+		3) {checked="checked" } disabled="disabled" /> <input name="star3"
+		type="radio" class="star" @if(review.getRating() ==
+		4) {checked="checked" } disabled="disabled" /> <input name="star3"
+		type="radio" class="star" @if(review.getRating() ==
+		5) {checked="checked" } disabled="disabled" />
+</div>
+<br />
+<div style="font-size: small;">@review.getComment()</div>
+} } @index(content(tour))
