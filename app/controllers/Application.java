@@ -86,7 +86,7 @@ public class Application extends Controller {
     }
 
     public static Result viewATour(String id) {
-        Tour tour = new Model.Finder<String, Tour>(String.class, Tour.class).byId(id);
+        Tour tour = Tour.find.byId(Long.getLong(id));
         String joined = "undefined";
         String username = session().get("username");
         if (username != null) {
@@ -117,7 +117,7 @@ public class Application extends Controller {
     
     @Security.Authenticated(Secured.class)
     public static Result createATour(){
-        return ok();
+        return ok(createatour.render());
     }
     
     @Security.Authenticated(Secured.class)
