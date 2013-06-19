@@ -85,8 +85,8 @@ public class Application extends Controller {
         return user != null ? ok(Json.toJson(user)) : notFound();
     }
 
-    public static Result viewATour(String id) {
-        Tour tour = Tour.find.byId(Long.valueOf(id));
+    public static Result viewATour(Long id) {
+        Tour tour = Tour.find.byId(id);
         String joined = "undefined";
         String username = session().get("username");
         if (username != null) {
