@@ -39,8 +39,6 @@ public class Location extends Model {
         String sql = "SELECT DISTINCT country FROM Location";
         List<SqlRow> sqlRows = Ebean.createSqlQuery(sql).findList();
 
-        Logger.info("Unique countries: " + sqlRows);
-
         List<String> countries = new ArrayList<String>();
         for (SqlRow row : sqlRows) {
             countries.add(row.getString(COUNTRY_FIELD));
@@ -52,8 +50,6 @@ public class Location extends Model {
     public static List<String> findUniqueCitiesOfCountry(String country) {
         String sql = "SELECT DISTINCT city FROM Location WHERE country = '" + country + "'";
         List<SqlRow> sqlRows = Ebean.createSqlQuery(sql).findList();
-
-        Logger.info("Unique cities form " + country + ": " + sqlRows);
 
         List<String> cities = new ArrayList<String>();
         for (SqlRow row : sqlRows) {

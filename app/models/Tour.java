@@ -1,7 +1,10 @@
 package models;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -18,12 +21,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlRow;
 
+import play.Logger;
 import play.data.format.Formats;
 import play.db.ebean.Model;
 
 @Entity
 public class Tour extends Model {
+
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     private static final long serialVersionUID = 1L;
 
@@ -34,7 +41,7 @@ public class Tour extends Model {
 
     public String name;
 
-    @Formats.DateTime(pattern = "yyyy-MM-dd")
+    @Formats.DateTime(pattern = DATE_FORMAT)
     public Date date;
 
     public double price;
@@ -68,21 +75,21 @@ public class Tour extends Model {
     }
 
     public Boolean join(User user) {
-          try{
-              Ebean.beginTransaction();
-              tourists.add(user);
-              user.tours.add(this);
-              update();
-              user.update();
-              Ebean.commitTransaction();
-              return true;
-          }finally{
-              Ebean.endTransaction();
-          }
+        try {
+            Ebean.beginTransaction();
+            tourists.add(user);
+            user.tours.add(this);
+            update();
+            user.update();
+            Ebean.commitTransaction();
+            return true;
+        } finally {
+            Ebean.endTransaction();
+        }
     }
-    
+
     public Boolean leave(User user) {
-        try{
+        try {
             Ebean.beginTransaction();
             tourists.remove(user);
             user.tours.remove(this);
@@ -90,10 +97,48 @@ public class Tour extends Model {
             user.update();
             Ebean.commitTransaction();
             return true;
-        }finally{
+        } finally {
             Ebean.endTransaction();
         }
-  }
+    }
+
+    public static List<String> findActiveTourCountries() {
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        Date currentDate = new Date();
+        String formattedDate = formatter.format(currentDate);
+
+        String sql = "SELECT DISTINCT country FROM Location WHERE id IN (SELECT location_id FROM Tour WHERE date >= '"
+                + formattedDate + "')";
+        List<SqlRow> sqlRows = Ebean.createSqlQuery(sql).findList();
+
+        Logger.debug(sqlRows.toString());
+
+        List<String> countries = new ArrayList<String>();
+        for (SqlRow row : sqlRows) {
+            countries.add(row.getString(Location.COUNTRY_FIELD));
+        }
+
+        return countries;
+    }
+
+    public static List<String> findActiveTourCitiesByCountry(String country) {
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        Date currentDate = new Date();
+        String formattedDate = formatter.format(currentDate);
+
+        String sql = "SELECT DISTINCT city FROM Location WHERE id IN (SELECT location_id FROM Tour WHERE date >= '"
+                + formattedDate + "') AND country = '" + country + "'";
+        List<SqlRow> sqlRows = Ebean.createSqlQuery(sql).findList();
+
+        Logger.debug(sqlRows.toString());
+
+        List<String> cities = new ArrayList<String>();
+        for (SqlRow row : sqlRows) {
+            cities.add(row.getString(Location.CITY_FIELD));
+        }
+
+        return cities;
+    }
 
     @Override
     public int hashCode() {
@@ -156,7 +201,5 @@ public class Tour extends Model {
         } else if (!tourists.equals(other.tourists)) return false;
         return true;
     }
-    
-    
 
 }
