@@ -39,12 +39,11 @@ body {
 		<li><img src="@routes.Assets.at("images/logo.png")" class="img-rounded"></li>
 	</ul>
 	<ul class="nav" >
-
-	  <li class="active"><a href="@routes.Application.index()">Home</a></li>
+	  <li class="active" id="navBarHome"><a href="@routes.Application.index()">Home</a></li>
 	  <li class="divider-vertical"><a href="#">Recent</a></li>
 	  <li class="divider-vertical"><a href="#">Guides</a></li>
-	  <li class="divider-vertical"><a href="@routes.Application.tours()">Tours</a></li>
-	  <li class="divider-vertical"><a href="@routes.Application.createATour()">Create a Tour</a></li>
+	  <li class="divider-vertical" id="navBarTours"><a href="@routes.Application.tours()">Tours</a></li>
+	  <li class="divider-vertical" id="navBarCreateTour"><a href="@routes.Application.createATour()">Create a Tour</a></li>
 	  <li class="divider-vertical"><a href="#">About</a></li>
 	  </ul>
 	  <ul  class="nav pull-right">
@@ -68,8 +67,8 @@ body {
 
 <ul class="breadcrumb" style="margin-left: 220px; margin-right: 220px">
   <li><a href="@routes.Application.index()">Home</a> <span class="divider">></span></li>
-  <li><a href="#">Tours</a> <span class="divider">></span></li>
-  <li class="active">Active Tours</li>
+<!--   <li><a href="#">Tours</a> <span class="divider">></span></li> -->
+<!--   <li class="active">Active Tours</li> -->
 </ul>
 
 <div class="container-fluid">
@@ -144,16 +143,6 @@ body {
       	</div>
       </div>
 <!--       end of the leftsidebar -->
-    
-      <script type="text/javascript">
-          $countries = $("#countries");
-          $countries.find("ul").hide();
-      
-          $countries.find("li").click(function(){
-
-              $(this).find("ul").toggle("slow");
-          });
-      </script>
 
 <!-- main content -->
       <div class="content">
@@ -168,13 +157,13 @@ body {
 <div class="navbar" style="margin-left: 210px; margin-right: 210px">
   <div class="navbar-inner">
 
-	<ul class="nav" >
+	<ul class="nav">
 
-	  <li class="active"><a href="@routes.Application.index()">Home</a></li>
+	  <li class="active" id="bottomHome"><a href="@routes.Application.index()">Home</a></li>
 	  <li class="divider-vertical"><a href="#">Recent</a></li>
 	  <li class="divider-vertical"><a href="#">Guides</a></li>
-	  <li class="divider-vertical"><a href="@routes.Application.tours()">Tours</a></li>
-	  <li class="divider-vertical"><a href="#">Create a Tour</a></li>
+	  <li class="divider-vertical" id="bottomTours"><a href="@routes.Application.tours()">Tours</a></li>
+	  <li class="divider-vertical" id="bottomCreateTour"><a href="@routes.Application.createATour()">Create a Tour</a></li>
 	  <li class="divider-vertical"><a href="#">About</a></li>
 	  </ul>
   </div>
@@ -206,4 +195,27 @@ body {
       </div>
 </div>
 <!-- end of the footer -->
+
+
+      <script type="text/javascript">
+      
+          $countries = $("#countries");
+          $countries.find("ul").hide();
+      
+          $countries.find("li").click(function(){
+
+              $(this).find("ul").toggle("slow");
+          });
+          
+          $(document).ready(function () {
+              $('ul.nav > li').click(function (e) {
+                  //e.preventDefault();
+                  $openBar= $(this);
+                  $('ul.nav > li').removeClass('active');
+                  //$(this).addClass('active');                
+              });            
+          });
+
+          
+      </script>
 }

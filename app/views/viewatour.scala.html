@@ -68,6 +68,9 @@
 	}(document, 'script', 'facebook-jssdk'));
 </script>
 <script type="text/javascript">
+
+
+
 	$(document).ready(
 			function() {
 				$("#btnJoinATour").click(
@@ -198,3 +201,18 @@
 <br />
 <div style="font-size: small;">@review.getComment()</div>
 } } @index(content(tour))
+
+
+
+<script type="text/javascript">
+
+$openBar = $("#navBarTours");
+
+//$("#tours").addClass('active');
+$('ul.nav > li').removeClass('active');
+
+$openBar.addClass('active');
+$openBar = $("#bottomTours");
+$openBar.addClass('active');
+</script>
+
