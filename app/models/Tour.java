@@ -67,7 +67,7 @@ public class Tour extends Model {
         return df.format(date);
     }
 
-    public boolean join(User user) {
+    public Boolean join(User user) {
           try{
               Ebean.beginTransaction();
               tourists.add(user);
@@ -81,7 +81,7 @@ public class Tour extends Model {
           }
     }
     
-    public boolean leave(User user) {
+    public Boolean leave(User user) {
         try{
             Ebean.beginTransaction();
             tourists.remove(user);

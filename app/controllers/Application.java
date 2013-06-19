@@ -87,9 +87,12 @@ public class Application extends Controller {
 
     public static Result viewATour(String id) {
         Tour tour = new Model.Finder<String, Tour>(String.class, Tour.class).byId(id);
+        String joined = "undefined";
         String username = session().get("username");
-        User user = User.find.byId(username);
-        boolean joined = tour.tourists.contains(user);
+        if (username != null) {
+            User user = User.find.byId(username);
+            joined = tour.tourists.contains(user) ? "true" : "false";
+        }
         return ok(viewatour.render(tour, joined));
     }
 
@@ -99,9 +102,9 @@ public class Application extends Controller {
         Tour tour = Tour.find.byId(Long.valueOf(tourId));
         String username = session().get("username");
         User user = User.find.byId(username);
-        return ok(Json.toJson(tour.join(user)));
+        return ok(tour.join(user).toString());
     }
-    
+
     @Security.Authenticated(Secured.class)
     public static Result leaveATour() {
         String tourId = Form.form().bindFromRequest().get("tourId");
@@ -109,6 +112,6 @@ public class Application extends Controller {
         Tour tour = Tour.find.byId(Long.valueOf(tourId));
         String username = session().get("username");
         User user = User.find.byId(username);
-        return ok(Json.toJson(tour.leave(user)));
+        return ok(tour.leave(user).toString());
     }
 }
