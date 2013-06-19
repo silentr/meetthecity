@@ -32,5 +32,10 @@
     $openBar = $("#bottomTours");
     $openBar.addClass('active');
 	  
+//     $("#breadcrumb ul").append('<li><a href="/user/messages"><span class="tab">Message Center</span></a></li>');
+    $('ul.breadcrumb').append(' <span class="divider"> > </span><li class="active" id="tour"><a href="@routes.Application.tours()">Tours</a></li>').addClass('active');
+    
+    $openBar = $("#tour");
+    $openBar.addClass('active');
 
 </script>
