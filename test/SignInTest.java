@@ -33,4 +33,16 @@ public class SignInTest extends WithApplication {
         assertThat(status(result)).isEqualTo(BAD_REQUEST);
         assertThat(session(result).get("username")).isNull();
     }
+
+    @Test
+    public void signOut() {
+        Result result = callAction(controllers.routes.ref.UserManagment.authenticate(), fakeRequest()
+                .withFormUrlEncodedBody(ImmutableMap.of("username", "maxime", "password", "secret")));
+        assertThat(status(result)).isEqualTo(SEE_OTHER);
+        assertThat("maxime").isEqualTo(session(result).get("username"));
+
+        Result signOutResult = callAction(controllers.routes.ref.UserManagment.signout(), fakeRequest());
+        assertThat(status(signOutResult)).isEqualTo(SEE_OTHER);
+        assertThat(session(signOutResult).get("username")).isNull();
+    }
 }
