@@ -47,7 +47,7 @@ public class Application extends Controller {
     public static Result signin() {
         return ok(signin.render(Form.form(Login.class)));
     }
-
+    
     public static Result signupSubmit() {
         Form<SignUp> signUpForm = Form.form(SignUp.class).bindFromRequest();
 
@@ -113,5 +113,15 @@ public class Application extends Controller {
         String username = session().get("username");
         User user = User.find.byId(username);
         return ok(tour.leave(user).toString());
+    }
+    
+    @Security.Authenticated(Secured.class)
+    public static Result createATour(){
+        return ok();
+    }
+    
+    @Security.Authenticated(Secured.class)
+    public static Result createATourSubmit(){
+        return ok();
     }
 }

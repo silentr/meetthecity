@@ -51,9 +51,9 @@ create table user (
 
 
 create table tour_to_tourist (
-  id                             bigint not null,
+  tour_id                        bigint not null,
   username                       varchar(255) not null,
-  constraint pk_tour_to_tourist primary key (id, username))
+  constraint pk_tour_to_tourist primary key (tour_id, username))
 ;
 create sequence location_seq;
 
@@ -76,7 +76,7 @@ create index ix_tour_guide_5 on tour (guide_username);
 
 
 
-alter table tour_to_tourist add constraint fk_tour_to_tourist_tour_01 foreign key (id) references tour (id) on delete restrict on update restrict;
+alter table tour_to_tourist add constraint fk_tour_to_tourist_tour_01 foreign key (tour_id) references tour (id) on delete restrict on update restrict;
 
 alter table tour_to_tourist add constraint fk_tour_to_tourist_user_02 foreign key (username) references user (username) on delete restrict on update restrict;
 

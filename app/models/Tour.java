@@ -59,7 +59,7 @@ public class Tour extends Model {
     public List<Review> reviews;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tour_to_tourist", joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
+    @JoinTable(name = "tour_to_tourist", joinColumns = @JoinColumn(name = "tour_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
     public List<User> tourists;
 
     public String getDateFormatted() {
