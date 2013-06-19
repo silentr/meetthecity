@@ -86,7 +86,7 @@ public class Application extends Controller {
     }
 
     public static Result viewATour(String id) {
-        Tour tour = Tour.find.byId(Long.getLong(id));
+        Tour tour = Tour.find.byId(Long.valueOf(id));
         String joined = "undefined";
         String username = session().get("username");
         if (username != null) {
