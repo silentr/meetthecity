@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.avaje.ebean.Ebean;
+
 import play.data.format.Formats;
 import play.db.ebean.Model;
 
@@ -65,16 +67,37 @@ public class Tour extends Model {
         return df.format(date);
     }
 
-    public void join(User user) {
-
+    public boolean join(User user) {
+          try{
+              Ebean.beginTransaction();
+              tourists.add(user);
+              user.tours.add(this);
+              update();
+              user.update();
+              Ebean.commitTransaction();
+              return true;
+          }finally{
+              Ebean.endTransaction();
+          }
     }
+    
+    public boolean leave(User user) {
+        try{
+            Ebean.beginTransaction();
+            tourists.remove(user);
+            user.tours.remove(this);
+            update();
+            user.update();
+            Ebean.commitTransaction();
+            return true;
+        }finally{
+            Ebean.endTransaction();
+        }
+  }
 
     @Override
     public String toString() {
-        return "Tour [id=" + id + ", name=" + name + ", date=" + date + ", price=" + price + ", location=" + location
-                + ", guide=" + guide + ", descriptionFull=" + descriptionFull + ", descriptionShort="
-                + descriptionShort + ", descriptionMini=" + descriptionMini + ", photoName=" + photoName + ", reviews="
-                + reviews + ", tourists=" + tourists + "]";
+        return "";
     }
 
 }

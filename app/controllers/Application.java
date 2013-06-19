@@ -14,7 +14,10 @@ import play.db.ebean.Model;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
+import play.mvc.Security.Authenticated;
 import scala.collection.mutable.StringBuilder;
+import validators.Secured;
 import views.html.*;
 import com.avaje.ebean.Ebean;
 
@@ -79,38 +82,33 @@ public class Application extends Controller {
 
     public static Result getUser(String id) {
         User user = User.find.byId(id);
-
         return user != null ? ok(Json.toJson(user)) : notFound();
     }
 
-    public static Result joinATour(String id) {
-
-        Logger.info(id);
-        Tour tour = new Model.Finder<String, Tour>(String.class, Tour.class).byId("1");
-        return ok(joinatour.render(tour));
+    public static Result viewATour(String id) {
+        Tour tour = new Model.Finder<String, Tour>(String.class, Tour.class).byId(id);
+        String username = session().get("username");
+        User user = User.find.byId(username);
+        boolean joined = tour.tourists.contains(user);
+        return ok(viewatour.render(tour, joined));
     }
 
-    public static Result joinATourSubmit() {
-        String tourId = Form.form().bindFromRequest().get("id");
-        Ebean.beginTransaction();
+    @Security.Authenticated(Secured.class)
+    public static Result joinATour() {
+        String tourId = Form.form().bindFromRequest().get("tourId");
         Tour tour = Tour.find.byId(Long.valueOf(tourId));
-        String username = session("connected");
-        if (username != null) {
-            User user = User.find.byId(username);
-            tour.tourists.add(user);
-            user.tours.add(tour);
-            tour.update();
-            user.update();
-            Ebean.commitTransaction();
-            return ok();
-        } else {
-            Ebean.endTransaction();
-            return unauthorized("Oops, you are not connected");
-        }
+        String username = session().get("username");
+        User user = User.find.byId(username);
+        return ok(Json.toJson(tour.join(user)));
     }
-
-    public static Result getAllReviews() {
-        List<Review> reviews = Review.find.all();
-        return ok(Json.toJson(reviews));
+    
+    @Security.Authenticated(Secured.class)
+    public static Result leaveATour() {
+        String tourId = Form.form().bindFromRequest().get("tourId");
+        Logger.info("tourId: " + tourId);
+        Tour tour = Tour.find.byId(Long.valueOf(tourId));
+        String username = session().get("username");
+        User user = User.find.byId(username);
+        return ok(Json.toJson(tour.leave(user)));
     }
 }
