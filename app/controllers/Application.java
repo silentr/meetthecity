@@ -88,7 +88,8 @@ public class Application extends Controller {
         List<String> countries = Location.findUniqueCountries();
         List<String> cities = new ArrayList<>();
         cities = new ArrayList<>();
-        return ok(createatour.render(form(models.form.TourForm.class), countries, cities));
+        Form<TourForm> tourForm = form(TourForm.class);
+        return ok(createatour.render(tourForm, countries, cities));
     }
 
     @Security.Authenticated(Secured.class)

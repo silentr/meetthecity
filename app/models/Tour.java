@@ -179,14 +179,8 @@ public class Tour extends Model {
 
         tour.photoName = locationDirectory.getAbsolutePath() + "\\" + targetFileName;
 
-        try{
-            Ebean.beginTransaction();
-            Ebean.save(tour);
-            Ebean.commitTransaction();
-        }finally{
-            Ebean.endTransaction();
-        }
-        
+        Ebean.save(tour);
+
         // saving file to DB
         Path source = Paths.get(tourForm.photoName);
         Path target = Paths.get(tour.photoName);
