@@ -48,7 +48,7 @@ body {
 	  </ul>
 	  <ul  class="nav pull-right">
 			  @if(UserManagment.isUserSignedIn()) {
-				  <li>@Controller.session(UserManagment.SESSION_USERNAME),&nbsp;</li>
+				  <li style="margin-top: 10px; font-size: 18px">@Controller.session(UserManagment.SESSION_USERNAME),&nbsp;</li>
 			      <li>
 			          <button onclick="window.location.href='@routes.UserManagment.signout()'" class="btn btn-primary" type="button" style="float: right; 
 				          padding-right: 67px; padding-left: 67px" >Sign Out</button>
