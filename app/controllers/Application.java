@@ -1,20 +1,20 @@
 package controllers;
 
+import static play.data.Form.form;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import models.Location;
 import models.Tour;
 import models.User;
-import models.form.TourForm;
 import models.form.Login;
 import models.form.SignUp;
+import models.form.TourForm;
 import play.Logger;
 import play.api.templates.Html;
 import play.data.Form;
-import static play.data.Form.*;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
@@ -32,49 +32,8 @@ import views.html.viewatour;
 
 public class Application extends Controller {
 
-    public static Result authenticate() {
-        Form<Login> loginForm = form(Login.class).bindFromRequest();
-        if (loginForm.hasErrors()) {
-
-            Logger.debug("User didn't logged in, errors = " + loginForm.errors());
-
-            return badRequest(signin.render(loginForm));
-        } else {
-            session().clear();
-            session("username", loginForm.get().username);
-
-            Logger.debug("User " + loginForm.get().username + " logged in");
-
-            return redirect(routes.Application.index());
-        }
-    }
-
     public static Result index() {
         return ok(index.render(new Html(new StringBuilder())));
-    }
-
-    public static Result signin() {
-        return ok(signin.render(form(Login.class)));
-    }
-
-    public static Result signupSubmit() {
-        Form<SignUp> signUpForm = form(SignUp.class).bindFromRequest();
-
-        if (signUpForm.hasErrors()) {
-            Logger.debug("User didn't signed up errors = " + signUpForm.errors());
-
-            return badRequest(signup.render(signUpForm));
-        } else {
-            User user = SignUp.createUser(signUpForm.get());
-            user.save();
-            Logger.debug(user + " signed up");
-
-            return redirect(routes.Application.signin());
-        }
-    }
-
-    public static Result signup() {
-        return ok(signup.render(form(SignUp.class)));
     }
 
     public static Result tours() {
