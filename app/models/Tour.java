@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -144,8 +143,24 @@ public class Tour extends Model {
     public static List<Tour> findActiveToursByCountry(String country) {
         String formattedDate = DateUtils.getCurrentFormattedDate();
 
-        String sql = "SELECT id FROM " + Location.class.getSimpleName() + " WHERE " + Location.COUNTRY_FIELD + "='"
-                + country + "'";
+        String sql = "SELECT id FROM Location WHERE country='" + country + "'";
+        List<SqlRow> sqlRows = Ebean.createSqlQuery(sql).findList();
+
+        List<Integer> ids = new ArrayList<>();
+        for (SqlRow row : sqlRows) {
+            ids.add(row.getInteger("id"));
+        }
+
+        List<Tour> tours = Ebean.createQuery(Tour.class).where().gt("date", formattedDate).in("location_id", ids)
+                .findList();
+
+        return tours;
+    }
+
+    public static List<Tour> findActiveToursByCountryAndCity(String country, String city) {
+        String formattedDate = DateUtils.getCurrentFormattedDate();
+
+        String sql = "SELECT id FROM Location WHERE country='" + country + "' AND city='" + city + "'";
         List<SqlRow> sqlRows = Ebean.createSqlQuery(sql).findList();
 
         List<Integer> ids = new ArrayList<>();

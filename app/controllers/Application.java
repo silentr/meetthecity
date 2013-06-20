@@ -9,8 +9,6 @@ import java.util.List;
 import models.Location;
 import models.Tour;
 import models.User;
-import models.form.Login;
-import models.form.SignUp;
 import models.form.TourForm;
 import play.Logger;
 import play.api.templates.Html;
@@ -25,8 +23,6 @@ import scala.collection.mutable.StringBuilder;
 import validators.Secured;
 import views.html.createatour;
 import views.html.index;
-import views.html.signin;
-import views.html.signup;
 import views.html.tours;
 import views.html.viewatour;
 
