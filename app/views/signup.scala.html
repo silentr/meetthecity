@@ -16,18 +16,18 @@ select {
 
 .form-signin {
 	max-width: 430px;
-	padding: 19px 29px 29px;
+	padding: 19px 29px 54px;
 	margin: 0 auto 20px;
 	background-color: #fff;
 	border: 1px solid #e5e5e5;
-	text-align: right -webkit-border-radius:       5px;
+	text-align: right -webkit-border-radius:         5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 	border: 1px solid #e5e5e5;
-	text-align: right -webkit-border-radius:      5px;
+	text-align: right -webkit-border-radius:        5px;
 }
 
 .form-signin .form-signin-heading {
@@ -52,9 +52,8 @@ select {
 	<h2 class="form-signin-heading" align="center">Sign Up</h2>
 
 	@if(form.hasErrors()) {
-	    <p align="center" class="alert alert-error">@form.errors().values().iterator().next().get(0).message()</p>
-	} 
-	<label>Username:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input
+	<p align="center" class="alert alert-error">@form.errors().values().iterator().next().get(0).message()</p>
+	} <label>Username:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input
 		name="username" type="text" class="input-block-level"
 		style="position: absolute; margin-left: 20px; left: 100px;" /></label> <br />
 	<label> First
@@ -85,14 +84,9 @@ select {
 		name="passwordConfirmation" type="password" class="input-block-level"
 		placeholder="min 8 characters"
 		style="position: absolute; margin-left: 20px; left: 100px;"></label> <br />
-	<p>Type the characters you see in the picture below.</p>
-	<img
-		src="http://www.actingis.com/wp-content/plugins/si-captcha-for-wordpress/captcha/securimage_show.php?si_form_id=com&amp;prefix=ArM9dhdHXBzBa2X5"
-		width="175" height="50" alt="CAPTCHA Image" title="CAPTCHA Image"><br />
-	<input type="text" class="input-block-level"><br /> <label
-		class="checkbox"> <input type="checkbox" value="remember-me">I
-		agree to Meet the City terms of service and I have<br>
-		&nbsp;&nbsp;&nbsp;&nbsp; read the <a href=""http://www.w3schools.com/">privacy
+	<label class="checkbox"> <input type="checkbox"
+		value="remember-me">I agree to Meet the City terms of service
+		and I have<br> &nbsp;&nbsp;&nbsp;&nbsp; read the <a href=""http://www.w3schools.com/">privacy
 			policy.</a>
 	</label>
 
