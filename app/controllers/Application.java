@@ -25,6 +25,7 @@ import views.html.createatour;
 import views.html.index;
 import views.html.tours;
 import views.html.viewatour;
+import views.html.helper.form;
 
 public class Application extends Controller {
 
@@ -92,20 +93,21 @@ public class Application extends Controller {
     public static Result createATourSubmit() {
         MultipartFormData body = request().body().asMultipartFormData();
         FilePart image = body.getFile("imgFile");
-        Form<TourForm> form = form(TourForm.class).bindFromRequest();
-        if(form.hasErrors()){
-            return badRequest(form.errorsAsJson());
+        Form<TourForm> tourFormFilled = form(TourForm.class).bindFromRequest();
+        if(tourFormFilled.hasErrors()){
+            List<String> countries = Location.findUniqueCountries();
+            List<String> cities = new ArrayList<>();
+            return badRequest(createatour.render(tourFormFilled, countries, cities));
         }
         if (image != null) {
             File file1 = image.getFile();
-            TourForm tourForm = form.get();
+            TourForm tourForm = tourFormFilled.get();
             tourForm.photoName = file1.getAbsolutePath();
             String username = session().get("username");
             User guide = User.find.byId(username);
             Tour.create(tourForm, guide);
             return tours();
         } else {
-            flash("error", "Missing file");
             return redirect(routes.Application.index());
         }
     }

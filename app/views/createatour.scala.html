@@ -32,23 +32,25 @@
 		<h2>Create a Tour</h2>
 	</legend>
 	<div class="clearfix">
-				<div>
+				<div class="input">
 					<label>Date</label>
-				</div>
-				<div>
-					<div id="datetimepicker" class="input-append date">
-						<input type="text" id="date" name="date"></input>
-						<span class="add-on">
-							<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-						</span>
-					</div>					
-					<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-					</script>
-					<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
-					</script>
-					<script type="text/javascript">
-						$('#datetimepicker').datetimepicker({format: 'dd.MM.yyyy', language: 'en-US'});
-					</script>
+					<div>
+						<div id="datetimepicker" class="input-append date">
+							<input type="text" id="date" name="date"></input>
+							<span class="add-on">
+								<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+							</span>
+							<span class="help-inline"></span>
+							<span class="help-block"></span>
+						</div>					
+						<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+						</script>
+						<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+						</script>
+						<script type="text/javascript">
+							$('#datetimepicker').datetimepicker({format: 'dd.MM.yyyy', language: 'en-US'});
+						</script>
+					</div>
 				</div>
 		  </div>
 
@@ -56,28 +58,24 @@
         tourForm("country"),
         options = options(countries),
         '_default -> "--- Choose a country ---",
-        '_label -> "Country",
-        '_error -> tourForm("country").error.map(_.withMessage("Please select your country"))
+        '_label -> "Country"
     )
 
 	@select(
         tourForm("city"),
         options = options(cities),
         '_default -> "--- Choose a city ---",
-        '_label -> "City",
-        '_error -> tourForm("city").error.map(_.withMessage("Please select your city"))
+        '_label -> "City"
     )
 
 	@inputText(
 		tourForm("name"),
-		'_label -> "Name",
-		'_error -> tourForm.globalError
+		'_label -> "Name"
 	)
 
 	@inputText(
 		tourForm("price"),
-		'_label -> "Price",
-		'_error -> tourForm.globalError
+		'_label -> "Price"
 	)
 	
 	<div class="clearfix">
@@ -93,10 +91,9 @@
 		</div>
 	</div>
 	
-	@inputText(
+	@textarea(
 		tourForm("description"),
-		'_label -> "Description",
-		'_error -> tourForm.globalError
+		'_label -> "Description"
 	)
 
 </fieldset>

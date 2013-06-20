@@ -11,12 +11,13 @@ public class TourForm {
     @Required(message="Date must be selected")
     @DateTime(pattern="dd.MM.yyyy")
     public Date date;
+    @Required(message="Please, choose country")
     public String country;
+    @Required(message="Please, choose city")
     public String city;
     @Required(message="Tour must have a name")
-    @MaxLength(value=255, message="The field must not be longer than 255 characters")
     public String name;
-    @Max(value=Integer.MAX_VALUE,message="Price can not be greater than " + Integer.MAX_VALUE)
+    @Required(message="Price is required. Put 0 if the tour is free")
     public double price;
     public String photoName;
     public String descriptionFull;
