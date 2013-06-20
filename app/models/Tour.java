@@ -1,7 +1,6 @@
 package models;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
@@ -13,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,18 +28,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import models.form.TourForm;
+import play.Logger;
+import play.data.format.Formats;
+import play.db.ebean.Model;
+import utils.DateUtils;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlRow;
 
-import play.Logger;
-import play.data.format.Formats;
-import play.db.ebean.Model;
-
 @Entity
 public class Tour extends Model {
 
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
 
     private static final long serialVersionUID = 1L;
 
@@ -114,15 +112,11 @@ public class Tour extends Model {
     }
 
     public static List<String> findActiveTourCountries() {
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-        Date currentDate = new Date();
-        String formattedDate = formatter.format(currentDate);
+        String formattedDate = DateUtils.getCurrentFormattedDate();
 
         String sql = "SELECT DISTINCT country FROM Location WHERE id IN (SELECT location_id FROM Tour WHERE date >= '"
                 + formattedDate + "')";
         List<SqlRow> sqlRows = Ebean.createSqlQuery(sql).findList();
-
-        Logger.debug(sqlRows.toString());
 
         List<String> countries = new ArrayList<String>();
         for (SqlRow row : sqlRows) {
@@ -133,15 +127,11 @@ public class Tour extends Model {
     }
 
     public static List<String> findActiveTourCitiesByCountry(String country) {
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-        Date currentDate = new Date();
-        String formattedDate = formatter.format(currentDate);
+        String formattedDate = DateUtils.getCurrentFormattedDate();
 
         String sql = "SELECT DISTINCT city FROM Location WHERE id IN (SELECT location_id FROM Tour WHERE date >= '"
                 + formattedDate + "') AND country = '" + country + "'";
         List<SqlRow> sqlRows = Ebean.createSqlQuery(sql).findList();
-
-        Logger.debug(sqlRows.toString());
 
         List<String> cities = new ArrayList<String>();
         for (SqlRow row : sqlRows) {
@@ -149,6 +139,24 @@ public class Tour extends Model {
         }
 
         return cities;
+    }
+
+    public static List<Tour> findActiveToursByCountry(String country) {
+        String formattedDate = DateUtils.getCurrentFormattedDate();
+
+        String sql = "SELECT id FROM " + Location.class.getSimpleName() + " WHERE " + Location.COUNTRY_FIELD + "='"
+                + country + "'";
+        List<SqlRow> sqlRows = Ebean.createSqlQuery(sql).findList();
+
+        List<Integer> ids = new ArrayList<>();
+        for (SqlRow row : sqlRows) {
+            ids.add(row.getInteger("id"));
+        }
+
+        List<Tour> tours = Ebean.createQuery(Tour.class).where().gt("date", formattedDate).in("location_id", ids)
+                .findList();
+
+        return tours;
     }
 
     public static void create(TourForm tourForm, User guide) {
