@@ -52,6 +52,9 @@ public class Application extends Controller {
 
     public static Result viewATour(Long id) {
         Tour tour = Tour.find.byId(id);
+        if(tour == null){
+            return redirect(routes.Application.tours());
+        }
         String joined = "undefined";
         String username = session().get(UserManagment.SESSION_USERNAME);
         if (username != null) {
@@ -73,7 +76,6 @@ public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result leaveATour() {
         String tourId = form().bindFromRequest().get("tourId");
-        Logger.info("tourId: " + tourId);
         Tour tour = Tour.find.byId(Long.valueOf(tourId));
         String username = session().get(UserManagment.SESSION_USERNAME);
         User user = User.find.byId(username);

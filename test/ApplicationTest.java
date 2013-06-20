@@ -5,6 +5,8 @@ import static play.test.Helpers.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableMap;
+
 import play.mvc.Result;
 import play.test.WithApplication;
 
@@ -43,11 +45,17 @@ public class ApplicationTest extends WithApplication {
     }
     
     @Test
-    public void viewATourTest(){
+    public void viewATourTestSuccess(){
         Result result = callAction(controllers.routes.ref.Application.viewATour(1));
         assertThat(status(result)).isEqualTo(OK);
         assertThat(contentType(result)).isEqualTo("text/html");
         assertThat(charset(result)).isEqualTo("utf-8");
-        assertThat(contentAsString(result)).contains("Meet the City");
+        assertThat(contentAsString(result)).contains("Trip to Istanbul");
+    }
+    
+    @Test
+    public void viewATourTestFail(){
+        Result result = callAction(controllers.routes.ref.Application.viewATour(7));
+        assertThat(status(result)).isEqualTo(SEE_OTHER);
     }
 }

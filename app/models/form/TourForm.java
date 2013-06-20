@@ -2,10 +2,8 @@ package models.form;
 
 import java.util.Date;
 
-import play.data.validation.Constraints.Max;
-import play.data.validation.Constraints.MaxLength;
-import play.data.validation.Constraints.Required;
 import play.data.format.Formats.DateTime;
+import play.data.validation.Constraints.Required;
 
 public class TourForm {
     @Required(message="Date must be selected")
