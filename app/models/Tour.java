@@ -1,8 +1,17 @@
 package models;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -19,6 +28,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import models.form.TourForm;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlRow;
@@ -138,6 +149,53 @@ public class Tour extends Model {
         }
 
         return cities;
+    }
+
+    public static void create(TourForm tourForm, User guide) {
+        Tour tour = new Tour();
+        tour.date = tourForm.date;
+        tour.descriptionFull = tourForm.descriptionFull;
+        tour.descriptionShort = tourForm.descriptionShort;
+        tour.descriptionMini = tourForm.descriptionMini;
+        tour.guide = guide;
+        Location location = new Location();
+        location.country = tourForm.country;
+        location.city = tourForm.city;
+        tour.location = location;
+        tour.name = tourForm.name;
+        tour.price = tourForm.price;
+        tour.reviews = new ArrayList<>();
+        tour.tourists = new ArrayList<>();
+
+        // making sure we don't have two files with the same name
+        tourForm.name = tourForm.name.replaceAll("\\s", "_").toLowerCase();
+        String targetFileName = tourForm.name + ".jpg";
+        File locationDirectory = new File("public\\images\\locations");
+        List<String> files = Arrays.asList(locationDirectory.list());
+        int i = 1;
+        while (files.contains(targetFileName)) {
+            targetFileName = tourForm.name + "_" + i++ + ".jpg";
+        }
+
+        tour.photoName = locationDirectory.getAbsolutePath() + "\\" + targetFileName;
+
+        try{
+            Ebean.beginTransaction();
+            Ebean.save(tour);
+            Ebean.commitTransaction();
+        }finally{
+            Ebean.endTransaction();
+        }
+        
+        // saving file to DB
+        Path source = Paths.get(tourForm.photoName);
+        Path target = Paths.get(tour.photoName);
+        CopyOption[] options = new CopyOption[] { StandardCopyOption.COPY_ATTRIBUTES };
+        try {
+            Files.copy(source, target, options);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

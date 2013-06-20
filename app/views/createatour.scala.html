@@ -1,20 +1,44 @@
- @()
-   
- @index{
- 	
-			
- <form id="createATour" method="post" action="" name="createATour">
-        <fieldset>
-          <legend><h2>Create a Tour</h2></legend>
-		  
-          <div class="clearfix">
+ @(tourForm: Form[models.form.TourForm], countries: List[String], cities:List[String]) 
+ 
+@import helper._
+@import helper.twitterBootstrap._
+ 
+ @index{ @helper.form(routes.Application.createATourSubmit, 'enctype -> "multipart/form-data"){
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$("#country").change(
+						function() {
+							$.ajax({
+								type : "GET",
+								dataType : "json",
+								data : {
+									country : $("#country").val()
+								},
+								url : "@routes.Application.changeCountry()",
+								success : function(data) {
+									$("#city").empty();
+									$("#city").append("<option class=\"blank\" value>--- Choose a city ---</option>");
+									$.each(data, function() {
+										$("#city").append("<option value=\"" + this + "\">" + this + "</option>");
+									});
+								}
+							});
+						})
+			})
+</script>
+<fieldset>
+	<legend>
+		<h2>Create a Tour</h2>
+	</legend>
+	<div class="clearfix">
 			<div class="row">
 				<div class="span2">
-					<label>Start at: </label>
+					<label>Date</label>
 				</div>
 				<div class="span4">
 					<div id="datetimepicker" class="input-append date">
-						<input type="text" id="startDateAndTime"></input>
+						<input type="text" id="date" name="date"></input>
 						<span class="add-on">
 							<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 						</span>
@@ -29,140 +53,63 @@
 				</div>
 			</div>
 		  </div>
-		  		  		  
-		  <div class="clearfix">
-            <div class="row">
-				<div class="span2">
-					<label for="country">Country: </label>
-				</div>
-				<div class="span4">
-					<div class="input">
-						<select name="country" id="country">
-							<option>1</option>
-							<option>2</option>
-						</select>
-					</div>
-				</div>
-			</div>
-		  </div>
-          		  
-		  <div class="clearfix">
-			<div class="row">
-				<div class="span2">
-					<label for="city">City: </label>
-				</div>	
-				<div class="span4">
-					<div class="input">
-						<select class="medium" name="city" id="city">
-							<option>1</option>
-							<option>2</option>
-						</select>
-					</div>
-				</div>
-			</div>	
-			</div>
-          
-		  <div class="clearfix">
-			<div class="row">
-				<div class="span2">
-					<label for="tourTitle">Tour title: </label>
-				</div>	
-				<div class="span4">
-					<div class="input">
-						<input class="xlarge" id="tourTitle" name="tourTitle" size="30" type="text" />
-					</div>
-				</div>
-			</div>
-          </div>
-		  
-		  <div class="clearfix">
-			<div class="row">
-				<div class="span2">
-					<label for="tripCost">Trip cost: </label>
-				</div>
-				<div class="span4">
-					<div class="input">
-						<input class="xlarge" id="tripCost" name="tripCost" size="30" value="€" type="text" />
-					</div>
-				</div>
-          	</div>
-          </div>
-		  
-		  <div class="clearfix">
-			<div class="row">
-				<div class="span2">
-					<label for="imgFile">Upload an image file: </label>
-				</div>
-				<div class="span4">
-					<div class="input">
-						<input class="input-file" id="imgFile" name="imgFile" type="file" />
-					</div>
-				</div>
-			</div>
-          </div>
-		  
-		  <div class="clearfix">
-			<div class="row">
-				<div class="span2">
-					<label for="shortDescription">Short Description: </label>
-				</div>
-				<div class="span4">
-					<div class="input">
-						<textarea class="xxlarge" id="shortDescription" name="shortDescription" rows="5"></textarea>
-						<span class="help-block">
-						
-						</span>
-					</div>
-				</div>					
-          	</div>
-          </div>
-		  
-		  <div class="clearfix">
-			<div class="row">
-				<div class="span2">
-					<label for="listOfUsefulLinks">List of useful links: </label>
-				</div>
-				<div class="span4">
-					<div class="input">
-						<textarea class="xxlarge" id="listOfUsefulLinks" name="listOfUsefulLinks" rows="5"></textarea>
-						<span class="help-block">
-						
-						</span>
-					</div>
-				</div>
-         	</div>
-          </div>
-		  
-		  <div class="clearfix">
-		  <div class="row">
-				<div class="span2">
-					<label for="googleMapsLink">Google Maps Link: </label>
-				</div>
-				<div class="span4">
-					<div class="input">
-						<input class="xlarge" id="googleMapsLink" name="googleMapsLink" size="30" type="text" />
-						<span class="help-block">
-							<p style="font-size:12px">
-								<a href="http://support.google.com/maps/bin/answer.py?hl=en&answer=72644" target="_blank">(How to embed Google Maps Link?)</a>
-							</p>
-						</span>
-					</div>
-				</div>	
-          	</div>
-          </div>
-		  
-        </fieldset>
-		
-        <fieldset>
-          <div class="actions">
-            <input type="submit" class="btn btn-primary" value="Submit"/>
-			&nbsp;<button type="reset" class="btn">Cancel</button>
-          </div>
-        </fieldset>
-      </form>
 
+	@select(
+        tourForm("country"),
+        options = options(countries),
+        '_default -> "--- Choose a country ---",
+        '_label -> "Country",
+        '_error -> tourForm("country").error.map(_.withMessage("Please select your country"))
+    )
+
+	@select(
+        tourForm("city"),
+        options = options(cities),
+        '_default -> "--- Choose a city ---",
+        '_label -> "City",
+        '_error -> tourForm("city").error.map(_.withMessage("Please select your city"))
+    )
+
+	@inputText(
+		tourForm("name"),
+		'_label -> "Name",
+		'_error -> tourForm.globalError
+	)
+
+	@inputText(
+		tourForm("price"),
+		'_label -> "Price",
+		'_error -> tourForm.globalError
+	)
 	
-	  }
+	<div class="clearfix">
+		<div class="row">
+			<div class="span2">
+				<label for="imgFile">Upload an image file: </label>
+			</div>
+			<div class="span4">
+				<div class="input">
+					<input class="input-file" id="imgFile" name="imgFile" type="file" />
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	@inputText(
+		tourForm("description"),
+		'_label -> "Description",
+		'_error -> tourForm.globalError
+	)
+
+</fieldset>
+<fieldset>
+	<div class="actions">
+		<input type="submit" class="btn btn-primary" value="Submit" /> &nbsp;
+		<button type="reset" class="btn">Cancel</button>
+	</div>
+</fieldset>
+} }
+	
 	  
 <script type="text/javascript">
 
