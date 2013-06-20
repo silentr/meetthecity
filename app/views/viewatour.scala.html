@@ -184,22 +184,22 @@
 </table>
 <h3>Reviews</h3>
 @for(review <- tour.guide.reviewsReceived){
-<div style="display: inline; float: left; padding-right: 10px;">@review.getTourist().firstname
-	@review.getTourist().lastname</div>
+<div style="display: inline; float: left; padding-right: 10px;">@review.tourist.firstname
+	@review.tourist.lastname</div>
 <div style="padding-top: 6px;">
-	<input name="star3" type="radio" class="star" @if(review.getRating() ==
+	<input name="star3" type="radio" class="star" @if(review.rating ==
 		1) {checked="checked" } disabled="disabled" /> <input name="star3"
-		type="radio" class="star" @if(review.getRating() ==
+		type="radio" class="star" @if(review.rating ==
 		2) {checked="checked" } disabled="disabled" /> <input name="star3"
-		type="radio" class="star" @if(review.getRating() ==
+		type="radio" class="star" @if(review.rating ==
 		3) {checked="checked" } disabled="disabled" /> <input name="star3"
-		type="radio" class="star" @if(review.getRating() ==
+		type="radio" class="star" @if(review.rating ==
 		4) {checked="checked" } disabled="disabled" /> <input name="star3"
-		type="radio" class="star" @if(review.getRating() ==
+		type="radio" class="star" @if(review.rating ==
 		5) {checked="checked" } disabled="disabled" />
 </div>
 <br />
-<div style="font-size: small;">@review.getComment()</div>
+<div style="font-size: small;">@review.comment</div>
 } } @index(content(tour))
 
 

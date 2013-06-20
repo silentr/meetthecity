@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 import play.db.ebean.Model;
 
 @Entity
@@ -37,12 +39,15 @@ public class User extends Model {
 
     public String country;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "tourist", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Review> reviewsGiven;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "guide", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Review> reviewsReceived;
 
+    @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "tourists")
     public List<Tour> tours;
 
