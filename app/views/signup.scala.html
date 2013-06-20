@@ -53,18 +53,18 @@ select {
 
 	@if(form.hasErrors()) {
 	<p align="center" class="alert alert-error">@form.errors().values().iterator().next().get(0).message()</p>
-	} <label>Username:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input
+	} <label>Username:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 		name="username" type="text" class="input-block-level"
 		style="position: absolute; margin-left: 20px; left: 100px;" /></label> <br />
 	<label> First
-		Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input
+		Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 		name="firstname" type="text" class="input-block-level"
 		style="position: absolute; margin-left: 20px; left: 100px;" />
 	</label> <br /> <label>Last
-		Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><input
+		Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 		name="lastname" type="text" class="input-block-level"
 		style="position: absolute; margin-left: 20px; left: 100px;" />
-	</label><br /> <label>Country:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>*</span><select
+	</label><br /> <label>Country:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select
 		name="" placeholder="[Choose Country]" /><br />
 		<option value="Value for Item 1" title="Title for Item 1">India</option>
 		<option value="Value for Item 2" title="Title for Item 2">Turkey</option>
@@ -73,14 +73,14 @@ select {
 		Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
-		<span>*</span> <input type="text" class="input-block-level"
+		<input type="text" class="input-block-level"
 		name="email" placeholder="example"
 		style="position: absolute; margin-left: 20px; left: 100px;">
 	</label> <br /> <label>Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<span>*</span><input name="password" type="password"
+		<input name="password" type="password"
 		class="input-block-level" placeholder="min 8 characters"
 		style="position: absolute; margin-left: 20px; left: 100px;">
-	</label> <br /> <label>Repeat Password:<span>*</span><input
+	</label> <br /> <label>Repeat Password:<input
 		name="passwordConfirmation" type="password" class="input-block-level"
 		placeholder="min 8 characters"
 		style="position: absolute; margin-left: 20px; left: 100px;"></label> <br />
