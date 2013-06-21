@@ -5,7 +5,7 @@
 # Home page
 
 GET     /                           controllers.Application.index()
-GET     /tours                      controllers.Application.tours()
+GET     /tours                      controllers.TourManagement.tours()
 GET     /signout                    controllers.UserManagment.signout()
 GET     /signup                     controllers.UserManagment.signup()
 POST    /signup                     controllers.UserManagment.signupSubmit()
@@ -13,12 +13,12 @@ GET     /signin                     controllers.UserManagment.signin()
 POST    /signin                     controllers.UserManagment.authenticate()
 GET     /user/all                   controllers.Application.getAllUsers()
 GET     /user/:id                   controllers.Application.getUser(id : String)
-GET     /view-a-tour/:id            controllers.Application.viewATour(id: Long)
-GET     /join-a-tour                controllers.Application.joinATour()
-GET     /leave-a-tour               controllers.Application.leaveATour()
-GET		/create-a-tour				controllers.Application.createATour()
-POST	/create-a-tour-submit		controllers.Application.createATourSubmit()
-GET		/changeCountry				controllers.Application.changeCountry()
+GET     /view-a-tour/:id            controllers.TourManagement.viewATour(id: Long)
+GET     /join-a-tour                controllers.TourManagement.joinATour()
+GET     /leave-a-tour               controllers.TourManagement.leaveATour()
+GET		/create-a-tour				controllers.TourManagement.createATour()
+POST	/create-a-tour-submit		controllers.TourManagement.createATourSubmit()
+GET		/changeCountry				controllers.TourManagement.changeCountry()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

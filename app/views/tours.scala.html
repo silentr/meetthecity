@@ -9,10 +9,10 @@
 	<tbody>
 		@for(tourItem <- class_list){
 		<tr>
-			<td><a href=@routes.Application.viewATour(tourItem.id)>@tourItem.name<br>
+			<td><a href=@routes.TourManagement.viewATour(tourItem.id)>@tourItem.name<br>
 			<br><img src="@tourItem.photoName" /></td></a>
 			<td>
-				<p style="font-size: small">@tourItem.descriptionShort <a href=@routes.Application.viewATour(tourItem.id)>See more</a></p>
+				<p style="font-size: small">@tourItem.descriptionShort <a href=@routes.TourManagement.viewATour(tourItem.id)>See more</a></p>
 			</td>
 		</tr>
 		}
@@ -33,7 +33,7 @@
     $openBar.addClass('active');
 	  
 //     $("#breadcrumb ul").append('<li><a href="/user/messages"><span class="tab">Message Center</span></a></li>');
-    $('ul.breadcrumb').append(' <span class="divider"> > </span><li class="active" id="tour"><a href="@routes.Application.tours()">Tours</a></li>').addClass('active');
+    $('ul.breadcrumb').append(' <span class="divider"> > </span><li class="active" id="tour"><a href="@routes.TourManagement.tours()">Tours</a></li>').addClass('active');
     
     $openBar = $("#tour");
     $openBar.addClass('active');

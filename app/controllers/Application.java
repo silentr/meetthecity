@@ -33,12 +33,6 @@ public class Application extends Controller {
         return ok(index.render(new Html(new StringBuilder())));
     }
 
-    public static Result tours() {
-
-        List<Tour> tourList = Tour.find.all();
-        return ok(tours.render(tourList));
-    }
-
     public static Result getAllUsers() {
         List<User> user = User.find.all();
 
@@ -49,81 +43,4 @@ public class Application extends Controller {
         User user = User.find.byId(id);
         return user != null ? ok(Json.toJson(user)) : notFound();
     }
-
-    public static Result viewATour(Long id) {
-        Tour tour = Tour.find.byId(id);
-        if(tour == null){
-            return redirect(routes.Application.tours());
-        }
-        String joined = "undefined";
-        String username = session().get(UserManagment.SESSION_USERNAME);
-        if (username != null) {
-            User user = User.find.byId(username);
-            joined = tour.tourists.contains(user) ? "true" : "false";
-        }
-        return ok(viewatour.render(tour, joined));
-    }
-
-    @Security.Authenticated(Secured.class)
-    public static Result joinATour() {
-        String tourId = form().bindFromRequest().get("tourId");
-        Tour tour = Tour.find.byId(Long.valueOf(tourId));
-        String username = session().get(UserManagment.SESSION_USERNAME);
-        if(username == null){
-            return redirect(routes.UserManagment.signin());
-        }
-        User user = User.find.byId(username);
-        return ok(tour.join(user).toString());
-    }
-
-    @Security.Authenticated(Secured.class)
-    public static Result leaveATour() {
-        String tourId = form().bindFromRequest().get("tourId");
-        Tour tour = Tour.find.byId(Long.valueOf(tourId));
-        String username = session().get(UserManagment.SESSION_USERNAME);
-        if(username == null){
-            return redirect(routes.UserManagment.signin());
-        }
-        User user = User.find.byId(username);
-        return ok(tour.leave(user).toString());
-    }
-
-    @Security.Authenticated(Secured.class)
-    public static Result createATour() {
-        List<String> countries = Location.findUniqueCountries();
-        List<String> cities = new ArrayList<>();
-        cities = new ArrayList<>();
-        Form<TourForm> tourForm = form(TourForm.class);
-        return ok(createatour.render(tourForm, countries, cities));
-    }
-
-    @Security.Authenticated(Secured.class)
-    public static Result createATourSubmit() {
-        MultipartFormData body = request().body().asMultipartFormData();
-        FilePart image = body.getFile("imgFile");
-        Form<TourForm> tourFormFilled = form(TourForm.class).bindFromRequest();
-        if(tourFormFilled.hasErrors()){
-            List<String> countries = Location.findUniqueCountries();
-            List<String> cities = new ArrayList<>();
-            return badRequest(createatour.render(tourFormFilled, countries, cities));
-        }
-        if (image != null) {
-            File file1 = image.getFile();
-            TourForm tourForm = tourFormFilled.get();
-            tourForm.photoName = file1.getAbsolutePath();
-            String username = session().get("username");
-            User guide = User.find.byId(username);
-            Tour.create(tourForm, guide);
-            return tours();
-        } else {
-            return redirect(routes.Application.index());
-        }
-    }
-
-    public static Result changeCountry() {
-        String country = form().bindFromRequest().get("country");
-        List<String> cities = Location.findUniqueCitiesOfCountry(country);
-        return ok(Json.toJson(cities));
-    }
-
 }

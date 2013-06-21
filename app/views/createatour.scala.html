@@ -3,7 +3,7 @@
 @import helper._
 @import helper.twitterBootstrap._
  
- @index{ @helper.form(routes.Application.createATourSubmit, 'enctype -> "multipart/form-data"){
+ @index{ @helper.form(routes.TourManagement.createATourSubmit, 'enctype -> "multipart/form-data"){
 <script type="text/javascript">
 	$(document).ready(
 			function() {
@@ -15,7 +15,7 @@
 								data : {
 									country : $("#country").val()
 								},
-								url : "@routes.Application.changeCountry()",
+								url : "@routes.TourManagement.changeCountry()",
 								success : function(data) {
 									$("#city").empty();
 									$("#city").append("<option class=\"blank\" value>--- Choose a city ---</option>");

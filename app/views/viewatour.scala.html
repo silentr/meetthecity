@@ -53,7 +53,7 @@
 													type: "GET",
 													dataType: "text",
 													data: {tourId: @tour.id},
-													url: "@routes.Application.joinATour()",
+													url: "@routes.TourManagement.joinATour()",
 													success: function(data){
 														bootbox.alert("You joined the tour successfully.");
 														$("#formJoinATour").html("<button type=\"button\" id=\"btnLeaveATour\" class=\"btn btn-inverse\">Leave a tour</button>");
@@ -73,7 +73,7 @@
 												type: "GET",
 												dataType: "text",
 												data: {tourId: @tour.id},
-												url: "@routes.Application.leaveATour()",
+												url: "@routes.TourManagement.leaveATour()",
 												success: function(data){
 													bootbox.alert("You left the tour successfully.");
 													$("#formJoinATour").html("<button type=\"button\" id=\"btnJoinATour\" class=\"btn btn-primary\">Join a tour</button>");
