@@ -43,7 +43,7 @@
 				$("#btnJoinATour").click(
 						function() {
 							if(@joined.equals("undefined")){
-								window.location.href = "http://localhost:9000/signin";
+								window.location.href = "@routes.UserManagment.signin()";
 							}else{
 								bootbox.confirm(
 										"Are you sure you want to join a tour?",
