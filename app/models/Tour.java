@@ -184,7 +184,7 @@ public class Tour extends Model {
         tour.date = tourForm.date;
         tour.descriptionFull = tourForm.description;
         tour.descriptionShort = tourForm.description.substring(0, tourForm.description.length()/2);
-        tour.descriptionMini = tourForm.description.substring(0, tourForm.description.length()/4);
+        tour.descriptionMini = tourForm.description.substring(0, tourForm.description.length() > 1020 ? 255 : tourForm.description.length()/4);
         tour.guide = guide;
         Location location = new Location();
         location.country = tourForm.country;
@@ -205,13 +205,15 @@ public class Tour extends Model {
             targetFileName = tourForm.name + "_" + i++ + ".jpg";
         }
 
-        tour.photoName = locationDirectory.getAbsolutePath() + "\\" + targetFileName;
+        String targetFile = locationDirectory.getAbsolutePath() + "\\" + targetFileName;
+        tour.photoName = "\\assets\\images\\locations\\" + targetFileName;
+        Logger.info("tour.photoName: " + tour.photoName);
 
         Ebean.save(tour);
 
         // saving file to DB
         Path source = Paths.get(tourForm.photoName);
-        Path target = Paths.get(tour.photoName);
+        Path target = Paths.get(targetFile);
         CopyOption[] options = new CopyOption[] { StandardCopyOption.COPY_ATTRIBUTES };
         try {
             Files.copy(source, target, options);
