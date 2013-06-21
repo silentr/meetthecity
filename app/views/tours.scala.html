@@ -9,8 +9,8 @@
 	<tbody>
 		@for(tourItem <- class_list){
 		<tr>
-			<td>@tourItem.name<br>
-			<br> <img src="@tourItem.photoName" /></td>
+			<td><a href=@routes.Application.viewATour(tourItem.id)>@tourItem.name<br>
+			<br><img src="@tourItem.photoName" /></td></a>
 			<td>
 				<p style="font-size: small">@tourItem.descriptionShort <a href=@routes.Application.viewATour(tourItem.id)>See more</a></p>
 			</td>
