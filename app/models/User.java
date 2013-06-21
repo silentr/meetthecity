@@ -67,7 +67,6 @@ public class User extends Model {
         result = prime * result + ((phone == null) ? 0 : phone.hashCode());
         result = prime * result + ((photo == null) ? 0 : photo.hashCode());
         result = prime * result + rating;
-        result = prime * result + ((reviewsGiven == null) ? 0 : reviewsGiven.hashCode());
         result = prime * result + ((reviewsReceived == null) ? 0 : reviewsReceived.hashCode());
         result = prime * result + ((tours == null) ? 0 : tours.hashCode());
         result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -110,7 +109,7 @@ public class User extends Model {
         } else if (!reviewsReceived.equals(other.reviewsReceived)) return false;
         if (tours == null) {
             if (other.tours != null) return false;
-        } else if (!tours.equals(other.tours)) return false;
+        }
         if (username == null) {
             if (other.username != null) return false;
         } else if (!username.equals(other.username)) return false;

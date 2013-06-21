@@ -230,7 +230,6 @@ public class Tour extends Model {
         result = prime * result + ((descriptionFull == null) ? 0 : descriptionFull.hashCode());
         result = prime * result + ((descriptionMini == null) ? 0 : descriptionMini.hashCode());
         result = prime * result + ((descriptionShort == null) ? 0 : descriptionShort.hashCode());
-        result = prime * result + ((guide == null) ? 0 : guide.hashCode());
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((location == null) ? 0 : location.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -262,7 +261,7 @@ public class Tour extends Model {
         } else if (!descriptionShort.equals(other.descriptionShort)) return false;
         if (guide == null) {
             if (other.guide != null) return false;
-        } else if (!guide.equals(other.guide)) return false;
+        }
         if (id != other.id) return false;
         if (location == null) {
             if (other.location != null) return false;

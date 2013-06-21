@@ -73,6 +73,11 @@
 
 	$(document).ready(
 			function() {
+				if(@joined){
+					$("#formJoinATour").html("<button type=\"button\" id=\"btnLeaveATour\" class=\"btn btn-inverse\">Leave a tour</button>");
+				}else{
+					$("#formJoinATour").html("<button type=\"button\" id=\"btnJoinATour\" class=\"btn btn-primary\">Join a tour</button>");				
+				}
 				$("#btnJoinATour").click(
 						function() {
 							if(@joined.equals("undefined")){
@@ -85,19 +90,17 @@
 												$.ajax({
 													type: "GET",
 													dataType: "text",
-													data: {tourId: "1"},
+													data: {tourId: @tour.id},
 													url: "@routes.Application.joinATour()",
 													success: function(data){
 														bootbox.alert("You joined the tour successfully.");
-														$("#btnJoinATour").css('visibility', 'hidden');
-														$("#btnLeaveATour").css('visibility', 'visible');
+														$("#formJoinATour").html("<button type=\"button\" id=\"btnLeaveATour\" class=\"btn btn-inverse\">Leave a tour</button>");
 													}
 												});
 											}
 										});
 							}
 						});
-				$("#btnJoinATour").css('visibility', @joined ? 'hidden' : 'visible');
 				$("#btnLeaveATour").click(
 						function() {
 							bootbox.confirm(
@@ -107,18 +110,16 @@
 											$.ajax({
 												type: "GET",
 												dataType: "text",
-												data: {tourId: "1"},
+												data: {tourId: @tour.id},
 												url: "@routes.Application.leaveATour()",
 												success: function(data){
 													bootbox.alert("You left the tour successfully.");
-													$("#btnJoinATour").css('visibility', 'visible');
-													$("#btnLeaveATour").css('visibility', 'hidden');
+													$("#formJoinATour").html("<button type=\"button\" id=\"btnJoinATour\" class=\"btn btn-primary\">Join a tour</button>");
 												}
 											});
 										}
 									});
 						});
-				$("#btnLeaveATour").css('visibility', @joined ? 'visible' : 'hidden');
 			});
 </script>
 </head>
@@ -129,12 +130,7 @@
 </p>
 <div style="padding-bottom: 10px;">Price: @if(tour.price != 0.0){
 	@tour.price } else{ Free }</div>
-<form action="/join-a-tour" method="POST">
-	<input type="hidden" id="tourId" value="@tour.id" name="tourId" />
-	<button type="button" id="btnJoinATour" class="btn btn-primary">Join
-		a tour</button>
-	<button type="button" id="btnLeaveATour" class="btn btn-inverse">Leave
-		a tour</button>
+<form action="/join-a-tour" method="POST" id="formJoinATour">
 </form>
 <!-- SHARE: TWITTER -->
 <div style="padding-bottom: 5px;">
