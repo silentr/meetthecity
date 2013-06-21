@@ -223,7 +223,7 @@ public class Tour extends Model {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = super.hashCode();
+        int result = 3;
         result = prime * result + ((date == null) ? 0 : date.hashCode());
         result = prime * result + ((descriptionFull == null) ? 0 : descriptionFull.hashCode());
         result = prime * result + ((descriptionMini == null) ? 0 : descriptionMini.hashCode());
@@ -237,7 +237,6 @@ public class Tour extends Model {
         temp = Double.doubleToLongBits(price);
         result = prime * result + (int) (temp ^ (temp >>> 32));
         result = prime * result + ((reviews == null) ? 0 : reviews.hashCode());
-        result = prime * result + ((tourists == null) ? 0 : tourists.hashCode());
         return result;
     }
 

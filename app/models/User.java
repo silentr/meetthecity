@@ -58,7 +58,7 @@ public class User extends Model {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = super.hashCode();
+        int result = 5;
         result = prime * result + ((country == null) ? 0 : country.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());

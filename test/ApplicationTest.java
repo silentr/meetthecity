@@ -58,4 +58,31 @@ public class ApplicationTest extends WithApplication {
         Result result = callAction(controllers.routes.ref.Application.viewATour(7));
         assertThat(status(result)).isEqualTo(SEE_OTHER);
     }
+    
+    @Test
+    public void joinATourTestSuccess(){
+        Result result = callAction(controllers.routes.ref.Application.joinATour(), fakeRequest()
+                .withSession("username", "sadek").withFormUrlEncodedBody(ImmutableMap.of("tourId", "1")));
+        assertThat(status(result)).isEqualTo(OK);
+        assertThat(contentType(result)).isEqualTo("text/plain");
+        assertThat(charset(result)).isEqualTo("utf-8");
+        assertThat(contentAsString(result)).contains("true");
+    }
+    
+    @Test
+    public void leaveATourTestSuccess(){
+        Result result = callAction(controllers.routes.ref.Application.joinATour(), fakeRequest()
+                .withSession("username", "sadek").withFormUrlEncodedBody(ImmutableMap.of("tourId", "1")));
+        assertThat(status(result)).isEqualTo(OK);
+        assertThat(contentType(result)).isEqualTo("text/plain");
+        assertThat(charset(result)).isEqualTo("utf-8");
+        assertThat(contentAsString(result)).contains("true");
+    }
+    
+    @Test
+    public void joinATourTestAnonymous(){
+        Result result = callAction(controllers.routes.ref.Application.joinATour(), fakeRequest().
+                withFormUrlEncodedBody(ImmutableMap.of("tourId", "1")));
+        assertThat(status(result)).isEqualTo(SEE_OTHER);
+    }
 }

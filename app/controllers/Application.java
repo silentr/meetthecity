@@ -69,6 +69,9 @@ public class Application extends Controller {
         String tourId = form().bindFromRequest().get("tourId");
         Tour tour = Tour.find.byId(Long.valueOf(tourId));
         String username = session().get(UserManagment.SESSION_USERNAME);
+        if(username == null){
+            return redirect(routes.UserManagment.signin());
+        }
         User user = User.find.byId(username);
         return ok(tour.join(user).toString());
     }
@@ -78,6 +81,9 @@ public class Application extends Controller {
         String tourId = form().bindFromRequest().get("tourId");
         Tour tour = Tour.find.byId(Long.valueOf(tourId));
         String username = session().get(UserManagment.SESSION_USERNAME);
+        if(username == null){
+            return redirect(routes.UserManagment.signin());
+        }
         User user = User.find.byId(username);
         return ok(tour.leave(user).toString());
     }
