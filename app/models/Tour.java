@@ -182,9 +182,9 @@ public class Tour extends Model {
     public static void create(TourForm tourForm, User guide) {
         Tour tour = new Tour();
         tour.date = tourForm.date;
-        tour.descriptionFull = tourForm.descriptionFull;
-        tour.descriptionShort = tourForm.descriptionShort;
-        tour.descriptionMini = tourForm.descriptionMini;
+        tour.descriptionFull = tourForm.description;
+        tour.descriptionShort = tourForm.description.substring(0, tourForm.description.length()/2);
+        tour.descriptionMini = tourForm.description.substring(0, tourForm.description.length()/4);
         tour.guide = guide;
         Location location = new Location();
         location.country = tourForm.country;

@@ -18,13 +18,10 @@ public class TourForm {
     @Required(message="Price is required. Put 0 if the tour is free")
     public double price;
     public String photoName;
-    public String descriptionFull;
-    public String descriptionShort;
-    public String descriptionMini;
+    public String description;
     @Override
     public String toString() {
         return "CreateATour [date=" + date + ", country=" + country + ", city=" + city + ", name=" + name + ", price="
-                + price + ", photoName=" + photoName + ", descriptionFull=" + descriptionFull + ", descriptionShort="
-                + descriptionShort + ", descriptionMini=" + descriptionMini + "]";
+                + price + ", photoName=" + photoName + "]";
     }
 }
