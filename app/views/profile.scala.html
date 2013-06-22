@@ -1,0 +1,43 @@
+ @(user: User, form: Form[models.form.EditProfile]) @index {
+<table class="table table.hover">
+	<tr>
+		<td><img src=@user.photo class="img-rounded"></td>
+		<td>
+			<table class="table table.hover"
+				style="background-color: transparent;">
+				<tr>
+					<th>User Name:</th>
+					<td>@user.username</td>
+				</tr>
+				<tr>
+					<th>Password:</th>
+					<td>********</td>
+					<td><a id="editPassword" href="">Change</a></td>
+				</tr>
+				<tr>
+					<th>Full Name:</th>
+					<td>@user.firstname&nbsp;&nbsp;@user.lastname</td>
+					<td><a id="editName" href="">Edit</a></td>
+				</tr>
+				<tr>
+					<th>E-Mail:</th>
+					<td>@user.email</td>
+					<td><a id="editMail" href="">Edit</a></td>
+				</tr>
+				<tr>
+					<th>Phone Number:</th>
+					<td>@user.phone</td>
+					<td><a id="phoneNumber" href="">Edit</a></td>
+				</tr>
+
+			</table>
+		</td>
+	</tr>
+</table>
+}
+
+<script type="text/javascript">
+	$('ul.breadcrumb')
+			.append(
+					'<span class="divider"> > </span><li class="active"><a href="">Profile</a></li>');
+</script>

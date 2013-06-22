@@ -1,12 +1,14 @@
 package controllers;
 
 import models.User;
+import models.form.EditProfile;
 import models.form.Login;
 import models.form.SignUp;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.profile;
 import views.html.signin;
 import views.html.signup;
 
@@ -64,5 +66,15 @@ public class UserManagment extends Controller {
 
     public static boolean isUserSignedIn() {
         return session(SESSION_USERNAME) != null;
+    }
+    
+    public static Result userProfile() {
+        
+       User user = null;
+       String username = session().get(UserManagment.SESSION_USERNAME);
+       if (username != null) 
+           user = User.find.byId(username);
+
+       return ok(profile.render(user, Form.form(EditProfile.class)));
     }
 }
