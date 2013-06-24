@@ -1,0 +1,87 @@
+ @(user: User, form: Form[models.form.EditProfile]) @index {
+
+@helper.form(routes.UserManagment.submitEdit) {
+
+@if(form.hasErrors()) {
+<p align="center" class="alert alert-error">@form.errors().values().iterator().next().get(0).message()</p>
+} 
+<table class="table table.hover">
+	<tr>
+		<th><h2>@user.username</h2></th>
+	</tr>
+	<tr>
+		<th>First Name:</th>
+		<td><input type="text" id="firstname" class="input-block-level"
+			value="@user.firstname"></td>
+	</tr>
+	<tr>
+		<th>Last Name:</th>
+		<td><input type="text" id="lastname" value="@user.lastname"
+			class="input-block-level"></td>
+	</tr>
+	<tr>
+		<th>Country:</th>
+		<td><select name="" placeholder="[Choose Country]" /><br />
+			<option value="Value for Item 1" title="Title for Item 1">India</option>
+			<option value="Value for Item 2" title="Title for Item 2">Turkey</option>
+			<option value="Value for Item 3" title="Title for Item 3">Ukraine</option>
+			</select></td>
+	</tr>
+	<tr>
+		<th>E-mail:</th>
+		<td><input type="text" class="input-block-level"
+			value="@user.email"></td>
+	</tr>
+	<tr>
+		<th>Phone Number:</th>
+		<td><input type="text" class="input-block-level"
+			value="@user.phone"></td>
+	</tr>
+	<tr>
+		<th>Password:</th>
+		<td><a id="editpassword" href="#edit">Edit</a></td>
+	</tr>
+
+	<tr id="old_pass" style="display: none;">
+		<th>Old Password:</th>
+		<td><input type="password" class="input-block-level"
+			placeholder="min 8 characters"></td>
+	</tr>
+	<tr id="new_pass" style="display: none;">
+		<th>New Password:</th>
+		<td><input type="password" placeholder="min 8 characters"
+			class="input-block-level"></td>
+	</tr>
+	<tr id="confirm_pass" style="display: none;">
+		<th>Repeat New Password:</th>
+		<td><input type="password" placeholder="min 8 characters"
+			class="input-block-level"></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td>
+			<button class="btn btn-large btn-primary" type="submit"
+				style="float: right;">Save Changes</button>
+		</td>
+	</tr>
+
+	}
+</table>
+
+}
+
+<script type="text/javascript">
+	$('#editpassword').click(function() {
+
+		var result_style = document.getElementById('old_pass').style;
+		result_style.display = 'table-row';
+		result_style = document.getElementById('new_pass').style;
+		result_style.display = 'table-row';
+		result_style = document.getElementById('confirm_pass').style;
+		result_style.display = 'table-row';
+	});
+	
+	$('ul.breadcrumb')
+	.append(
+			'<span class="divider"> > </span><li class="active"><a href="">Profile</a></li><span class="divider"> > </span><li class="active"><a href="">Edit Profile</a></li>');
+</script>

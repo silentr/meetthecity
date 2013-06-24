@@ -11,6 +11,7 @@ import play.mvc.Result;
 import views.html.profile;
 import views.html.signin;
 import views.html.signup;
+import views.html.editprofile;
 
 public class UserManagment extends Controller {
 
@@ -75,6 +76,37 @@ public class UserManagment extends Controller {
        if (username != null) 
            user = User.find.byId(username);
 
-       return ok(profile.render(user, Form.form(EditProfile.class)));
+       return ok(profile.render(user));
+    }
+    
+    public static Result editUserProfile() {
+        
+        User user = null;
+        String username = session().get(UserManagment.SESSION_USERNAME);
+        if (username != null) 
+            user = User.find.byId(username);
+
+        return ok(editprofile.render(user, Form.form(EditProfile.class)));
+     }
+   public static Result submitEdit() {
+       
+       Form<EditProfile> signUpForm = Form.form(EditProfile.class).bindFromRequest();
+
+       User user = null;
+       String username = session().get(UserManagment.SESSION_USERNAME);
+       if (username != null) 
+           user = User.find.byId(username);
+       
+       if (signUpForm.hasErrors()) {
+           Logger.debug("User didn't signed up errors = " + signUpForm.errors());
+
+           return badRequest(editprofile.render(user, Form.form(EditProfile.class)));
+       } else {
+//           User user = SignUp.createUser(signUpForm.get());
+//           user.save();
+//           Logger.debug(user + " signed up");
+
+           return redirect(routes.Application.index());
+       }
     }
 }

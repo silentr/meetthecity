@@ -7,6 +7,8 @@
 GET     /                           controllers.Application.index()
 GET     /tours                      controllers.TourManagement.tours()
 GET     /userprofile                controllers.UserManagment.userProfile()
+GET     /editprofile                controllers.UserManagment.editUserProfile()
+POST     /editprofile               controllers.UserManagment.submitEdit()
 GET     /signout                    controllers.UserManagment.signout()
 GET     /signup                     controllers.UserManagment.signup()
 POST    /signup                     controllers.UserManagment.signupSubmit()

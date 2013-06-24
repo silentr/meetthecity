@@ -1,4 +1,4 @@
- @(user: User, form: Form[models.form.EditProfile]) @index {
+ @(user: User) @index {
 <table class="table table.hover">
 	<tr>
 		<td><img src=@user.photo class="img-rounded"></td>
@@ -12,83 +12,93 @@
 				<tr>
 					<th>Password:</th>
 					<td>********</td>
-					<td><a id="editPassword" href="#">Change</a></td>
+<!-- 					<td><a id="editPassword" href="#">Change</a></td> -->
 				</tr>
 				<tr>
 					<th>First Name:</th>
 					<td>@user.firstname</td>
-					<td><a id="editFirstName" href="#">Edit</a></td>
+<!-- 					<td><a id="editFirstName" href="#">Edit</a></td> -->
 				</tr>
 				<tr>
 					<th>Last Name:</th>
 					<td>@user.lastname</td>
-					<td><a id="editLastName" href="#">Edit</a></td>
+<!-- 					<td><a id="editLastName" href="#">Edit</a></td> -->
 				</tr>
 				<tr>
 					<th>E-Mail:</th>
 					<td>@user.email</td>
-					<td><a id="editMail" href="#">Edit</a></td>
+<!-- 					<td><a id="editMail" href="#">Edit</a></td> -->
 				</tr>
 				<tr>
 					<th>Phone Number:</th>
 					<td>@user.phone</td>
-					<td><a id="phoneNumber" href="#">Edit</a></td>
+<!-- 					<td><a id="phoneNumber" href="#">Edit</a></td> -->
 				</tr>
-
+				<tr>
+					<th></th>
+					<td>
+						<button
+							onclick="window.location.href='@routes.UserManagment.editUserProfile()'"
+							class="btn btn-primary" type="button"
+							>Edit Pofile</button>
+					</td>
+				<tr>
 			</table>
 		</td>
 	</tr>
+
+
 </table>
 }
 
 <script type="text/javascript">
 	var result;
 
-	$('#editPassword').click(function() {
-		bootbox.alert("Hello world!");
-	});
-	$('#editFirstName').click(
-			function() {
-				bootbox.prompt("Change Your First Name", "Cancel", "Confirm",
-						function(result) {
-							if (result == "@user.firstname")
-								return;
-							if (result)
-								bootbox.alert("New Name is: " + result);
-						}, "@user.firstname");
-			});
-	$('#editLastName').click(
-			function() {
-				bootbox.prompt("Change Your Last Name", "Cancel", "Confirm",
-						function(result) {
-							if (result == "@user.lastname")
-								return;
-							if (result)
-								bootbox.alert("New Last Name is: " + result);
-						}, "@user.lastname");
-			});
-	$('#editMail').click(
-			function() {
-				bootbox.prompt("Change Your E-Mail", "Cancel", "Confirm",
-						function(result) {
-							if (result == "@user.email")
-								return;
-							if (result)
-								bootbox.alert("New E-Mail is: " + result);
-						}, "@user.email");
-			});
-	$('#phoneNumber').click(
-			function() {
-				bootbox
-						.prompt("Change Your Phone Number", "Cancel",
-								"Confirm", function(result) {
-									if (result == "@user.phone")
-										return;
-									if (result)
-										bootbox.alert("New Phone Number is: "
-												+ result);
-								}, "@user.phone");
-			});
+// 	$('#editPassword').click(function() {
+// 		bootbox.alert("Hello world!");
+// 	});
+// 	$('#editFirstName').click(
+// 			function() {
+// 				bootbox.prompt("Change Your First Name", "Cancel", "Confirm",
+// 						function(result) {
+// 							if (result == "@user.firstname")
+// 								return;
+// 							if (result)
+// 								bootbox.alert("New Name is: " + result);
+// 						}, "@user.firstname");
+// 			});
+// 	$('#editLastName').click(
+// 			function() {
+// 				bootbox.prompt("Change Your Last Name", "Cancel", "Confirm",
+// 						function(result) {
+// 							if (result == "@user.lastname")
+// 								return;
+// 							if (result)
+// 								bootbox.alert("New Last Name is: " + result);
+// 						}, "@user.lastname");
+// 			});
+// 	$('#editMail').click(
+// 			function() {
+// 				bootbox.prompt("Change Your E-Mail", "Cancel", "Confirm",
+// 						function(result) {
+// 							if (result == "@user.email")
+// 								return;
+// 							if (result)
+// 								bootbox.alert("New E-Mail is: " + result);
+// 						}, "@user.email");
+// 			});
+// 	$('#phoneNumber').click(
+// 			function() {
+// 				bootbox
+// 						.prompt("Change Your Phone Number", "Cancel",
+// 								"Confirm", function(result) {
+// 									if (result == "@user.phone")
+// 										return;
+// 									if (result)
+// 										bootbox.alert("New Phone Number is: "
+// 												+ result);
+// 								}, "@user.phone");
+// 			});
 
 	$('ul.breadcrumb')
 			.append(
