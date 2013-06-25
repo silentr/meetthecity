@@ -33,6 +33,17 @@ users:
         rating:     5
         country:    USA
 
+    - !!models.User
+        email:      altug@bayram.com
+        phone:      1111 22 333 444
+        photo:      "/assets/images/guides/guide-1.png"
+        username:   altugbay
+        password:   altugbayram
+        firstname:  Altug
+        lastname:   Bayram
+        rating:     5
+        country:    TUR
+        
 locations:
     - !!models.Location
         ltd:              20
