@@ -82,7 +82,7 @@
 						onclick="return confirm('Are you sure?');"
 				style="float: right;">Save Changes</button>
 <!-- 			onclick="myFunction()"  -->
-
+<!-- 						onclick="return confirm('Are you sure?');" -->
 		</td>
 	</tr>
 
@@ -112,13 +112,9 @@
 	
 	function myFunction()
 	{
-		bootbox.prompt("Change Your First Name", "Cancel", "Confirm",
-				function(result) {
-					if (result == "@user.firstname")
-						return true;
-					if (result)
-						bootbox.alert("New Name is: " + result);
-				}, "@user.firstname");
+		bootbox.confirm("Are you sure?", function(result) {
+			  return result;
+			});
 	}
 	
 	$('ul.breadcrumb')
