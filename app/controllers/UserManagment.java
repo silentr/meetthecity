@@ -1,5 +1,12 @@
 package controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import models.User;
 import models.form.EditProfile;
 import models.form.Login;
@@ -7,6 +14,8 @@ import models.form.SignUp;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import views.html.profile;
 import views.html.signin;
@@ -94,22 +103,65 @@ public class UserManagment extends Controller {
         User user = null;
         String username = session().get(UserManagment.SESSION_USERNAME);
         if (username != null) user = User.find.byId(username);
-        
+
         if (editProfile.hasErrors()) {
             Logger.debug("The changes could not be saved = " + editProfile.errors());
-            if(editProfile.errors().toString().contains("password"))
-                return badRequest(editprofile.render(user, editProfile, true));
+            if (editProfile.errors().toString().contains("password")) return badRequest(editprofile.render(user,
+                    editProfile, true));
             else
                 return badRequest(editprofile.render(user, editProfile, false));
-        } 
-        else {
-            editProfile.get();
+        } else {
+
+
+            MultipartFormData body = request().body().asMultipartFormData();
+            FilePart picture = body.getFile("photofile");
+            if (picture != null) {
+
+                File file = picture.getFile();
+                String path = "public/images/" + user.username + "_photo.png";
+                File destinationFile = new File(path);
+                editProfile.get().photo = "/assets/images/"+user.username + "_photo.png";
+                try {
+                    copyFile(file, destinationFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            ;
             EditProfile.user = user;
             User updatedUser = EditProfile.editUser(editProfile.get());
             updatedUser.update();
-            Logger.debug(user + " has editted his profile");
-
+            Logger.debug(user.username + " has editted his profile");
+            
             return redirect(routes.UserManagment.userProfile());
+        }
+    }
+
+    public static void copyFile(File source, File dest) throws IOException {
+
+        if (!dest.exists()) {
+            dest.createNewFile();
+        }
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+
+            in = new FileInputStream(source);
+            out = new FileOutputStream(dest);
+
+            // Transfer bytes from in to out
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+            if (out != null) {
+                out.close();
+            }
         }
     }
 }

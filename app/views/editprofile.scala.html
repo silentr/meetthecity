@@ -1,6 +1,6 @@
  @(user: User, form: Form[models.form.EditProfile], isPassword: Boolean) @index {
 
-@helper.form(routes.UserManagment.submitEdit) {
+@helper.form(routes.UserManagment.submitEdit, 'enctype -> "multipart/form-data") {
 
 @if(form.hasErrors()) {
 <p align="center" class="alert alert-error">@form.errors().values().iterator().next().get(0).message()</p>
@@ -24,7 +24,7 @@
 		<th>Country:</th>
 		<td><select name="" placeholder="[Choose Country]" /><br />
 			<option value="Value for Item 1" title="Title for Item 1">India</option>
-			<option value="Value for Item 2" title="Title for Item 2">Turkey</option>
+			<option value="Value for Item 2" title="Title for Item 2" selected="true">Turkey</option>
 			<option value="Value for Item 3" title="Title for Item 3">Ukraine</option>
 			</select></td>
 	</tr>
@@ -37,6 +37,10 @@
 		<th>Phone Number:</th>
 		<td><input type="text" name="phone" class="input-block-level"
 			value="@user.phone"></td>
+	</tr>
+	<tr>
+		<th>Change Picture:</th>
+		<td><input type="file" name="photofile" class="input-block-level" ></td>
 	</tr>
 	<tr>
 		<th>Password:</th>
