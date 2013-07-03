@@ -39,7 +39,7 @@ public class UserManagment extends Controller {
 
             Logger.debug("User " + loginForm.get().username + " logged in");
 
-            return redirect(routes.Application.index());
+            return redirect(routes.Application.home());
         }
     }
 

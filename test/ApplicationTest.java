@@ -23,7 +23,7 @@ public class ApplicationTest extends WithApplication {
 
     @Test
     public void homepageCheck() {
-        Result result = callAction(controllers.routes.ref.Application.index());
+        Result result = callAction(controllers.routes.ref.Application.home());
         assertThat(status(result)).isEqualTo(OK);
         assertThat(contentType(result)).isEqualTo("text/html");
         assertThat(charset(result)).isEqualTo("utf-8");

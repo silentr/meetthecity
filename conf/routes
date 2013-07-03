@@ -4,11 +4,11 @@
 
 # Home page
 
-GET     /                           controllers.Application.index()
+GET     /                           controllers.Application.home()
 GET     /tours                      controllers.TourManagement.tours()
 GET     /userprofile                controllers.UserManagment.userProfile()
 GET     /editprofile                controllers.UserManagment.editUserProfile()
-POST     /editprofile               controllers.UserManagment.submitEdit()
+POST    /editprofile                controllers.UserManagment.submitEdit()
 GET     /signout                    controllers.UserManagment.signout()
 GET     /signup                     controllers.UserManagment.signup()
 POST    /signup                     controllers.UserManagment.signupSubmit()

@@ -92,7 +92,7 @@ public class TourManagement extends Controller {
             Tour.create(tourForm, guide);
             return tours();
         } else {
-            return redirect(routes.Application.index());
+            return redirect(routes.Application.home());
         }
     }
 

@@ -1,0 +1,20 @@
+@(class_list: List[Tour]) 
+
+@index {
+
+<h3>Tours</h3>
+<table class="table table.hover">
+	<tbody>
+		@for(tourItem <- class_list){
+		<tr>
+			<td><a href=@routes.TourManagement.viewATour(tourItem.id)>@tourItem.name<br>
+			<br><img src="@tourItem.photoName" /></td></a>
+			<td>
+				<p style="font-size: small">@tourItem.descriptionShort <a href=@routes.TourManagement.viewATour(tourItem.id)>See more</a></p>
+			</td>
+		</tr>
+		}
+	</tbody>
+</table>
+
+}
