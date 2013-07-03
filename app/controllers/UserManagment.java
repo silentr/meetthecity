@@ -110,9 +110,9 @@ public class UserManagment extends Controller {
                     editProfile, true));
             else
                 return badRequest(editprofile.render(user, editProfile, false));
-        } else {
-
-
+        } 
+        else {
+            boolean isUploadedPhoto = false;
             MultipartFormData body = request().body().asMultipartFormData();
             FilePart picture = body.getFile("photofile");
             if (picture != null) {
@@ -121,15 +121,17 @@ public class UserManagment extends Controller {
                 String path = "public/images/" + user.username + "_photo.png";
                 File destinationFile = new File(path);
                 editProfile.get().photo = "/assets/images/"+user.username + "_photo.png";
+                
                 try {
                     copyFile(file, destinationFile);
+                    isUploadedPhoto = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            ;
+            
             EditProfile.user = user;
-            User updatedUser = EditProfile.editUser(editProfile.get());
+            User updatedUser = EditProfile.editUser(editProfile.get(), isUploadedPhoto);
             updatedUser.update();
             Logger.debug(user.username + " has editted his profile");
             

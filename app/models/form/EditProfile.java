@@ -44,7 +44,7 @@ public class EditProfile {
         return password.equals(passwordConfirmation) ? null : "passwords are different";
     }
 
-    public static User editUser(EditProfile form) {
+    public static User editUser(EditProfile form, boolean uploadedPhoto) {
 
         user.password = form.password;
         user.email = form.email;
@@ -52,7 +52,8 @@ public class EditProfile {
         user.firstname = form.firstname;
         user.lastname = form.lastname;
         user.country = form.country;
-        user.photo = form.photo;
+        if(uploadedPhoto)
+            user.photo = form.photo;
 
         return user;
     }
