@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -32,6 +34,10 @@ public class Review {
     @JsonBackReference
     @ManyToOne
     public Tour tour;
+    
+    public static List<Review> reviews(User tourist, User guide){
+        return find.where().eq("tourist", tourist).eq("guide", guide).findList();
+    }
 
     @Override
     public String toString() {

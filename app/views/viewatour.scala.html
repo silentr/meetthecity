@@ -1,4 +1,4 @@
-@(tour: Tour, joined: String) @content(tour: Tour) = {
+@(tour: Tour, joined: String, rated: Boolean) @content(tour: Tour) = {
 <head>
 <script>
 	!function(d, s, id) {
@@ -141,24 +141,31 @@
 	</tr>
 </table>
 <h3>Reviews</h3>
-@for(review <- tour.guide.reviewsReceived){
-<div style="display: inline; float: left; padding-right: 10px;">@review.tourist.firstname
-	@review.tourist.lastname</div>
-<div style="padding-top: 6px;">
-	<input name="star3" type="radio" class="star" @if(review.rating ==
-		1) {checked="checked" } disabled="disabled" /> <input name="star3"
-		type="radio" class="star" @if(review.rating ==
-		2) {checked="checked" } disabled="disabled" /> <input name="star3"
-		type="radio" class="star" @if(review.rating ==
-		3) {checked="checked" } disabled="disabled" /> <input name="star3"
-		type="radio" class="star" @if(review.rating ==
-		4) {checked="checked" } disabled="disabled" /> <input name="star3"
-		type="radio" class="star" @if(review.rating ==
-		5) {checked="checked" } disabled="disabled" />
-</div>
-<br />
-<div style="font-size: small;">@review.comment</div>
-} } @index(content(tour))
+	@for(review <- tour.guide.reviewsReceived){
+		<div style="display: inline; float: left; padding-right: 10px;">
+			@review.tourist.firstname @review.tourist.lastname
+		</div>
+		<div style="padding-top: 6px;">
+			<input name="star3" type="radio" class="star" @if(review.rating == 1) {checked="checked" } disabled="disabled" />
+			<input name="star3" type="radio" class="star" @if(review.rating == 2) {checked="checked" } disabled="disabled" />
+			<input name="star3" type="radio" class="star" @if(review.rating == 3) {checked="checked" } disabled="disabled" />
+			<input name="star3" type="radio" class="star" @if(review.rating == 4) {checked="checked" } disabled="disabled" />
+			<input name="star3" type="radio" class="star" @if(review.rating == 5) {checked="checked" } disabled="disabled" />
+		</div>
+		<br />
+		<div style="font-size: small;">@review.comment</div>
+	}
+	<div id="div-rate" style=" @if(rated) {visibility: hidden;}>
+		<br/>
+		<input name="star4" type="radio" class="star" />
+		<input name="star4" type="radio" class="star" />
+		<input name="star4" type="radio" class="star" />
+		<input name="star4" type="radio" class="star" />
+		<input name="star4" type="radio" class="star" /><br/>
+		<textarea rows="3" style="resize: none; width: 500px;"></textarea><br/>
+		<button type="button" class="btn btn-primary">Rate</button>
+	</div>
+} @index(content(tour))
 
 
 

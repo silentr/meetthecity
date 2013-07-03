@@ -35,12 +35,14 @@ public class TourManagement extends Controller {
             return redirect(routes.TourManagement.tours());
         }
         String joined = "undefined";
+        Boolean rated = false;
         String username = session().get(UserManagment.SESSION_USERNAME);
         if (username != null) {
             User user = User.find.byId(username);
             joined = tour.tourists.contains(user) ? "true" : "false";
+            rated = user.isRated(tour.guide);
         }
-        return ok(viewatour.render(tour, joined));
+        return ok(viewatour.render(tour, joined, rated));
     }
 
     @Security.Authenticated(Secured.class)

@@ -54,6 +54,17 @@ public class User extends Model {
     public static User authenticate(String username, String password) {
         return find.where().eq("username", username).eq("password", password).findUnique();
     }
+    
+    public Boolean isRated(User guide){
+        if(equals(guide)){
+            return true;
+        }
+        List<Review> reviews = Review.reviews(this, guide);
+        if(reviews == null || reviews.isEmpty()){
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public int hashCode() {
