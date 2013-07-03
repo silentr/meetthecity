@@ -1,7 +1,6 @@
 import java.util.List;
 import java.util.Map;
 
-import models.Location;
 import models.Review;
 import models.Tour;
 import models.User;
@@ -22,7 +21,6 @@ public class Global extends GlobalSettings {
         Map yamlMap = (Map) Yaml.load("initial-data.yml");
         List<User> users = (List<User>) yamlMap.get("users");
         List<Tour> tours = (List<Tour>) yamlMap.get("tours");
-        List<Location> locations = (List<Location>) yamlMap.get("locations");
         List<Review> reviews = (List<Review>) yamlMap.get("reviews");
 
         // Check if the database is empty
@@ -30,10 +28,6 @@ public class Global extends GlobalSettings {
             Ebean.save(users);
         }
         
-        if (Location.find.findRowCount() == 0) {
-            Ebean.save(locations);
-        }
-
         if (Tour.find.findRowCount() == 0) {
             Ebean.save(tours);
         }

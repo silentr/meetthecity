@@ -23,12 +23,16 @@ import views.html.tours;
 import views.html.viewatour;
 
 public class TourManagement extends Controller {
-    
+
     public static Result tours() {
         List<Tour> tourList = Tour.find.all();
         return ok(tours.render(tourList));
     }
-    
+
+    public static Result toursByCountryAndCity(String country, String city) {
+        return ok(tours.render(Tour.findActiveToursByCountryAndCity(country, city)));
+    }
+
     public static Result viewATour(Long id) {
         Tour tour = Tour.find.byId(id);
         if (tour == null) {

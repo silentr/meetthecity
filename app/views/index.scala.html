@@ -128,7 +128,7 @@ body {
                       <a href="#">@country</a>
 	                  <ul id=@country>
 		                  @Tour.findActiveTourCitiesByCountry(country).map { city =>
-		                      <li><a href="#">@city</a></li>
+		                      <li><a href="@routes.TourManagement.toursByCountryAndCity(country, city)">@city</a></li>
 		                  }
 	                  </ul>
                   </li>

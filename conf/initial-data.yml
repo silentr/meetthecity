@@ -43,28 +43,6 @@ users:
         lastname:   Bayram
         rating:     5
         country:    TUR
-        
-locations:
-    - !!models.Location
-        ltd:              20
-        lng:              20
-        country:          Turkey  
-        city:             Istanbul
-    - !!models.Location
-        ltd:              30
-        lng:              30
-        country:          Germany  
-        city:             Munich
-    - !!models.Location
-        ltd:              30
-        lng:              30
-        country:          Germany  
-        city:             Munich
-    - !!models.Location
-        ltd:              32
-        lng:              33
-        country:          Germany  
-        city:             Berlin
 
 tours:
 
@@ -75,8 +53,8 @@ tours:
         location:         !!models.Location
                               ltd:              30
                               lng:              32
-                              country:          Ukraine
-                              city:             Kyiv
+                              country:          Turkey
+                              city:             Istanbul
         guide:            !!models.User
                           username: sadek
         photoName:        "/assets/images/locations/trip_to_istanbul.jpg"
@@ -90,8 +68,8 @@ tours:
         location:         !!models.Location
                               ltd:              65
                               lng:              62
-                              country:          USA
-                              city:             New York
+                              country:          Germany
+                              city:             Munich
         guide:            !!models.User
                           username: erwan
         photoName:        "/assets/images/locations/munich_sightseeing.jpg"
