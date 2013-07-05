@@ -8,7 +8,7 @@ create table location (
   ltd                       integer,
   lng                       integer,
   country                   varchar(255),
-  city                      varchar(255),
+  CITY                      varchar(255),
   constraint pk_location primary key (id))
 ;
 

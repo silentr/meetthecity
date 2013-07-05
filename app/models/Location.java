@@ -16,7 +16,7 @@ import com.avaje.ebean.SqlRow;
 public class Location extends Model {
 
     public static final String COUNTRY_FIELD = "country";
-    public static final String CITY_FIELD = "city";
+    public static final String CITY_FIELD = "CITY";
 
     private static final long serialVersionUID = -5592660318772583L;
 
