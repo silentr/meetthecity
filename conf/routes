@@ -23,6 +23,8 @@ GET     /leave-a-tour               controllers.TourManagement.leaveATour()
 GET		/create-a-tour				controllers.TourManagement.createATour()
 POST	/create-a-tour-submit		controllers.TourManagement.createATourSubmit()
 GET		/changeCountry				controllers.TourManagement.changeCountry()
+GET		/changeLanguage				controllers.Application.changeLanguage(selectedLanguage: String)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

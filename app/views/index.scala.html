@@ -38,24 +38,24 @@ body {
 		<li><a href="@routes.Application.home()" style="margin: 0px; padding: 0px;"><img src="@routes.Assets.at("images/logo.png")" class="img-rounded"></a></li>
 	</ul>
 	<ul class="nav" >
-	  <li class="active" id="navBarHome"><a href="@routes.Application.home()">Home</a></li>
-	  <li class="divider-vertical"><a href="#">Recent</a></li>
-	  <li class="divider-vertical"><a href="#">Guides</a></li>
-	  <li class="divider-vertical" id="navBarTours"><a href="@routes.TourManagement.tours()">Tours</a></li>
-	  <li class="divider-vertical" id="navBarCreateTour"><a href="@routes.TourManagement.createATour()">Create a Tour</a></li>
-	  <li class="divider-vertical"><a href="#">About</a></li>
+	  <li class="active" id="navBarHome"><a href="@routes.Application.home()">@Application.getLanguageString("home")</a></li>
+	  <li class="divider-vertical"><a href="#">@Application.getLanguageString("recent")</a></li>
+	  <li class="divider-vertical"><a href="#">@Application.getLanguageString("guide")</a></li>
+	  <li class="divider-vertical" id="navBarTours"><a href="@routes.TourManagement.tours()">@Application.getLanguageString("tour")</a></li>
+	  <li class="divider-vertical" id="navBarCreateTour"><a href="@routes.TourManagement.createATour()">@Application.getLanguageString("create")</a></li>
+	  <li class="divider-vertical"><a href="#">@Application.getLanguageString("about")</a></li>
 	  </ul>
 	  <ul  class="nav pull-right">
 			  @if(UserManagment.isUserSignedIn()) {
 				  <li style="margin-top: 1px; margin-bottom: 5px; font-size: 18px"><a href="@routes.UserManagment.userProfile()">@Controller.session(UserManagment.SESSION_USERNAME),&nbsp;</a></li>
 			      <li>
 			          <button onclick="window.location.href='@routes.UserManagment.signout()'" class="btn btn-primary" type="button" style="float: right; 
-				          padding-right: 67px; padding-left: 67px" >Sign Out</button>
+				          padding-right: 67px; padding-left: 67px" >@Application.getLanguageString("signout")</button>
 				  </li>
 			  } else {
 			      <li>
                       <button onclick="window.location.href='@routes.UserManagment.signin()'" class="btn btn-primary" type="button" style="float: right; 
-				          padding-right: 67px; padding-left: 67px" >Sign In</button>
+				          padding-right: 67px; padding-left: 67px" >@Application.getLanguageString("signin")</button>
 				 </li>
 			  }
 	  </ul>
@@ -76,20 +76,27 @@ body {
      <div class="sidebar right">
      
         <div class="well" style="margin: 0px; padding: 0px">
-        	<p style="margin: 2px">Language:
+        	<p style="margin: 2px">@Application.getLanguageString("language"):
         		<div class="bfh-selectbox">
   					<input type="hidden" name="selectbox1" value="">
   						<a class="bfh-selectbox-toggle" data-toggle="bfh-selectbox" href="#">
+  						 @if(Application.getLanguage.equalsIgnoreCase("en")) {
     						<span class="bfh-selectbox-option input-medium" data-option="1">English</span>
+    						}else{
+    						<span class="bfh-selectbox-option input-medium" data-option="1">Deutsch</span>
+    						}
     							<b class="caret"></b>
   						</a>
 					  	<div class="bfh-selectbox-options">
 					  		<div role="listbox">
 					    		<ul role="option">
-					      			<li><a tabindex="-1" href="#" data-option="1">English</a></li>
-					      			<li><a tabindex="-1" href="#" data-option="2">Deutsch</a></li>
-					      			<li><a tabindex="-1" href="#" data-option="3">Español</a></li>
-					      			<li><a tabindex="-1" href="#" data-option="3">Français</a></li>
+					    	@if(Application.getLanguage.equalsIgnoreCase("en")) {
+					      			<li><a tabindex="-1" href="#lang"  onclick="window.location.href='@routes.Application.changeLanguage("en")'" data-option="1">English</a></li>
+					      			<li><a tabindex="-1" href="#lang"  onclick="window.location.href='@routes.Application.changeLanguage("de")'" data-option="2">Deutsch</a></li>
+    						}else{
+ 					      			<li><a tabindex="-1" href="#lang"  onclick="window.location.href='@routes.Application.changeLanguage("de")'" data-option="1">Deutsch</a></li>
+					      			<li><a tabindex="-1" href="#lang"  onclick="window.location.href='@routes.Application.changeLanguage("en")'" data-option="2">English</a></li>
+    						}
 					    		</ul>
 					    	</div>
 					  </div>
@@ -158,12 +165,12 @@ body {
 
 	<ul class="nav">
 
-	  <li class="active" id="bottomHome"><a href="@routes.Application.home()">Home</a></li>
-	  <li class="divider-vertical"><a href="#">Recent</a></li>
-	  <li class="divider-vertical"><a href="#">Guides</a></li>
-	  <li class="divider-vertical" id="bottomTours"><a href="@routes.TourManagement.tours()">Tours</a></li>
-	  <li class="divider-vertical" id="bottomCreateTour"><a href="@routes.TourManagement.createATour()">Create a Tour</a></li>
-	  <li class="divider-vertical"><a href="#">About</a></li>
+	  <li class="active" id="navBarHome"><a href="@routes.Application.home()">@Application.getLanguageString("home")</a></li>
+	  <li class="divider-vertical"><a href="#">@Application.getLanguageString("recent")</a></li>
+	  <li class="divider-vertical"><a href="#">@Application.getLanguageString("guide")</a></li>
+	  <li class="divider-vertical" id="navBarTours"><a href="@routes.TourManagement.tours()">@Application.getLanguageString("guide")</a></li>
+	  <li class="divider-vertical" id="navBarCreateTour"><a href="@routes.TourManagement.createATour()">@Application.getLanguageString("create")</a></li>
+	  <li class="divider-vertical"><a href="#">@Application.getLanguageString("about")</a></li>
 	  </ul>
   </div>
 </div>
