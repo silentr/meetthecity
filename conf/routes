@@ -5,6 +5,7 @@
 # Home page
 
 GET     /                           controllers.Application.home()
+GET     /about                      controllers.Application.about()
 GET     /tours                      controllers.TourManagement.tours()
 GET     /tours/:country/:city       controllers.TourManagement.toursByCountryAndCity(country : String, city : String)
 GET     /userprofile                controllers.UserManagment.userProfile()
