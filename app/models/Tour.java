@@ -198,7 +198,7 @@ public class Tour extends Model {
         // making sure we don't have two files with the same name
         tourForm.name = tourForm.name.replaceAll("\\s", "_").toLowerCase();
         String targetFileName = tourForm.name + ".jpg";
-        File locationDirectory = new File("public\\images\\locations");
+        File locationDirectory = new File("public/images/locations");
         List<String> files = Arrays.asList(locationDirectory.list());
         int i = 1;
         while (files.contains(targetFileName)) {
@@ -206,7 +206,7 @@ public class Tour extends Model {
         }
 
         String targetFile = locationDirectory.getAbsolutePath() + "\\" + targetFileName;
-        tour.photoName = "\\assets\\images\\locations\\" + targetFileName;
+        tour.photoName = "/assets/images/locations/" + targetFileName;
         Logger.info("tour.photoName: " + tour.photoName);
 
         Ebean.save(tour);

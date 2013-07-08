@@ -66,39 +66,15 @@ public class TourTest extends WithApplication {
                 .withFormUrlEncodedBody(ImmutableMap.of("tourId", "1")));
         assertThat(status(result)).isEqualTo(SEE_OTHER);
     }
-
-    // @Test
-    // public void createATourSubmitTestSuccess() throws
-    // UnsupportedEncodingException {
-    //
-    // File fnew = new File("ankara.png");
-    // BufferedImage originalImage;
-    // ByteArrayOutputStream baos = null;
-    // try {
-    // originalImage = ImageIO.read(fnew);
-    // baos = new ByteArrayOutputStream();
-    // ImageIO.write(originalImage, "jpg", baos);
-    // byte[] imageInByte = baos.toByteArray();
-    // } catch (IOException e) {
-    // // TODO Auto-generated catch block
-    // e.printStackTrace();
-    // }
-    //
-    // Map<String, String> requestMap = new HashMap<String, String>();
-    // requestMap.put("date", "21.06.2013");
-    // requestMap.put("country", "Turkey");
-    // requestMap.put("city", "Ankara");
-    // requestMap.put("name", "Ankara sightseeing");
-    // requestMap.put("price", "0");
-    // requestMap.put("imgFile", baos.toString("ISO-8858-2"));
-    // requestMap.put("description", "Full description");
-    // Result result =
-    // callAction(controllers.routes.ref.Application.createATourSubmit(),
-    // fakeRequest().withSession("username",
-    // "sadek").withFormUrlEncodedBody(requestMap));
-    // assertThat(status(result)).isEqualTo(OK);
-    // assertThat(contentType(result)).isEqualTo("text/plain");
-    // assertThat(charset(result)).isEqualTo("utf-8");
-    // assertThat(contentAsString(result)).contains("Tours");
-    // }
+    
+    @Test
+    public void addReviewTest() {
+        Result result = callAction(controllers.routes.ref.TourManagement.addReview(), 
+                fakeRequest()
+                .withSession("username", "maxime")
+                .withFormUrlEncodedBody(ImmutableMap.of("tourId", "1", "rate", "2", "comment","Test comment")));
+        assertThat(status(result)).isEqualTo(OK);
+        assertThat(contentType(result)).isEqualTo("text/plain");
+        assertThat(charset(result)).isEqualTo("utf-8");
+    }
 }

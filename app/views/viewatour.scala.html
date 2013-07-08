@@ -1,5 +1,20 @@
 @(tour: Tour, joined: String, rated: Boolean) @content(tour: Tour) = {
 <head>
+
+<style type="text/css">
+	.header-r {
+		display: inline; 
+		float: left; 
+		padding-right: 10px;
+	}
+	.up-padding {
+		padding-top: 6px;
+	}
+	.small-text {
+		font-size: small;
+	}
+</style>
+
 <script>
 	!function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
@@ -82,6 +97,41 @@
 										}
 									});
 						});
+			$("#btnRate").click(
+				function(){
+					var rateInput = $(".star0.star-rating-on").length;
+					var commentInput = $("#comment").val();
+					$.ajax({
+						type: "GET",
+						dataType: "json",
+						data: {tourId: @tour.id, rate: rateInput, comment: commentInput},
+						url: "@routes.TourManagement.addReview()",
+						success: function(data){
+							$("<div class=\"header-r\">" + data.firstname + " " + data.lastname + "</div>").appendTo("#reviews");
+							var rating = $("<div></div>");
+							rating.addClass("up-padding");
+							var comment = $("<div>" + data.comment + "</div>");
+							comment.addClass("small-text");
+							var continueRating = true;
+							for (var i = 1; i <= 5; i++){
+								var star = $("<div role=\"text\"><a title=\"on\">on</a></div>").
+								addClass("star-rating rater-1 star star-rating-applied star-rating-readonly");
+								if(continueRating){
+									star.addClass("star-rating-on");
+								}
+								if(continueRating && data.rating == (i + "")){
+									continueRating = false;
+								}
+								rating.append(star);
+							}
+							rating.appendTo("#reviews");
+							$("<br/>").appendTo("#reviews");
+							comment.appendTo("#reviews");
+							$("#formAddReview").remove();
+						}
+					});
+				}		
+			);
 			});
 </script>
 </head>
@@ -99,8 +149,6 @@
 	<a href="https://twitter.com/share" class="twitter-share-button"
 		data-url="http://meetthecity.com/view-a-tour/@tour.id">Tweet</a>
 </div>
-<!-- SHARE: GOOGLE PLUS ONE -->
-<div class="g-plusone" data-annotation="inline" data-width="300"></div>
 <!-- SHARE: FACEBOOK -->
 <div id="fb-root" style="padding-top: 5px;"></div>
 <div class="fb-like" data-href="http://meetthecity.com/view-a-tour/@tour.id"
@@ -141,30 +189,34 @@
 	</tr>
 </table>
 <h3>Reviews</h3>
+	<div id="reviews">
 	@for(review <- tour.guide.reviewsReceived){
-		<div style="display: inline; float: left; padding-right: 10px;">
+		<div class="header-r">
 			@review.tourist.firstname @review.tourist.lastname
 		</div>
-		<div style="padding-top: 6px;">
-			<input name="star3" type="radio" class="star" @if(review.rating == 1) {checked="checked" } disabled="disabled" />
-			<input name="star3" type="radio" class="star" @if(review.rating == 2) {checked="checked" } disabled="disabled" />
-			<input name="star3" type="radio" class="star" @if(review.rating == 3) {checked="checked" } disabled="disabled" />
-			<input name="star3" type="radio" class="star" @if(review.rating == 4) {checked="checked" } disabled="disabled" />
-			<input name="star3" type="radio" class="star" @if(review.rating == 5) {checked="checked" } disabled="disabled" />
+		<div class="up-padding">
+			<input name="star@review.id" type="radio" class="star" @if(review.rating == 1) {checked="checked" } disabled="disabled" />
+			<input name="star@review.id" type="radio" class="star" @if(review.rating == 2) {checked="checked" } disabled="disabled" />
+			<input name="star@review.id" type="radio" class="star" @if(review.rating == 3) {checked="checked" } disabled="disabled" />
+			<input name="star@review.id" type="radio" class="star" @if(review.rating == 4) {checked="checked" } disabled="disabled" />
+			<input name="star@review.id" type="radio" class="star" @if(review.rating == 5) {checked="checked" } disabled="disabled" />
 		</div>
 		<br />
-		<div style="font-size: small;">@review.comment</div>
+		<div class="small-text">@review.comment</div>
 	}
-	<div id="div-rate" style=" @if(rated) {visibility: hidden;}>
-		<br/>
-		<input name="star4" type="radio" class="star" />
-		<input name="star4" type="radio" class="star" />
-		<input name="star4" type="radio" class="star" />
-		<input name="star4" type="radio" class="star" />
-		<input name="star4" type="radio" class="star" /><br/>
-		<textarea rows="3" style="resize: none; width: 500px;"></textarea><br/>
-		<button type="button" class="btn btn-primary">Rate</button>
 	</div>
+	<form action="/add-review" method="POST" id="formAddReview" style="@if(rated) {display: none;}">
+		<div id="div-rate">
+			<br/>
+			<input name="star0" type="radio" class="star star0" />
+			<input name="star0" type="radio" class="star star0" />
+			<input name="star0" type="radio" class="star star0" />
+			<input name="star0" type="radio" class="star star0" />
+			<input name="star0" type="radio" class="star star0" />
+			<textarea id="comment" rows="3" style="resize: none; width: 500px;"></textarea><br/>
+			<button type="button" id="btnRate" class="btn btn-primary">Rate</button>
+		</div>
+	</form>
 } @index(content(tour))
 
 

@@ -6,10 +6,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.avaje.ebean.Ebean;
+
 import models.Location;
+import models.Review;
 import models.Tour;
 import models.User;
 import models.form.TourForm;
+import play.Logger;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -39,7 +43,8 @@ public class TourManagement extends Controller {
             return redirect(routes.TourManagement.tours());
         }
         String joined = "undefined";
-        Boolean rated = false;
+        // for anonymous user
+        Boolean rated = true;
         String username = session().get(UserManagment.SESSION_USERNAME);
         if (username != null) {
             User user = User.find.byId(username);
@@ -68,6 +73,38 @@ public class TourManagement extends Controller {
         String username = session().get(UserManagment.SESSION_USERNAME);
         User user = User.find.byId(username);
         return ok(tour.leave(user).toString());
+    }
+    
+    @Security.Authenticated(Secured.class)
+    public static Result addReview(){
+        String tourIdS = form().bindFromRequest().get("tourId");
+        long tourId = Long.valueOf(tourIdS);
+        String rateS = form().bindFromRequest().get("rate");
+        int rate = Integer.valueOf(rateS);
+        String comment = form().bindFromRequest().get("comment");
+        
+        String username = session().get(UserManagment.SESSION_USERNAME);
+        User tourist = User.find.byId(username);
+        
+        Tour tour = Tour.find.byId(tourId);
+        
+        Review review = new Review();
+        review.rating = rate;
+        review.comment = comment;
+        review.guide = tour.guide;
+        review.tourist = tourist;
+        
+        Ebean.save(review);
+        review.guide.updateRating();
+        
+        StringBuilder sbReviewJson = new StringBuilder();
+        sbReviewJson.append("{\"id\":\"").append(review.id).append("\",");
+        sbReviewJson.append("\"firstname\":\"").append(review.tourist.firstname).append("\",");
+        sbReviewJson.append("\"lastname\":\"").append(review.tourist.lastname).append("\",");
+        sbReviewJson.append("\"rating\":\"").append(review.rating).append("\",");
+        sbReviewJson.append("\"comment\":\"").append(review.comment).append("\"}");
+        
+        return ok(sbReviewJson.toString());
     }
 
     @Security.Authenticated(Secured.class)

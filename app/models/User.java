@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 
 import org.codehaus.jackson.annotate.JsonManagedReference;
 
+import com.avaje.ebean.Ebean;
+
 import play.db.ebean.Model;
 
 @Entity
@@ -64,6 +66,20 @@ public class User extends Model {
             return false;
         }
         return true;
+    }
+    
+    public void updateRating() {
+        List<Review> reviews = Review.reviews(this);
+        int sum = 0, count = 0;
+        for(Review r : reviews){
+            sum += r.rating;
+            count++;
+        }
+        rating = sum/count;
+        Ebean.beginTransaction();
+        this.update();
+        Ebean.commitTransaction();
+        Ebean.endTransaction();
     }
 
     @Override
@@ -126,5 +142,4 @@ public class User extends Model {
         } else if (!username.equals(other.username)) return false;
         return true;
     }
-
 }
