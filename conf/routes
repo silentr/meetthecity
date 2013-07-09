@@ -5,6 +5,7 @@
 # Home page
 
 GET     /                           controllers.Application.home()
+GET     /about                      controllers.Application.about()
 GET     /tours                      controllers.TourManagement.tours()
 GET     /tours/:country/:city       controllers.TourManagement.toursByCountryAndCity(country : String, city : String)
 GET     /userprofile                controllers.UserManagment.userProfile()
@@ -19,13 +20,14 @@ GET     /user/all                   controllers.Application.getAllUsers()
 GET     /user/:id                   controllers.Application.getUser(id : String)
 GET     /view-a-tour/:id            controllers.TourManagement.viewATour(id: Long)
 GET     /join-a-tour                controllers.TourManagement.joinATour()
-GET     /leave-a-tour               controllers.TourManagement.leaveATour()
+GET	    /leave-a-tour               controllers.TourManagement.leaveATour()
 GET		/create-a-tour				controllers.TourManagement.createATour()
 POST	/create-a-tour-submit		controllers.TourManagement.createATourSubmit()
 GET		/changeCountry				controllers.TourManagement.changeCountry()
 GET		/changeLanguage				controllers.Application.changeLanguage(selectedLanguage: String)
 GET		/search						controllers.Application.search()
 GET		/searchResult				controllers.Application.resultSearch(searchedString: String)
+GET	    /add-review					controllers.TourManagement.addReview()
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -7,6 +7,8 @@ users:
 
     - !!models.User
         email:      maxime@sample.com
+        firstname:  Maxime
+        lastname:   Johanson
         username:   maxime
         password:   secret
         country:    UKR
@@ -124,7 +126,6 @@ tours:
 reviews:
 
     - !!models.Review
-        id:      1
         comment: Good guide
         rating:  4
         guide:   !!models.User
@@ -133,7 +134,6 @@ reviews:
                    username: erwan
 
     - !!models.Review
-        id:      2
         comment: Excellent guide
         rating:  5
         tourist:   !!models.User

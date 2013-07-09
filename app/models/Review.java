@@ -8,18 +8,17 @@ import javax.persistence.ManyToOne;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
 
-import play.db.ebean.Model.Finder;
+import play.db.ebean.Model;
 
 @Entity
-public class Review {
+public class Review extends Model {
 
-    @SuppressWarnings("unused")
-    private static final long serialVersionUID = -55902660318772583L;
+    private static final long serialVersionUID = 55900318772583L;
 
     public static Finder<Long, Review> find = new Finder<Long, Review>(Long.class, Review.class);
 
     @Id
-    public Long id;
+    public long id;
     public String comment;
     public int rating;
 
@@ -38,11 +37,14 @@ public class Review {
     public static List<Review> reviews(User tourist, User guide){
         return find.where().eq("tourist", tourist).eq("guide", guide).findList();
     }
+    
+    public static List<Review> reviews(User guide){
+        return find.where().eq("guide", guide).findList();
+    }
 
     @Override
     public String toString() {
-        return "Review [id=" + id + ", comment=" + comment + ", rating=" + rating + ", guide=" + guide.username
-                + ", tourist=" + tourist.username + ", tour=" + tour.name + "]";
+        return "Review [id=" + id + ", comment=" + comment + ", rating=" + rating
+                + ", tourist=" + tourist.username + "]";
     }
-
 }

@@ -19,6 +19,8 @@ import views.html.index;
 import views.html.home;
 import models.form.*;
 import views.html.searchresult;
+import views.html.about;
+
 
 public class Application extends Controller {
 
@@ -83,5 +85,10 @@ public class Application extends Controller {
                 resultList.add(tourItem);
         }
         return ok(searchresult.render(resultList, searchedString));
+    }
+
+    public static Result about() {
+        return ok(about.render());
+
     }
 }
