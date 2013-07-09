@@ -1,7 +1,10 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import play.data.Form;
 import models.Tour;
 import models.User;
 import play.Logger;
@@ -14,12 +17,15 @@ import play.mvc.Result;
 import scala.collection.mutable.StringBuilder;
 import views.html.index;
 import views.html.home;
+import models.form.*;
+import views.html.searchresult;
 
 public class Application extends Controller {
 
     static String language="en";
     
     public static Result index() {
+
         return ok(index.render(new Html(new StringBuilder())));
     }
     
@@ -56,5 +62,26 @@ public class Application extends Controller {
     public static String getLanguage() {
         
         return language;
+    }
+    
+    public static Result search(){
+        
+        Form<Search> searchForm = Form.form(Search.class).bindFromRequest();
+        String searchedString = searchForm.get().searchtext;
+        Logger.debug("Searched String: "+searchedString);
+        return redirect(routes.Application.resultSearch(searchedString));
+   }
+    
+    public static Result resultSearch(String searchedString) {
+        
+        List<Tour> tourList = Tour.find.all();
+        List<Tour> resultList = new ArrayList<Tour>();
+        
+        for (Tour tourItem : tourList) {
+            
+            if(tourItem.descriptionShort.toLowerCase(Locale.ENGLISH).contains(searchedString.toLowerCase(Locale.ENGLISH)))
+                resultList.add(tourItem);
+        }
+        return ok(searchresult.render(resultList, searchedString));
     }
 }

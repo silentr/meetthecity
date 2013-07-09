@@ -24,6 +24,8 @@ GET		/create-a-tour				controllers.TourManagement.createATour()
 POST	/create-a-tour-submit		controllers.TourManagement.createATourSubmit()
 GET		/changeCountry				controllers.TourManagement.changeCountry()
 GET		/changeLanguage				controllers.Application.changeLanguage(selectedLanguage: String)
+GET		/search						controllers.Application.search()
+GET		/searchResult				controllers.Application.resultSearch(searchedString: String)
 
 
 # Map static resources from the /public folder to the /assets URL path

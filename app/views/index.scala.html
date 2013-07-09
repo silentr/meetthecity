@@ -120,11 +120,11 @@ body {
 <!--     end of the right sidebar  -->
       
 <!--       left sidebar -->
-      <div class="sidebar left">
+     <div class="sidebar left">
       	<div class="well" style="margin: 0px; padding: 0px">
-        	<form class="navbar-search pull-left">
-                <input type="text" class="search-query" placeholder="Search" style="width: 148px;">
-            </form>
+      	@helper.form(routes.Application.search()) {
+        	<input type="text" name="searchtext" class="search-query" placeholder="Search" style="width: 148px;">
+        }
       	</div>
       <div class="well">
           <h5>Countries</h5>

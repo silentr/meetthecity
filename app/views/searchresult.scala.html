@@ -1,0 +1,31 @@
+@(tourList: List[Tour], searchedString: String) 
+
+@index {
+
+<h3>Results for "@searchedString"</h3>
+
+@if(tourList.size()==0){
+
+	<h4>There is no result for the "@searchedString"</h4>
+}else{
+<table class="table table.hover">
+	<tbody>
+		@for(tourItem <- tourList){
+		<tr>
+			<td><a href=@routes.TourManagement.viewATour(tourItem.id)>@tourItem.name<br>
+			<br><img src="@tourItem.photoName" /></td></a>
+			<td>
+				<p style="font-size: small">@tourItem.descriptionShort <a href=@routes.TourManagement.viewATour(tourItem.id)>See more</a></p>
+			</td>
+		</tr>
+		}
+	</tbody>
+</table>
+}
+}
+
+<script type="text/javascript">
+	$('ul.breadcrumb')
+	.append(
+			'<span class="divider"> > </span><li class="active"><a href="">Search</a></li>');
+</script>
