@@ -165,17 +165,24 @@ public class Tour extends Model {
     public static List<Tour> findActiveToursByCountryAndCity(String country, String city) {
         String formattedDate = DateUtils.getCurrentFormattedDate();
 
-        String sql = "SELECT id FROM Location WHERE country='" + country + "' AND city='" + city + "'";
+        String sql = "SELECT ID FROM Location WHERE country='" + country + "' AND city='" + city + "'";
         List<SqlRow> sqlRows = Ebean.createSqlQuery(sql).findList();
 
         List<Integer> ids = new ArrayList<>();
         for (SqlRow row : sqlRows) {
-            ids.add(row.getInteger("id"));
+            ids.add(row.getInteger("ID"));
         }
 
+        Logger.debug(sqlRows.toString());
+       
+        
+        
+        
         List<Tour> tours = Ebean.createQuery(Tour.class).where().gt("date", formattedDate).in("location_id", ids)
                 .findList();
 
+        Logger.debug(tours.toString());
+        
         return tours;
     }
 
