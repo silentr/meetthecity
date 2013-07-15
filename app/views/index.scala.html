@@ -43,7 +43,7 @@ body {
 	  <li class="divider-vertical"><a href="#">@Application.getLanguageString("guide")</a></li>
 	  <li class="divider-vertical" id="navBarTours"><a href="@routes.TourManagement.tours()">@Application.getLanguageString("tour")</a></li>
 	  <li class="divider-vertical" id="navBarCreateTour"><a href="@routes.TourManagement.createATour()">@Application.getLanguageString("create")</a></li>
-	  <li class="divider-vertical"><a href="@routes.Application.about()">@Application.getLanguageString("about")</a></li>
+	  <li class="divider-vertical" id="navBarAbout"><a href="@routes.Application.about()">@Application.getLanguageString("about")</a></li>
 	  </ul>
 	  <ul  class="nav pull-right">
 			  @if(UserManagment.isUserSignedIn()) {
@@ -170,7 +170,7 @@ body {
 	  <li class="divider-vertical"><a href="#">@Application.getLanguageString("guide")</a></li>
 	  <li class="divider-vertical" id="navBarTours"><a href="@routes.TourManagement.tours()">@Application.getLanguageString("guide")</a></li>
 	  <li class="divider-vertical" id="navBarCreateTour"><a href="@routes.TourManagement.createATour()">@Application.getLanguageString("create")</a></li>
-	  <li class="divider-vertical"><a href="@routes.Application.about()">@Application.getLanguageString("about")</a></li>
+	  <li class="divider-vertical" id="navBarAbout"><a href="@routes.Application.about()">@Application.getLanguageString("about")</a></li>
 	  </ul>
   </div>
 </div>
